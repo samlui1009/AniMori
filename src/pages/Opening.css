@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap');
+
+body {
+    font-family: "Silkscreen", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    background-image: url('../assets/daymode-bg.png');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-attachment: fixed;
+    z-index: -1;
+}
+
+.main-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    height: 250px;
+    text-align: center;
+
+    margin-top: 100px;
+
+    background: rgba(255, 255, 255, 0.65); /* semi-transparent peach */
+    backdrop-filter: blur(6px);            /* frosted glass effect */
+    /* This gives the "frosted" effect */
+    border: 2.5px solid rgba(75, 203, 215, 0.74); /* subtle teal border */
+    border-radius: 25px;
+    padding: 1rem;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
+
+.typeWriterText {
+    font-size: 2rem;
+    color: #4B2E2A;
+}
+
+.question {
+    color: #7B6A68;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 1.25rem;
+}
+
+.start-btn, .surprise-btn {
+    display: inline-block;
+    margin: 10px;
+    font-family: "Silkscreen", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    width: 200px;
+    height: 50px;
+    background-color: #E89B56;
+    opacity: 0.75;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.start-btn:hover, .surprise-btn:hover {
+    opacity: 1.0;
+}
