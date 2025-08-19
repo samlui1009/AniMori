@@ -1,0 +1,45 @@
+.stats-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+    border: 1px solid black;
+    width: 600px;
+    height: 250px;
+    
+    background: rgba(255, 255, 255, 0.65); /* semi-transparent peach */
+    backdrop-filter: blur(6px);            /* frosted glass effect */
+    /* This gives the "frosted" effect */
+    border: 2.5px solid rgba(75, 203, 215, 0.74); /* subtle teal border */
+    border-radius: 25px;
+    padding: 1rem;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    text-align: center;
+
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.stats-list {
+    display: flex;
+    list-style: none;
+    justify-content: space-between;
+    /* margin: 0; */
+    padding: 0;
+    gap: 20px;
+    font-size: 1rem;
+}
+
+.rate {
+    display: flex;
+    justify-content: center;
+}
+
+.completion-rate {
+    position: absolute;
+    bottom: 10px;
+/* https://stackoverflow.com/questions/62906503/how-can-i-force-an-element-to-sit-at-bottom-of-div-card */
+}
+
