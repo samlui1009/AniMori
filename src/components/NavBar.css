@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap');
+
+.nav-bar {
+    display: flex;
+    max-width: 100%;
+    justify-content: space-between;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.btn {
+    border-radius: 12px;
+    border: none;
+    font-family: "Silkscreen", sans-serif;
+    cursor: pointer;    
+    background-color: #E89B56;
+    width: 100px;
+    height: 50px;
+    opacity: 0.75;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.btn:hover {
+    opacity: 1.0;
+}
