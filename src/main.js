@@ -10,8 +10,13 @@ if (started) {
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 750,
+    height: 750,
+    frame: true,
+    // As per Google, this creates a "frameless" window that we'll need to 
+    // style accordingly in the renderer.jsx & css
+    // When "false", it creates an automatic "rounded" border
+    // But then this also eliminates the overall bar 
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true
@@ -26,7 +31,7 @@ const createWindow = () => {
   }
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+//   mainWindow.webContents.openDevTools();
 };
 
 // This method will be called when Electron has finished
