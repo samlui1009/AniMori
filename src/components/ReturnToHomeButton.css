@@ -1,0 +1,15 @@
+.home-btn {
+    border-radius: 12px;
+    border: none;
+    font-family: "Silkscreen", sans-serif;
+    cursor: pointer;    
+    background-color: #E89B56;
+    width: 100px;
+    height: 50px;
+    opacity: 0.75;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.home-btn:hover {
+    opacity: 1.0;
+}
