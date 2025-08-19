@@ -1,31 +1,24 @@
-/**
- * This file will automatically be loaded by vite and run in the "renderer" context.
- * To learn more about the differences between the "main" and the "renderer" context in
- * Electron, visit:
- *
- * https://electronjs.org/docs/tutorial/process-model
- *
- * By default, Node.js integration in this file is disabled. When enabling Node.js integration
- * in a renderer process, please be aware of potential security implications. You can read
- * more about security risks here:
- *
- * https://electronjs.org/docs/tutorial/security
- *
- * To enable Node.js integration in this file, open up `main.js` and enable the `nodeIntegration`
- * flag:
- *
- * ```
- *  // Create the browser window.
- *  mainWindow = new BrowserWindow({
- *    width: 800,
- *    height: 600,
- *    webPreferences: {
- *      nodeIntegration: true
- *    }
- *  });
- * ```
- */
+import { createRoot } from 'react-dom/client';
+import { HashRouter, Routes, Route } from 'react-router-dom';
+// https://stackoverflow.com/questions/36505404/how-to-use-react-router-with-electron
+// Why don't we need BrowserRouter like in SipLy/portfolio?
+// Because HashRouter is meant for FILE-BASED ENVIRONMENTS like this!
+import OpeningPage from './pages/Opening.jsx';
+import HomePage from './pages/Home.jsx';
 
-import './index.css';
+function App() {
+    return (
+        <HashRouter>
+            <Routes>
+                <Route path="/" element={<OpeningPage></OpeningPage>}></Route>
+                <Route path="/home" element={<HomePage></HomePage>}></Route>
+            </Routes>
+        </HashRouter>
+    )
+}
 
-console.log('👋 This message is being logged by "renderer.js", included via Vite');
+export default App
+
+const container = document.getElementById("root");
+const root = createRoot(container);
+root.render(<App/>)
