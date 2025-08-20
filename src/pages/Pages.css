@@ -35,6 +35,14 @@
     align-items: center;
 }
 
+.title {
+    color: #4B2E2A;
+}
+
+.tagline {
+    color: #7B6A68;
+}
+
 .home-btn {
     margin-left: auto;
     margin-right: auto;

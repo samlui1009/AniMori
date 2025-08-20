@@ -33,6 +33,10 @@
     }
 }
 
+.stats-title {
+    color: #4B2E2A;
+}
+
 .stats-list {
     display: flex;
     list-style: none;
@@ -41,10 +45,23 @@
     padding: 0;
     gap: 20px;
     font-size: 1rem;
+    color: #7B6A68;
+}
+
+.stats-numeric {
+    display: flex;
+    list-style: none;
+    justify-content: space-around;
+    /* margin: 0; */
+    padding: 0;
+    gap: 20px;
+    font-size: 1rem;
+    color: #7B6A68;
 }
 
 .rate {
     display: flex;
+    color: #7B6A68;
     justify-content: center;
 }
 
