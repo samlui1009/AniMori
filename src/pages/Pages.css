@@ -43,6 +43,13 @@
     color: #7B6A68;
 }
 
+.nav-ctn {
+    width: 350px;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
 .home-btn {
     margin-left: auto;
     margin-right: auto;

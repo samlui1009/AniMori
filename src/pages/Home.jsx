@@ -5,7 +5,9 @@ import Statistics from '../components/Stats.jsx';
 function Home() {
     return(
         <div>
-            <DLMode></DLMode>
+            <div className="dl-ctn">
+                <DLMode></DLMode>
+            </div>
             <NavigationBar></NavigationBar>
             <Statistics></Statistics>
         </div>

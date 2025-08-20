@@ -28,9 +28,10 @@ function MALSearchBar() {
     return (
         <div className="search-bar-ctn">
             <form onSubmit={handleSearch} method="get">
-                <input type="search" name="query" placeholder="Type your anime here" value={query} onChange={(e) => setQuery(e.target.value)}></input>
+                <input type="search" name="query" placeholder="Find your anime here" value={query} onChange={(e) => setQuery(e.target.value)}></input>
                 <button type="submit"></button>
             </form>
+
             {anime && (
                 <div className="anime-result">
                     <h2>{anime.title}</h2>
