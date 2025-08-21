@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap');
 
 .open-menu {
-    width: 175px;
+    width: 195px;
     /* This is just for testing to see how it'd look */
     border-radius: 12px;
     color: var(--color, #4B2E2A);
@@ -33,6 +33,7 @@
     background: none;
     opacity: 0.85;
     transition: all 0.3s ease-out;
+    cursor: pointer;
 }
 
 .find-anime-btn:hover {

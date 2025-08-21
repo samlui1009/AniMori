@@ -5,7 +5,7 @@ import './MALSearchBar.css';
 
 // TODO
 
-function MALSearchBar() {
+function MALSearchBar( {animeResult} ) {
     const [query, setQuery] = useState("");
     // Query - Initial state: What are we typing?
     // We should not be typing ANYTHING
@@ -20,6 +20,8 @@ function MALSearchBar() {
         try {
             const result = await searchAnimeByTitle(query);
             setAnime(result);
+            animeResult(result);
+            // Use THIS to pass it to the parent
         } catch (err) {
             setError("Error! Anime could not be found");
         }
@@ -27,17 +29,23 @@ function MALSearchBar() {
 
     return (
         <div className="search-bar-ctn">
-            <form onSubmit={handleSearch} method="get">
-                <input type="search" name="query" placeholder="Find your anime here" value={query} onChange={(e) => setQuery(e.target.value)}></input>
-                <button type="submit"></button>
+            <form onSubmit={handleSearch}>
+                <input className="input-field" 
+                       placeholder="Type Anime Name Here" 
+                       value={query} 
+                       onChange={(e) => setQuery(e.target.value)}></input>
+                <div className="search-btn-ctn">
+                    <button className="search-btn" type="submit">Search!</button>
+                </div>
             </form>
 
-            {anime && (
+            {/* {anime && (
                 <div className="anime-result">
                     <h2>{anime.title}</h2>
                     <img src={anime.images.jpg.image_url} alt={anime.title} />
                 </div>
-            )}
+            )} */}
+            {/* Moved this code over to AnimeCard instead */}
         </div>
     )
 }

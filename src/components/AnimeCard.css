@@ -1,0 +1,49 @@
+.anime-info-ctn {
+    display: flex;
+    border-radius: 12px;
+    border: 1px solid black;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 50px;
+    width: 450px;
+    max-height: 405px;
+
+    background: rgba(255, 255, 255, 0.65); /* semi-transparent peach */
+    backdrop-filter: blur(6px);            /* frosted glass effect */
+    /* This gives the "frosted" effect */
+    border: var(--border, 2.5px solid rgba(75, 203, 215, 0.74)); /* subtle teal border */
+    border-radius: 25px;
+    padding: 1rem;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.anime-gen-info {
+    padding: 0;
+    margin: 0;
+    font-size: 0.90rem;
+}
+
+.name {
+    text-align: center;
+}
+
+.anime-img {
+    width: 100px;
+    height: 150px;
+}
+
+.btn-ctn {
+    padding-top: 15px;
+}
+
+.btn {
+    font-family: "Silkscreen", sans-serif;
+    margin-left: 5px;
+    margin-right: 5px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    opacity: 0.85;
+    transition: all 0.3s ease-out;
+    cursor: pointer;
+}

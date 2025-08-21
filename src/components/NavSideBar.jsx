@@ -1,14 +1,13 @@
 import './NavSideBar.css';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import MalSB from '../components/MALSearchBar.jsx';
 import Hamburger from 'hamburger-react';
 
-function NavSideBar() {
+function NavSideBar( {onAnimeResult} ) {
 
     const [open, setOpen] = useState(false);
     // Initial state: Hamburger menu should NOT be open yet
-    const [openModal, setOpenModal] = useState(false);
-    // Initial state: Modal should NOT be open yet
 
     return (
         <div className="hamburger-ctn">
@@ -41,8 +40,14 @@ function NavSideBar() {
                             <Link to="/s-tiers">⭐ S-Tiers</Link>
                         </li>
                         <li className="qnav-item">
-                            <button className="find-anime-btn">⌕ Find Anime</button>
+                            <p>⌕ Find Anime</p>
+                            <MalSB animeResult={onAnimeResult}></MalSB>
+                            {/* <button className="find-anime-btn" onClick={() => {setOpenModal(true);}}>⌕ Find Anime</button>
                             {/* Keep this for now temporarily - TODO: Needs modal pop-up */}
+                            {/* {openModal &&
+                                <div className="open-modal-ctn"> 
+                                    <FindAnimeModal closeModal={() => setOpenModal(false)} />
+                                </div>} */}
                         </li>
                     </ul>
                 </div>}

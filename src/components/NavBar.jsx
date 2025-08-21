@@ -29,7 +29,7 @@ function NavBar() {
         <div className="nav-container">
             <ul className="nav-bar">
                 <button className="btn" onClick={goTBWatched}><li>To Watch</li></button>
-                <button className="btn" onClick={goCurrentlyWatching}><li>Currently Watching</li></button>
+                <button className="btn" onClick={goCurrentlyWatching}><li>Watching</li></button>
                 <button className="btn" onClick={goWatched}><li>Watched</li></button>
                 <button className="btn" onClick={goDropped}><li>Dropped</li></button>
                 <button className="btn" onClick={goSTiers}><li>S-Tiers</li></button>

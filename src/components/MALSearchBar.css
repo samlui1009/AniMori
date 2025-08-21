@@ -1,3 +1,35 @@
-.search-bar-ctn {
-    
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap');
+
+.input-field {
+    width: 175px;
+    border-radius: 12px;
+    border: none;
+    font-family: "Silkscreen", sans-serif;
+    font-size: 0.75rem;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.search-btn-ctn {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.search-btn {
+    font-family: "Silkscreen", sans-serif;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    background-color: var(--background-color, #E89B56);
+    opacity: 0.75;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.search-btn:hover {
+    opacity: 1.0;
+}
+
+[data-theme = "dark"] .search-btn {
+    --background-color: #6c7ac7;
 }
