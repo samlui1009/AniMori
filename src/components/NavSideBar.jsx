@@ -7,6 +7,8 @@ function NavSideBar() {
 
     const [open, setOpen] = useState(false);
     // Initial state: Hamburger menu should NOT be open yet
+    const [openModal, setOpenModal] = useState(false);
+    // Initial state: Modal should NOT be open yet
 
     return (
         <div className="hamburger-ctn">
@@ -21,7 +23,7 @@ function NavSideBar() {
                 
             {open &&
                 <div className="open-menu">
-                    <p>Quick Nav</p>
+                    <p className="menu-title">Quick Nav</p>
                     <ul className="open-menu-options">
                         <li className="qnav-item">
                             <Link to="/to-be-watched">📌 To Watch</Link>
@@ -39,7 +41,7 @@ function NavSideBar() {
                             <Link to="/s-tiers">⭐ S-Tiers</Link>
                         </li>
                         <li className="qnav-item">
-                            <a href="#">⌕ Find Anime</a>
+                            <button className="find-anime-btn">⌕ Find Anime</button>
                             {/* Keep this for now temporarily - TODO: Needs modal pop-up */}
                         </li>
                     </ul>

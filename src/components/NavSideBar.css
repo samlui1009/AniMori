@@ -1,13 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap');
+
 .open-menu {
     width: 175px;
     /* This is just for testing to see how it'd look */
     border-radius: 12px;
-    color: #4B2E2A;
+    color: var(--color, #4B2E2A);
 
     background: rgba(255, 255, 255, 0.65); /* semi-transparent peach */
     backdrop-filter: blur(6px);            /* frosted glass effect */
     /* This gives the "frosted" effect */
-    border: 2.5px solid rgba(75, 203, 215, 0.74); /* subtle teal border */
+    border: var(--border, 2.5px solid rgba(75, 203, 215, 0.74)); /* subtle teal border */
     border-radius: 12px;
     padding: 0.25rem;
     /* Apply animation? TODO - Not important though */
@@ -22,12 +24,40 @@
     margin-bottom: 30px;
 }
 
+.find-anime-btn {
+    font-family: "Silkscreen", sans-serif;
+    font-weight: 700;
+    font-size: 0.99rem;
+    color: var(--color,  #92726e);
+    border: none;
+    background: none;
+    opacity: 0.85;
+    transition: all 0.3s ease-out;
+}
+
+.find-anime-btn:hover {
+    color: var(--color, #4B2E2A );
+}
+
 a {
-    color: #92726e;
+    color: var(--color, #92726e);
     text-decoration-line: none;
     transition: all 0.3s ease-out;
 }
 
 a:hover {
-    color: #4B2E2A;
+    color: var(--color, #4B2E2A);
+}
+
+[data-theme='dark'] .open-menu {
+    --border: 2.5px solid #3a3d70;
+    --color: #66667f;
+}
+
+[data-theme='dark'] a, .find-anime-btn {
+    --color: #86868f;
+}
+
+[data-theme='dark'] a:hover, .find-anime-btn:hover {
+    --color: #66667f;
 }

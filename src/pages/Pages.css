@@ -7,7 +7,7 @@
     background: rgba(255, 255, 255, 0.65); /* semi-transparent peach */
     backdrop-filter: blur(6px);            /* frosted glass effect */
     /* This gives the "frosted" effect */
-    border: 2.5px solid rgba(75, 203, 215, 0.74); /* subtle teal border */
+    border: var(--border, 2.5px solid rgba(75, 203, 215, 0.74)); /* subtle teal border */
     border-radius: 25px;
     padding: 1rem;
 
@@ -36,17 +36,23 @@
 }
 
 .title {
-    color: #4B2E2A;
+    color: var(--color, #4B2E2A);
 }
 
 .tagline {
-    color: #7B6A68;
+    color: var(--color, #7B6A68);
 }
 
 .nav-ctn {
     width: 350px;
     position: fixed;
     left: 0;
+    top: 0;
+}
+
+.dl-ctn {
+    position: fixed;
+    right: 0;
     top: 0;
 }
 
@@ -58,4 +64,16 @@
 .btn-container {
     position: absolute;
     bottom: 20px;
+}
+
+[data-theme='dark'] .header-ctn {
+    --border: 2.5px solid #3a3d70;
+}
+
+[data-theme='dark'] .title {
+    --color: #66667f;
+}
+
+[data-theme='dark'] .tagline {
+    --color: #86868f;
 }

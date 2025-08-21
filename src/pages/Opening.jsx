@@ -15,7 +15,9 @@ function Opening() {
     return (
         <div>
             <div className="main-div">
-            <DLToggle></DLToggle>
+            <div className="dl-ctn">
+                <DLToggle></DLToggle>
+            </div>
             {/* Toggle is added here, no CSS styling or logic to toggle light/dark mode just yet */}
             <div className="header-div">
                 <Typewriter className="header-typewriter"

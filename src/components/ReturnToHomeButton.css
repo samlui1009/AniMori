@@ -3,7 +3,7 @@
     border: none;
     font-family: "Silkscreen", sans-serif;
     cursor: pointer;    
-    background-color: #E89B56;
+    background-color: var(--background-color, #E89B56);
     width: 100px;
     height: 50px;
     opacity: 0.75;
@@ -12,4 +12,8 @@
 
 .home-btn:hover {
     opacity: 1.0;
+}
+
+[data-theme = 'dark'] .home-btn {
+    --background-color: #6c7ac7;
 }

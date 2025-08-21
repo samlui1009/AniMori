@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap');
+
+.toggle-btn {
+    background: none;
+    border: none;
+    font-size: 1.75rem;
+    font-family: "Silkscreen", sans-serif;
+}
+
+.toggle-icon {
+    font-size: 1.5rem;
+    color: var(--color, #7B6A68);
+    opacity: 0.7;
+    cursor: pointer;
+    transition: opacity 0.5s ease-in;
+}
+
+.toggle-icon:hover {
+    opacity: 1;
+    color: var(--color, #4B2E2A);
+}
+
+[data-theme='dark'] .toggle-icon {
+    --color: #a59faed5;
+}
+
+[data-theme='dark'] .toggle-icon:hover {
+    --color: #4f4360d5;
+}
+
+/* Tutorial for dark mode: https://www.youtube.com/watch?v=y0LwoUi_Kcw */
