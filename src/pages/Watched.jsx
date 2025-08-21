@@ -2,6 +2,7 @@ import { useState } from 'react';
 import RTHButton from '../components/ReturnToHomeButton.jsx';
 import DLMode from '../components/DayNightModeOptionBar.jsx';
 import NavSB from '../components/NavSideBar.jsx';
+import AnimeCard from '../components/AnimeCard.jsx';
 import './Pages.css'
 
 function Watched() {

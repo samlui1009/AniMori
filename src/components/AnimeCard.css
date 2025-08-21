@@ -47,3 +47,12 @@
     transition: all 0.3s ease-out;
     cursor: pointer;
 }
+
+.close-btn {
+    cursor: pointer;
+    border: none;
+    background: none;
+    position: absolute;
+    right: 0;
+    margin-right: 10px;
+}
