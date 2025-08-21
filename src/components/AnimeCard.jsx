@@ -27,11 +27,11 @@ function AnimeCard( { passedAnimeData }) {
         <div>
             {displayAnime && (
                 <div className="anime-info-ctn">
-                <button className="close-btn" onClick={() => setDisplayAnime(false)}><FontAwesomeIcon icon={faSquareXmark} /></button>
+                <button className="close-btn" onClick={() => setDisplayAnime(false)}><FontAwesomeIcon icon={faSquareXmark} size="lg"/></button>
                 <div className="anime-gen-info">
                     <h3 className="name">Anime Name: {passedAnimeData.title}</h3>
-                    <p>Total Episodes: {passedAnimeData.episodes}</p>
-                    <p>Anime Status: {passedAnimeData.status}</p>
+                    <p className="info">Total Episodes: {passedAnimeData.episodes}</p>
+                    <p className="info">Anime Status: {passedAnimeData.status}</p>
                 </div>
                 <img className="anime-img" src={passedAnimeData.images.jpg.image_url} alt={passedAnimeData.title}></img>
                 <div className="btn-ctn">

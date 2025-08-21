@@ -38,14 +38,6 @@ function MALSearchBar( {animeResult} ) {
                     <button className="search-btn" type="submit">Search!</button>
                 </div>
             </form>
-
-            {/* {anime && (
-                <div className="anime-result">
-                    <h2>{anime.title}</h2>
-                    <img src={anime.images.jpg.image_url} alt={anime.title} />
-                </div>
-            )} */}
-            {/* Moved this code over to AnimeCard instead */}
         </div>
     )
 }

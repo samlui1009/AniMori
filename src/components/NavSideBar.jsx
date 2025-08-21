@@ -42,12 +42,6 @@ function NavSideBar( {onAnimeResult} ) {
                         <li className="qnav-item">
                             <p>⌕ Find Anime</p>
                             <MalSB animeResult={onAnimeResult}></MalSB>
-                            {/* <button className="find-anime-btn" onClick={() => {setOpenModal(true);}}>⌕ Find Anime</button>
-                            {/* Keep this for now temporarily - TODO: Needs modal pop-up */}
-                            {/* {openModal &&
-                                <div className="open-modal-ctn"> 
-                                    <FindAnimeModal closeModal={() => setOpenModal(false)} />
-                                </div>} */}
                         </li>
                     </ul>
                 </div>}

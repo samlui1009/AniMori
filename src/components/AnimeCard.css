@@ -26,6 +26,11 @@
 
 .name {
     text-align: center;
+    color: var(--color, #4B2E2A);
+}
+
+.info {
+    color: var(--color, #7B6A68);
 }
 
 .anime-img {
@@ -55,4 +60,16 @@
     position: absolute;
     right: 0;
     margin-right: 10px;
+}
+
+[data-theme="dark"] .anime-info-ctn {
+    --border: 2.5px solid #3a3d70;
+}
+
+[data-theme="dark"] .name {
+    --color: #66667f;
+}
+
+[data-theme="dark"] .info {
+    --color: #86868f;
 }
