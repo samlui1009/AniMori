@@ -3,13 +3,15 @@
   "productName": "animori",
   "version": "1.0.0",
   "description": "My Electron application description",
-  "main": ".vite/build/main.js",
+  "main": "dist/main/animori.js",
   "scripts": {
     "start": "electron-forge start",
+    "dev": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
     "rebuild": "electron-rebuild -f -w better-sqlite3",
+    "postinstall": "npm run rebuild",
     "lint": "echo \"No linting configured\""
   },
   "keywords": [],

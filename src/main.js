@@ -1,11 +1,86 @@
-import { app, BrowserWindow } from 'electron';
+// From YT Tutorial
+// This is the Main process - ONLY ONE 
+// Serves as application entry point, responsible for controlling the life-cycle
+// A Node.js environment, with full OS access => A major security concern though
+// The Main process is ALSO isolated, so to communicate with each other - Use IPC!
+
+// Inter Process Communication => https://www.youtube.com/watch?v=J60XrXk0J1o
+
+// Contains logic for creating the window and handling the lifecycle
+
+import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'node:path';
 import started from 'electron-squirrel-startup';
+import AnimeDb from '../db/databaseManager.js';
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (started) {
   app.quit();
 }
+
+// ipc Code to handle backend interactions with SQLite database
+ipcMain.handle("updateComments", (_event, newComments, malId) => {
+    AnimeDb.updateAnimeComments(newComments, malId);
+    console.log("Comments updated!");
+    // Testing to see if this endpoint works
+    // It executes, but personal_comments = NULL and mal_id = NULL in initial test?
+    // 
+})
+// Event is an IpcMainInvokeEvent object
+// This is an unused parameter
+// But if we have parameters after it, then we DO need to add _event
+
+ipcMain.handle("updatePersonalStatus", (_event, newStatus, malId) => {
+    AnimeDb.updateAnimePersonalStatus(newStatus, malId);
+})
+
+ipcMain.handle("updateSTierStatus", (_event, newFlag, malId) => {
+    AnimeDb.updateAnimeSTierFlag(newFlag, malId);
+})
+
+ipcMain.handle("deleteAnime", (_event, idNum) => {
+    AnimeDb.deleteAnimeFromDatabase(idNum);
+})
+
+ipcMain.handle("getSTierAnimeCount", () => {
+    return AnimeDb.returnAnimeCountAllSTiers();
+})
+// These do not require the _event, because there are no parameters we are 
+// Feeding into
+
+ipcMain.handle("getWatchedAnimeCount", () => {
+    return AnimeDb.returnAnimeCountGroupedByWatched();
+})
+
+ipcMain.handle("getToBeWatchedAnimeCount", () => {
+    return AnimeDb.returnAnimeCountGroupedByToBeWatched();
+})
+
+ipcMain.handle("getWatchingAnimeCount", () => {
+    return AnimeDb.returnAnimeCountGroupedByWatching();
+})
+
+ipcMain.handle("getDroppedAnimeCount", () => {
+    return AnimeDb.returnAnimeCountGroupedByDropped();
+})
+
+ipcMain.handle("getTotalAverageRating", () => {
+    return AnimeDb.returnTotalAverageRating();
+})
+
+ipcMain.handle("getTotalAnimeCount", () => {
+    return AnimeDb.returnTotalAnimeCount();
+})
+
+ipcMain.handle("addNewAnime", (anime) => {
+    AnimeDb.addNewAnime(anime);
+    // Add console.log to test it?
+    // Is this even supposed to return back anything? Probably not...
+});
+
+ipcMain.handle("returnAllAnimeTitles", () => {
+    return AnimeDb.returnAllAnimeTitles();
+});
 
 const createWindow = () => {
   // Create the browser window.
@@ -13,12 +88,25 @@ const createWindow = () => {
     width: 750,
     height: 750,
     frame: true,
+    alwaysOnTop: true,
+    // Sets dimensions
+    contextIsolation: true,
+    nodeIntegration: false,
+    // Q: Why are these necessary?
+
     // As per Google, this creates a "frameless" window that we'll need to 
     // style accordingly in the renderer.jsx & css
     // When "false", it creates an automatic "rounded" border
     // But then this also eliminates the overall bar 
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
+      preload: path.join(__dirname, '../preload/preload.js'),
+
+
+    //   Also sets a preload script => Joining our window with a file called
+    //   preload.js
+    //   It serves as a "bridge" b/t Main process and Renderer process
+    //   Called preload because it "pre-loads" before any other scripts 
+    //   in the Renderer process
       nodeIntegration: true
     },
   });
