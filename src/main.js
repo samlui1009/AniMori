@@ -3,6 +3,7 @@
 // Serves as application entry point, responsible for controlling the life-cycle
 // A Node.js environment, with full OS access => A major security concern though
 // The Main process is ALSO isolated, so to communicate with each other - Use IPC!
+// Runs ipcMain
 
 // Inter Process Communication => https://www.youtube.com/watch?v=J60XrXk0J1o
 
@@ -91,8 +92,8 @@ const createWindow = () => {
     alwaysOnTop: true,
     // Sets dimensions
     contextIsolation: true,
-    nodeIntegration: false,
-    // Q: Why are these necessary?
+    // This is set to true by default through documentation
+    // 
 
     // As per Google, this creates a "frameless" window that we'll need to 
     // style accordingly in the renderer.jsx & css

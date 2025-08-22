@@ -542,41 +542,40 @@ function returnAllAnimeTitles() {
   return returnStatement.all();
 }
 function returnAnimeCountGroupedByWatched() {
-  const returnStatement = anidb.prepare(`
-        SELECT COUNT(*) FROM anime WHERE personal_status = 'Watched`);
-  return returnStatement.all();
+  const row = anidb.prepare(`
+        SELECT COUNT(*) AS count FROM anime WHERE personal_status = 'Watched'`).get();
+  return row.count;
 }
 function returnAnimeCountGroupedByToBeWatched() {
-  const returnStatement = anidb.prepare(`
-        SELECT COUNT(*) FROM anime WHERE personal_status = 'To Be Watched'`);
-  return returnStatement.all();
+  const row = anidb.prepare(`
+        SELECT COUNT(*) AS count FROM anime WHERE personal_status = 'To Be Watched'`).get();
+  return row.count;
 }
 function returnAnimeCountGroupedByWatching() {
-  const returnStatement = anidb.prepare(`
-        SELECT COUNT(*) FROM anime WHERE personal_status = 'Watching'`);
-  return returnStatement.all();
+  const row = anidb.prepare(`
+        SELECT COUNT(*) AS count FROM anime WHERE personal_status = 'Watching'`).get();
+  return row.count;
 }
 function returnAnimeCountAllSTiers() {
-  const returnStatement = anidb.prepare(`
-        SELECT COUNT(*) FROM anime WHERE is_s_tier = 1`);
-  return returnStatement.all();
+  const row = anidb.prepare(`
+        SELECT COUNT(*) AS count FROM anime WHERE is_s_tier = 1`);
+  return row.count;
 }
 function returnAnimeCountGroupedByDropped() {
-  const returnStatement = anidb.prepare(`
-        SELECT COUNT(*) FROM anime WHERE personal_status = 'Dropped'`);
-  return returnStatement.all();
+  const row = anidb.prepare(`
+        SELECT COUNT(*) AS count FROM anime WHERE personal_status = 'Dropped'`).get();
+  return row.count;
 }
 function returnTotalAverageRating() {
-  const returnStatement = anidb.prepare(`
-        SELECT AVG(personal_RATING) FROM anime`);
-  return returnStatement.all();
+  const row = anidb.prepare(`
+        SELECT AVG(personal_RATING) AS average FROM anime`).get();
+  return row.average;
 }
 function returnTotalAnimeCount() {
-  const returnStatement = anidb.prepare(`
-        SELECT COUNT(*) FROM anime`);
-  return returnStatement.all();
+  const row = anidb.prepare(`
+        SELECT COUNT(*) AS count FROM anime`).get();
+  return row.count;
 }
-console.log(returnTotalAnimeCount());
 const AnimeDb = {
   anidb,
   addNewAnime,
@@ -645,8 +644,8 @@ const createWindow = () => {
     alwaysOnTop: true,
     // Sets dimensions
     contextIsolation: true,
-    nodeIntegration: false,
-    // Q: Why are these necessary?
+    // This is set to true by default through documentation
+    // 
     // As per Google, this creates a "frameless" window that we'll need to 
     // style accordingly in the renderer.jsx & css
     // When "false", it creates an automatic "rounded" border

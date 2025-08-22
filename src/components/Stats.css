@@ -64,7 +64,7 @@
     justify-content: center;
 }
 
-.completion-rate {
+.avg-rate {
     position: absolute;
     bottom: 10px;
 /* https://stackoverflow.com/questions/62906503/how-can-i-force-an-element-to-sit-at-bottom-of-div-card */
