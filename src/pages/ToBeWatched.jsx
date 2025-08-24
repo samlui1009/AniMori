@@ -10,6 +10,7 @@ import './Pages.css'
 
 function ToBeWatched() {
 
+    const status = "To Be Watched";
     const [anime, setAnime] = useState(null);
     
     return(
@@ -24,6 +25,7 @@ function ToBeWatched() {
                 <h3 className="title">📺 To Watch 📺</h3>
                 <p className="tagline">+1 to the never-ending pile.</p>
             </div>
+            <AnimeShelf personalStatus={status}></AnimeShelf>
             <div className="btn-container">
                 <RTHButton className="home-btn"></RTHButton>
             </div>

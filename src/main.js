@@ -54,8 +54,8 @@ ipcMain.handle("getTotalAnimeCount", () => {
 })
 
 // Returns Anime Database "lean" data = Required for Shelf component
-ipcMain.handle("getAnimeLeanData", (_event, malId) => {
-    return AnimeDb.returnAnimeLeanDataFromMalID(malId);
+ipcMain.handle("getAnimeLeanDataByStatus", (_event, personalStatus) => {
+    return AnimeDb.returnAnimeLeanDataByStatus(personalStatus);
 })
 
 const createWindow = () => {

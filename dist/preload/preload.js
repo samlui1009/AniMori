@@ -8,5 +8,5 @@ contextBridge.exposeInMainWorld("dbFunctions", {
   getTotalAverageRating: () => ipcRenderer.invoke("getTotalAverageRating"),
   getTotalAnimeCount: () => ipcRenderer.invoke("getTotalAnimeCount"),
   getTotalCountByStatus: (status) => ipcRenderer.invoke("getTotalCountByStatus", status),
-  getAnimeLeanData: (malId) => ipcRenderer.invoke("getAnimeLeanData", malId)
+  getAnimeLeanDataByStatus: (status) => ipcRenderer.invoke("getAnimeLeanDataByStatus", status)
 });

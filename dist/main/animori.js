@@ -536,10 +536,10 @@ function returnTotalAnimeCount() {
         SELECT COUNT(*) AS count FROM anime`).get();
   return row.count;
 }
-function returnAnimeLeanDataFromMalID(malId) {
+function returnAnimeLeanDataByStatus(personalStatus) {
   const row = anidb.prepare(`
-        SELECT * FROM anime`).get(malId);
-  return row.all();
+        SELECT mal_id, title, image_url, personal_comments, personal_rating, is_s_tier FROM anime WHERE personal_status = ?`).all(personalStatus);
+  return row;
 }
 const AnimeDb = {
   anidb,
@@ -547,7 +547,7 @@ const AnimeDb = {
   deleteAnimeFromDatabase,
   updateAnimeField,
   returnAnimeCountGroupedByStatus,
-  returnAnimeLeanDataFromMalID,
+  returnAnimeLeanDataByStatus,
   returnTotalAnimeCount,
   returnTotalAverageRating
 };
@@ -572,8 +572,8 @@ require$$3$1.ipcMain.handle("getTotalAverageRating", () => {
 require$$3$1.ipcMain.handle("getTotalAnimeCount", () => {
   return AnimeDb.returnTotalAnimeCount();
 });
-require$$3$1.ipcMain.handle("getAnimeLeanData", (_event, malId) => {
-  return AnimeDb.returnAnimeLeanDataFromMalID(malId);
+require$$3$1.ipcMain.handle("getAnimeLeanDataByStatus", (_event, personalStatus) => {
+  return AnimeDb.returnAnimeLeanDataByStatus(personalStatus);
 });
 const createWindow = () => {
   const mainWindow = new require$$3$1.BrowserWindow({

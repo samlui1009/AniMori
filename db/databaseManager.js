@@ -91,11 +91,11 @@ function returnTotalAnimeCount() {
 // REQUIRES: The anime must exist within the database
 // MODIFIES: None 
 // EFFECTS: Returns "lean" anime data to be displayed in Shelf component 
-function returnAnimeLeanDataFromMalID(malId) {
+function returnAnimeLeanDataByStatus(personalStatus) {
     const row = anidb.prepare(`
-        SELECT * FROM anime`).get(malId);
-    return row.all();
+        SELECT mal_id, title, image_url, personal_comments, personal_rating, is_s_tier FROM anime WHERE personal_status = ?`).all(personalStatus);
     // Returns result as an array
+    return row;
 }
 
 export default {
@@ -104,7 +104,7 @@ export default {
     deleteAnimeFromDatabase,
     updateAnimeField,
     returnAnimeCountGroupedByStatus,
-    returnAnimeLeanDataFromMalID,
+    returnAnimeLeanDataByStatus,
     returnTotalAnimeCount,
     returnTotalAverageRating
 };
