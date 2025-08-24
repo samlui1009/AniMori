@@ -516,10 +516,10 @@ function updateAnimeField(field, value, malId) {
         UPDATE anime SET ${field} = ? WHERE mal_id = ?`);
   runStatement.run(value, malId);
 }
-function deleteAnimeFromDatabase(foundId, malId) {
+function deleteAnimeFromDatabase(malId) {
   const deleteStatement = anidb.prepare(`
         DELETE from anime WHERE mal_id = ?`);
-  deleteStatement.run(foundId, malId);
+  deleteStatement.run(malId);
 }
 function returnAnimeCountGroupedByStatus(personalStatus) {
   const row = anidb.prepare(`

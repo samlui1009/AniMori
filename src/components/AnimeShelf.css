@@ -40,15 +40,26 @@
     cursor: pointer;
     font-size: 1.45rem;
     color: var(--color, #4B2E2A);
+    opacity: 0.80;
     transition: all 0.5s ease-in;
 }
 
-.btn {
-    width: 75px;
+.nav-btn:hover {
+    opacity: 1.0;
+}
+
+.content {
+    text-align: center;
+    font-weight: 100;
+    color: var(--color, #7B6A68);
 }
 
 [data-theme='dark'] .nav-btn {
     --color: #e5dfecd5;
+}
+
+[data-theme='dark'] .content {
+    --color: #86868f;
 }
 
 

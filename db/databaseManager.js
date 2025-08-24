@@ -53,10 +53,10 @@ function updateAnimeField(field, value, malId) {
 
 // Below: Delete queries - Really only just this one needed though
 // Functional and working!
-function deleteAnimeFromDatabase(foundId, malId) {
+function deleteAnimeFromDatabase(malId) {
     const deleteStatement = anidb.prepare(`
         DELETE from anime WHERE mal_id = ?`)
-    deleteStatement.run(foundId, malId);
+    deleteStatement.run(malId);
 }
 
 // Below: Return queries
