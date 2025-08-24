@@ -1,4 +1,7 @@
 import { useState } from 'react';
+
+import AnimeShelf from '../components/AnimeShelf.jsx';
+
 import RTHButton from '../components/ReturnToHomeButton.jsx';
 import DLMode from '../components/DayNightModeOptionBar.jsx';
 import NavSB from '../components/NavSideBar.jsx';

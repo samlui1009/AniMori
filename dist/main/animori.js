@@ -489,16 +489,13 @@ var electronSquirrelStartupExports = requireElectronSquirrelStartup();
 const started = /* @__PURE__ */ getDefaultExportFromCjs(electronSquirrelStartupExports);
 const anidb = new Database("./animori.db", { verbose: console.log });
 anidb.exec(`
+    DROP TABLE IF EXISTS anime;
+
     CREATE TABLE IF NOT EXISTS anime (
       mal_id INTEGER PRIMARY KEY,
       image_url TEXT,
       title TEXT,
       episodes INTEGER,
-      airing BOOLEAN,
-      genres TEXT,
-      season TEXT,
-      year INTEGER,
-      status TEXT,
       personal_status TEXT,
       personal_rating INTEGER,
       personal_comments TEXT,
@@ -507,69 +504,34 @@ anidb.exec(`
 `);
 function addNewAnime(anime) {
   const addStatement = anidb.prepare(`
-        INSERT INTO anime (mal_id, image_url, title, episodes, airing, genres, season, year, status, personal_status, personal_rating, personal_comments, is_s_tier)
-        VALUES (@mal_id, @image_url, @title, @episodes, @airing, @genres, @season, @year, @status, @personal_status, @personal_rating, @personal_comments, @is_s_tier)
+        INSERT INTO anime (mal_id, image_url, title, episodes, personal_status, personal_rating, personal_comments, is_s_tier)
+        VALUES (@mal_id, @image_url, @title, @episodes, @personal_status, @personal_rating, @personal_comments, @is_s_tier)
         `);
   addStatement.run(anime);
 }
-function updateAnimeComments(newComments, malId) {
-  const updateStatement = anidb.prepare(`
-        UPDATE anime SET personal_comments = ? WHERE mal_id = ?`);
-  updateStatement.run(newComments, malId);
-}
-function updateAnimeRating(newRating, malId) {
-  const updateStatement = anidb.prepare(`
-        UPDATE anime SET personal_RATING = ? WHERE mal_id = ?`);
-  updateStatement.run(newRating, malId);
-}
-function updateAnimePersonalStatus(newStatus, malId) {
-  const updateStatement = anidb.prepare(`
-        UPDATE anime SET personal_status = ? WHERE mal_id = ?`);
-  updateStatement.run(newStatus, malId);
-}
-function updateAnimeSTierFlag(updatedFlag, malId) {
-  const updateStatement = anidb.prepare(`
-        UPDATE anime SET is_s_tier = ? WHERE mal_id = ?`);
-  updateStatement.run(updatedFlag, malId);
+function updateAnimeField(field, value, malId) {
+  const allowedFields = ["personal_rating", "personal_status", "is_s_tier", "personal_comments"];
+  if (!allowedFields.includes(field)) {
+    throw new Error(`Invalid field: ${field}`);
+  }
+  const runStatement = anidb.prepare(`
+        UPDATE anime SET ${field} = ? WHERE mal_id = ?`);
+  runStatement.run(value, malId);
 }
 function deleteAnimeFromDatabase(foundId, malId) {
   const deleteStatement = anidb.prepare(`
         DELETE from anime WHERE mal_id = ?`);
   deleteStatement.run(foundId, malId);
 }
-function returnAllAnimeTitles() {
-  const returnStatement = anidb.prepare("SELECT title FROM anime");
-  return returnStatement.all();
-}
-function returnAnimeCountGroupedByWatched() {
+function returnAnimeCountGroupedByStatus(personalStatus) {
   const row = anidb.prepare(`
-        SELECT COUNT(*) AS count FROM anime WHERE personal_status = 'Watched'`).get();
-  return row.count;
-}
-function returnAnimeCountGroupedByToBeWatched() {
-  const row = anidb.prepare(`
-        SELECT COUNT(*) AS count FROM anime WHERE personal_status = 'To Be Watched'`).get();
-  return row.count;
-}
-function returnAnimeCountGroupedByWatching() {
-  const row = anidb.prepare(`
-        SELECT COUNT(*) AS count FROM anime WHERE personal_status = 'Watching'`).get();
-  return row.count;
-}
-function returnAnimeCountAllSTiers() {
-  const row = anidb.prepare(`
-        SELECT COUNT(*) AS count FROM anime WHERE is_s_tier = 1`);
-  return row.count;
-}
-function returnAnimeCountGroupedByDropped() {
-  const row = anidb.prepare(`
-        SELECT COUNT(*) AS count FROM anime WHERE personal_status = 'Dropped'`).get();
-  return row.count;
+        SELECT COUNT(*) AS count FROM anime WHERE personal_status = ?`).get(personalStatus);
+  return row ? row.count : 0;
 }
 function returnTotalAverageRating() {
   const row = anidb.prepare(`
         SELECT AVG(personal_RATING) AS average FROM anime`).get();
-  return row.average;
+  return row ? row.average : 0;
 }
 function returnTotalAnimeCount() {
   const row = anidb.prepare(`
@@ -579,17 +541,9 @@ function returnTotalAnimeCount() {
 const AnimeDb = {
   anidb,
   addNewAnime,
-  updateAnimeComments,
-  updateAnimePersonalStatus,
-  updateAnimeRating,
-  updateAnimeSTierFlag,
+  updateAnimeField,
+  returnAnimeCountGroupedByStatus,
   deleteAnimeFromDatabase,
-  returnAllAnimeTitles,
-  returnAnimeCountGroupedByDropped,
-  returnAnimeCountAllSTiers,
-  returnAnimeCountGroupedByToBeWatched,
-  returnAnimeCountGroupedByWatched,
-  returnAnimeCountGroupedByWatching,
   returnTotalAnimeCount,
   returnTotalAverageRating
 };
@@ -608,6 +562,9 @@ require$$3$1.ipcMain.handle("updateSTierStatus", (_event, newFlag, malId) => {
 });
 require$$3$1.ipcMain.handle("deleteAnime", (_event, idNum) => {
   AnimeDb.deleteAnimeFromDatabase(idNum);
+});
+require$$3$1.ipcMain.handle("getWatchedAnimeImages", () => {
+  return AnimeDb.returnAnimeImagesGroupedByWatched();
 });
 require$$3$1.ipcMain.handle("getSTierAnimeCount", () => {
   return AnimeDb.returnAnimeCountAllSTiers();

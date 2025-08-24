@@ -9,20 +9,18 @@ anidb.exec(`
       image_url TEXT,
       title TEXT,
       episodes INTEGER,
-      airing BOOLEAN,
-      genres TEXT,
-      season TEXT,
-      year INTEGER,
-      status TEXT,
       personal_status TEXT,
       personal_rating INTEGER,
       personal_comments TEXT,
       is_s_tier INTEGER
     )
 `);
-// This is basic SQL syntax - Need to revise
+// This is basic SQL syntax
 // The database executes this in case the table doesn't exist
 // All of the query logic will be handled here
+
+// Aug 23: Revised the schema for the anime table so it's more lean and fitting of
+// requires for displaying anime data in the Shelf component
 
 // REQUIRES: The anime must exist within the database
 // MODIFIES: Anime
@@ -30,52 +28,28 @@ anidb.exec(`
 // This is for INSERTING a new anime with all of these values into the SQLite database
 function addNewAnime(anime) {
     const addStatement = anidb.prepare(`
-        INSERT INTO anime (mal_id, image_url, title, episodes, airing, genres, season, year, status, personal_status, personal_rating, personal_comments, is_s_tier)
-        VALUES (@mal_id, @image_url, @title, @episodes, @airing, @genres, @season, @year, @status, @personal_status, @personal_rating, @personal_comments, @is_s_tier)
+        INSERT INTO anime (mal_id, image_url, title, episodes, personal_status, personal_rating, personal_comments, is_s_tier)
+        VALUES (@mal_id, @image_url, @title, @episodes, @personal_status, @personal_rating, @personal_comments, @is_s_tier)
         `)
     addStatement.run(anime);
 }
 
 // Below: Update queries
+// REQUIRES: Anime must be present within database
+// MODIFIES: AnimeDb
+// EFFECTS: Updates the database field accordingly with the value
+function updateAnimeField(field, value, malId) {
+    const allowedFields = ["personal_rating", "personal_status", "is_s_tier", "personal_comments"];
+    if (!allowedFields.includes(field)) {
+        throw new Error(`Invalid field: ${field}`);
+    }
 
-// REQUIRES: The anime must exist within the database 
-// MODIFIES: Anime
-// EFFECTS:  Modifies the selected animes' personal comments
-function updateAnimeComments(newComments, malId) {
-    const updateStatement = anidb.prepare(`
-        UPDATE anime SET personal_comments = ? WHERE mal_id = ?`);
-    updateStatement.run(newComments, malId);
-}
-
-// REQUIRES: The anime must exist within the database 
-// MODIFIES: Anime
-// EFFECTS:  Modifies the selected animes' personal rating
-function updateAnimeRating(newRating, malId) {
-    const updateStatement = anidb.prepare(`
-        UPDATE anime SET personal_RATING = ? WHERE mal_id = ?`)
-    updateStatement.run(newRating, malId);
-}
-
-// REQUIRES: The anime must exist within the database 
-// MODIFIES: Anime
-// EFFECTS:  Modifies the selected animes' personal status
-function updateAnimePersonalStatus(newStatus, malId) {
-    const updateStatement = anidb.prepare(`
-        UPDATE anime SET personal_status = ? WHERE mal_id = ?`)
-    updateStatement.run(newStatus, malId);
-}
-
-// REQUIRES: Anime must exist within database
-// MODIFIES: Anime 
-// EFFECTS: Modifies the S-Tier "boolean" flag for the anime 
-function updateAnimeSTierFlag(updatedFlag, malId) {
-    const updateStatement = anidb.prepare(`
-        UPDATE anime SET is_s_tier = ? WHERE mal_id = ?`)
-    updateStatement.run(updatedFlag, malId);
+    const runStatement = anidb.prepare(`
+        UPDATE anime SET ${field} = ? WHERE mal_id = ?`)
+    runStatement.run(value, malId);
 }
 
 // Below: Delete queries - Really only just this one needed though
-
 // Functional and working!
 function deleteAnimeFromDatabase(foundId, malId) {
     const deleteStatement = anidb.prepare(`
@@ -84,60 +58,14 @@ function deleteAnimeFromDatabase(foundId, malId) {
 }
 
 // Below: Return queries
-
-// REQUIRES: The anime must exist within the database 
-// MODIFIES: None
-// EFFECTS:  Returns all listed anime titles as an array
-function returnAllAnimeTitles() {
-    const returnStatement = anidb.prepare("SELECT title FROM anime");
-    return returnStatement.all();
-}
-// Do I need this?
-
 // REQUIRES: The anime must exist within the database
-// MODIFIES: None 
-// EFFECTS: Returns the total number of anime that falls under "Watched"
-function returnAnimeCountGroupedByWatched() {
+// MODIFIES: N/A - Refactored from independent queries
+// EFFECTS: Returns the total averaged rating of anime
+function returnAnimeCountGroupedByStatus(personalStatus) {
     const row = anidb.prepare(`
-        SELECT COUNT(*) AS count FROM anime WHERE personal_status = 'Watched'`).get();
-    return row.count;
-    // By saying row.count, we return back a plain JavaScript number
-}
-
-// REQUIRES: The anime must exist within the database
-// MODIFIES: None 
-// EFFECTS: Returns the total number of anime that falls under "To Be Watched"
-function returnAnimeCountGroupedByToBeWatched() {
-    const row = anidb.prepare(`
-        SELECT COUNT(*) AS count FROM anime WHERE personal_status = 'To Be Watched'`).get();
-    return row.count;
-}
-
-// REQUIRES: The anime must exist within the database
-// MODIFIES: None 
-// EFFECTS: Returns the total number of anime that falls under "Watched"
-function returnAnimeCountGroupedByWatching() {
-    const row = anidb.prepare(`
-        SELECT COUNT(*) AS count FROM anime WHERE personal_status = 'Watching'`).get();
-    return row.count;
-}
-
-// REQUIRES: Anime must exist within database
-// MODIFIES: None
-// EFFECTS: Returns the total number of anime that are flagged as S-Tier
-function returnAnimeCountAllSTiers() {
-    const row = anidb.prepare(`
-        SELECT COUNT(*) AS count FROM anime WHERE is_s_tier = 1`)
-    return row.count;
-}
-
-// REQUIRES: The anime must exist within the database
-// MODIFIES: None 
-// EFFECTS: Returns the total number of anime that falls under "Dropped"
-function returnAnimeCountGroupedByDropped() {
-    const row = anidb.prepare(`
-        SELECT COUNT(*) AS count FROM anime WHERE personal_status = 'Dropped'`).get();
-    return row.count;
+        SELECT COUNT(*) AS count FROM anime WHERE personal_status = ?`).get(personalStatus);
+    return row ? row.count : 0;
+    // Returns back either the count value OR 0
 }
 
 // REQUIRES: The anime must exist within the database
@@ -146,7 +74,7 @@ function returnAnimeCountGroupedByDropped() {
 function returnTotalAverageRating() {
     const row = anidb.prepare(`
         SELECT AVG(personal_RATING) AS average FROM anime`).get();
-    return row.average;
+    return row ? row.average : 0;
 }
 
 // REQUIRES: The anime must exist within the database
@@ -158,20 +86,23 @@ function returnTotalAnimeCount() {
     return row.count;
 }
 
+// REQUIRES: The anime must exist within the database
+// MODIFIES: None 
+// EFFECTS: Returns "lean" anime data to be displayed in Shelf component 
+function returnAnimeLeanDataFromMalID(malId) {
+    const row = anidb.prepare(`
+        SELECT * FROM anime`).get(malId);
+    return row.all();
+    // Returns result as an array
+}
+
 export default {
     anidb,
     addNewAnime,
-    updateAnimeComments,
-    updateAnimePersonalStatus,
-    updateAnimeRating,
-    updateAnimeSTierFlag,
     deleteAnimeFromDatabase,
-    returnAllAnimeTitles,
-    returnAnimeCountGroupedByDropped,
-    returnAnimeCountAllSTiers,
-    returnAnimeCountGroupedByToBeWatched,
-    returnAnimeCountGroupedByWatched,
-    returnAnimeCountGroupedByWatching,
+    updateAnimeField,
+    returnAnimeCountGroupedByStatus,
+    returnAnimeLeanDataFromMalID,
     returnTotalAnimeCount,
     returnTotalAverageRating
 };
@@ -191,12 +122,7 @@ export default {
 //     personal_rating: 5,
 //     personal_comments: "Best anime, 10/10 - will watch again. Made me sob buckets!"
 // })
-// Test-trial, dummy anime
-
-// const testSelect = anidb.prepare(`
-//     SELECT * FROM anime`)
-// console.log(testSelect.all());
-// Test query - Mainly used to select ALL anime that is recorded
+// Test-trial, dummy anime entry
 
 // References: https://www.youtube.com/watch?v=IooIXYf0PIo
 // References: https://www.youtube.com/watch?v=nMvjcBTFlPA&t=378s

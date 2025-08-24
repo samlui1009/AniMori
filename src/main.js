@@ -19,69 +19,39 @@ if (started) {
   app.quit();
 }
 
+// Adds the anime to the database - Do NOT return anything
+ipcMain.handle("addNewAnime", (anime) => {
+    AnimeDb.addNewAnime(anime);
+});
+
 // ipc Code to handle backend interactions with SQLite database
-ipcMain.handle("updateComments", (_event, newComments, malId) => {
-    AnimeDb.updateAnimeComments(newComments, malId);
-    console.log("Comments updated!");
-    // Testing to see if this endpoint works
-    // It executes, but personal_comments = NULL and mal_id = NULL in initial test?
-    // 
+ipcMain.handle("updateAnimeField", (_event, field, value, malId) => {
+    AnimeDb.updateAnimeField(field, value, malId);
 })
+
 // Event is an IpcMainInvokeEvent object
 // This is an unused parameter
 // But if we have parameters after it, then we DO need to add _event
 
-ipcMain.handle("updatePersonalStatus", (_event, newStatus, malId) => {
-    AnimeDb.updateAnimePersonalStatus(newStatus, malId);
+// Deletes the anime from database based off the malId
+ipcMain.handle("deleteAnime", (_event, malId) => {
+    AnimeDb.deleteAnimeFromDatabase(malId);
 })
 
-ipcMain.handle("updateSTierStatus", (_event, newFlag, malId) => {
-    AnimeDb.updateAnimeSTierFlag(newFlag, malId);
-})
-
-ipcMain.handle("deleteAnime", (_event, idNum) => {
-    AnimeDb.deleteAnimeFromDatabase(idNum);
-})
-
-ipcMain.handle("getSTierAnimeCount", () => {
-    return AnimeDb.returnAnimeCountAllSTiers();
-})
-// These do not require the _event, because there are no parameters we are 
-// Feeding into
-
-ipcMain.handle("getWatchedAnimeCount", () => {
-    return AnimeDb.returnAnimeCountGroupedByWatched();
-})
-
-ipcMain.handle("getToBeWatchedAnimeCount", () => {
-    return AnimeDb.returnAnimeCountGroupedByToBeWatched();
-})
-
-ipcMain.handle("getWatchingAnimeCount", () => {
-    return AnimeDb.returnAnimeCountGroupedByWatching();
-})
-
-ipcMain.handle("getDroppedAnimeCount", () => {
-    return AnimeDb.returnAnimeCountGroupedByDropped();
-})
-
+// Returns total average rating for ALL anime = Required for Stats component
 ipcMain.handle("getTotalAverageRating", () => {
     return AnimeDb.returnTotalAverageRating();
 })
 
+// Returns the total anime count = Required for Stats component
 ipcMain.handle("getTotalAnimeCount", () => {
     return AnimeDb.returnTotalAnimeCount();
 })
 
-ipcMain.handle("addNewAnime", (anime) => {
-    AnimeDb.addNewAnime(anime);
-    // Add console.log to test it?
-    // Is this even supposed to return back anything? Probably not...
-});
-
-ipcMain.handle("returnAllAnimeTitles", () => {
-    return AnimeDb.returnAllAnimeTitles();
-});
+// Returns Anime Database "lean" data = Required for Shelf component
+ipcMain.handle("getAnimeLeanData", (_event, malId) => {
+    return AnimeDb.returnAnimeLeanDataFromMalID(malId);
+})
 
 const createWindow = () => {
   // Create the browser window.

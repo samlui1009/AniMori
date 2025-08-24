@@ -35,9 +35,10 @@ function AnimeCard( { passedAnimeData }) {
                 </div>
                 <img className="anime-img" src={passedAnimeData.images.jpg.image_url} alt={passedAnimeData.title}></img>
                 <div className="btn-ctn">
-                    <button className="btn">Add</button>
-                    <button className="btn">Move</button>
-                    <button className="btn">Remove</button>
+                    <button className="btn">Add To Shelf</button>
+                    {/* <button className="btn">Move</button> */}
+                    {/* TODO: Move button should only be a part of the library/shelf, alongside Edit */}
+                    {/* <button className="btn">Remove</button> */}
                 </div>
             </div>
             )}

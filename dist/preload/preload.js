@@ -7,6 +7,7 @@ contextBridge.exposeInMainWorld("dbFunctions", {
   updateSTierStatus: (flag, malId) => ipcRenderer.invoke("updateSTierStatus", flag, malId),
   deleteAnime: (malId) => ipcRenderer.invoke("deleteAnime", malId),
   getSTierAnimeCount: () => ipcRenderer.invoke("getSTierAnimeCount"),
+  getWatchedAnimeImages: () => ipcRenderer.invoke("getWatchedAnimeImages"),
   getWatchedAnimeCount: () => ipcRenderer.invoke("getWatchedAnimeCount"),
   getWatchingAnimeCount: () => ipcRenderer.invoke("getWatchingAnimeCount"),
   getDroppedAnimeCount: () => ipcRenderer.invoke("getDroppedAnimeCount"),

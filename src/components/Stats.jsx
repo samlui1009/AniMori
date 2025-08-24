@@ -27,6 +27,7 @@ function Stats() {
         }
         run();
     }, []);
+    // Questions here: Why the "run()"?
 
     return (
         <div className="stats-container">
@@ -41,7 +42,6 @@ function Stats() {
                 <li>{currentlyWatching}</li>
                 <li>{dropped}</li>
             </ul>
-            {/* TODO: The CSS3 styling needs fixing here */}
             <div className="rate">
                 <p className="avg-rate">Average Rating: {rate}</p>
             </div>

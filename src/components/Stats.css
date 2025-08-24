@@ -51,15 +51,16 @@
 .stats-numeric {
     display: flex;
     list-style: none;
-    justify-content: space-around;
+    justify-content: space-between;
+    width: 450px;
     padding: 0;
-    gap: 20px;
-    font-size: 1rem;
+    font-size: 1.1rem;
     color: var(--color, #7B6A68);
 }
 
 .rate {
     display: flex;
+    font-size: 1.1rem;
     color: var(--color, #7B6A68);
     justify-content: center;
 }
