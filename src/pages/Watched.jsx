@@ -5,7 +5,8 @@ import NavSB from '../components/NavSideBar.jsx';
 
 import AnimeShelf from '../components/AnimeShelf.jsx';
 
-import AnimeCard from '../components/AnimeCard.jsx';
+import AnimeSearchCard from '../components/AnimeSearchCard.jsx';
+
 import './Pages.css'
 
 function Watched() {
@@ -30,7 +31,7 @@ function Watched() {
             <div className="btn-container">
                 <RTHButton className="home-btn"></RTHButton>
             </div>
-            {anime && <AnimeCard passedAnimeData={anime}></AnimeCard>}
+            {anime && <AnimeSearchCard passedAnimeData={anime}></AnimeSearchCard>}
         </div>
     )
 }

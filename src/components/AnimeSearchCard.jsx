@@ -1,11 +1,11 @@
-import './AnimeCard.css';
+import './AnimeSearchCard.css';
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSquareXmark } from '@fortawesome/free-solid-svg-icons'; // Import the toggle icons
 
 // THIS is the Anime "Search Results" card generated after searching
 // for an anime with the API
-function AnimeCard( { passedAnimeData }) {
+function AnimeSearchCard( { passedAnimeData }) {
 
     const [displayAnime, setDisplayAnime] = useState(false);
     
@@ -48,4 +48,4 @@ function AnimeCard( { passedAnimeData }) {
     )
 }
 
-export default AnimeCard
+export default AnimeSearchCard

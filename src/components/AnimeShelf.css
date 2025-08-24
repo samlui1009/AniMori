@@ -1,3 +1,54 @@
 .shelf-ctn {
-    border: 1px solid black;
+    margin-top: 50px;
+    width: 220px;
+    border-radius: 12px;
+
+    border-radius: 25px;
+    padding: 1rem;
+
+    background: rgba(255, 255, 255, 0.65); /* semi-transparent peach */
+    backdrop-filter: blur(6px);            /* frosted glass effect */
+    /* This gives the "frosted" effect */
+    border: var(--border, 2.5px solid rgba(75, 203, 215, 0.74)); /* subtle teal border */
+    border-radius: 25px;
+    padding: 1rem;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
+
+.nav-btns-ctn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.single-anime-display {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;    
+}
+
+.img {
+    width: 150px;
+    height: 150px;
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.45rem;
+    color: var(--color, #4B2E2A);
+    transition: all 0.5s ease-in;
+}
+
+.btn {
+    width: 75px;
+}
+
+[data-theme='dark'] .nav-btn {
+    --color: #e5dfecd5;
+}
+
+
