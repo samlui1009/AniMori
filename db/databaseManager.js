@@ -31,7 +31,9 @@ function addNewAnime(anime) {
         INSERT INTO anime (mal_id, image_url, title, episodes, personal_status, personal_rating, personal_comments, is_s_tier)
         VALUES (@mal_id, @image_url, @title, @episodes, @personal_status, @personal_rating, @personal_comments, @is_s_tier)
         `)
-    addStatement.run(anime);
+    // addStatement.run(anime);
+    addStatement.run({ ...anime });
+    // This is for troubleshooting - better-sqlite3 error: TypeError
 }
 
 // Below: Update queries
@@ -108,21 +110,39 @@ export default {
 };
 // Required to export these so that it can be imported in preload.js
 
+// Below are test queries to be used!
 // addNewAnime({
-//     mal_id: 1,
-//     image_url: "https://static.wikia.nocookie.net/p__/images/c/cf/Takopi_anime1.png/revision/latest?cb=20250630020546&path-prefix=protagonist",
-//     title: "Takopi's Original Sin",
-//     episodes: 6,
-//     airing: 0,
-//     genres: "Horror, Time-Travel",
-//     season: "summer",
-//     year: 2025,
-//     status: "Finished Airing",
-//     personal_status: "S-Tiers",
-//     personal_rating: 5,
-//     personal_comments: "Best anime, 10/10 - will watch again. Made me sob buckets!"
+//     mal_id: 2,
+//     image_url: "https://cdn.myanimelist.net/images/anime/5/17407l.jpg",
+//     title: "Naruto Shippuden",
+//     episodes: 150,
+//     personal_status: "Currently Watching",
+//     personal_rating: "3",
+//     personal_comments: "Very bleh. Not a fan of shinobis.",
+//     is_s_tier: 0
 // })
-// Test-trial, dummy anime entry
+
+// addNewAnime({
+//     mal_id: 3,
+//     image_url: "https://www.hotmail.com",
+//     title: "Pokemon", 
+//     episodes: 1025,
+//     personal_status: "Dropped",
+//     personal_rating: 2,
+//     personal_comments: "Too repetitive!",
+//     is_s_tier: 0
+// })
+
+// addNewAnime({
+//     mal_id: 4,
+//     image_url: "https://www.google.com",
+//     title: "Test Anime",
+//     episodes: 5,
+//     personal_status: "To Be Watched",
+//     personal_rating: 5,
+//     personal_comments: "5 for now, we'll see how it goes",
+//     is_s_tier: 0
+// })
 
 // References: https://www.youtube.com/watch?v=IooIXYf0PIo
 // References: https://www.youtube.com/watch?v=nMvjcBTFlPA&t=378s

@@ -38,6 +38,11 @@ ipcMain.handle("deleteAnime", (_event, malId) => {
     AnimeDb.deleteAnimeFromDatabase(malId);
 })
 
+ipcMain.handle("getTotalCountByStatus", (_event, status) => {
+    return AnimeDb.returnAnimeCountGroupedByStatus(status);
+    // Forgot the return, lol
+})
+
 // Returns total average rating for ALL anime = Required for Stats component
 ipcMain.handle("getTotalAverageRating", () => {
     return AnimeDb.returnTotalAverageRating();

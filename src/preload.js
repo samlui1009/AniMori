@@ -18,7 +18,6 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
 // Exposing key called "dbFunctions", with all of these functions made available
-
 contextBridge.exposeInMainWorld('dbFunctions', {
     // ping: () => "pong",
 
@@ -32,11 +31,11 @@ contextBridge.exposeInMainWorld('dbFunctions', {
         ipcRenderer.invoke("getTotalAverageRating"),
     getTotalAnimeCount: () =>
         ipcRenderer.invoke("getTotalAnimeCount"),
+    getTotalCountByStatus: (status) =>
+        ipcRenderer.invoke("getTotalCountByStatus", status),
     getAnimeLeanData: (malId) => 
         ipcRenderer.invoke("getAnimeLeanData", malId)
 });
-// Create an object we expose in the Renderer process
-// Ping-Pong testAPI just used for testing
 
 // https://dev.to/arindam1997007/a-step-by-step-guide-to-integrating-better-sqlite3-with-electron-js-app-using-create-react-app-3k16
 // IPC start-up for the preload script

@@ -12,9 +12,10 @@ function Stats() {
     useEffect(() => {
         const run = async () => {
             try {
-                const watchedStats = await window.dbFunctions.getWatchedAnimeCount();
-                const currentWatchStats = await window.dbFunctions.getWatchingAnimeCount();
-                const droppedStats = await window.dbFunctions.getDroppedAnimeCount();
+                const watchedStats = await window.dbFunctions.getTotalCountByStatus('Watched');
+                const droppedStats = await window.dbFunctions.getTotalCountByStatus('Dropped');
+                const currentWatchStats = await window.dbFunctions.getTotalCountByStatus('Currently Watching');
+                // To Be Watched status should be 'To Be Watched'
                 const rate = await window.dbFunctions.getTotalAverageRating();
 
                 setWatched(watchedStats)
@@ -38,12 +39,13 @@ function Stats() {
                 <li>Total Dropped</li>
             </ul>
             <ul className="stats-numeric">
-                <li>{watched}</li>
-                <li>{currentlyWatching}</li>
-                <li>{dropped}</li>
+                <li>{watched ?? 0}</li>
+                <li>{currentlyWatching ?? 0}</li>
+                <li>{dropped ?? 0}</li>
             </ul>
             <div className="rate">
-                <p className="avg-rate">Average Rating: {rate}</p>
+                <p className="avg-rate">Average Rating: {rate ?? 0}</p>
+                {/* Either returns back the rate, or a 0 if there's nothing recorded */}
             </div>
         </div>
     )

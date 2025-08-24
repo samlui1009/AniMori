@@ -489,8 +489,6 @@ var electronSquirrelStartupExports = requireElectronSquirrelStartup();
 const started = /* @__PURE__ */ getDefaultExportFromCjs(electronSquirrelStartupExports);
 const anidb = new Database("./animori.db", { verbose: console.log });
 anidb.exec(`
-    DROP TABLE IF EXISTS anime;
-
     CREATE TABLE IF NOT EXISTS anime (
       mal_id INTEGER PRIMARY KEY,
       image_url TEXT,
@@ -507,7 +505,7 @@ function addNewAnime(anime) {
         INSERT INTO anime (mal_id, image_url, title, episodes, personal_status, personal_rating, personal_comments, is_s_tier)
         VALUES (@mal_id, @image_url, @title, @episodes, @personal_status, @personal_rating, @personal_comments, @is_s_tier)
         `);
-  addStatement.run(anime);
+  addStatement.run({ ...anime });
 }
 function updateAnimeField(field, value, malId) {
   const allowedFields = ["personal_rating", "personal_status", "is_s_tier", "personal_comments"];
@@ -538,48 +536,35 @@ function returnTotalAnimeCount() {
         SELECT COUNT(*) AS count FROM anime`).get();
   return row.count;
 }
+function returnAnimeLeanDataFromMalID(malId) {
+  const row = anidb.prepare(`
+        SELECT * FROM anime`).get(malId);
+  return row.all();
+}
 const AnimeDb = {
   anidb,
   addNewAnime,
+  deleteAnimeFromDatabase,
   updateAnimeField,
   returnAnimeCountGroupedByStatus,
-  deleteAnimeFromDatabase,
+  returnAnimeLeanDataFromMalID,
   returnTotalAnimeCount,
   returnTotalAverageRating
 };
 if (started) {
   require$$3$1.app.quit();
 }
-require$$3$1.ipcMain.handle("updateComments", (_event, newComments, malId) => {
-  AnimeDb.updateAnimeComments(newComments, malId);
-  console.log("Comments updated!");
+require$$3$1.ipcMain.handle("addNewAnime", (anime) => {
+  AnimeDb.addNewAnime(anime);
 });
-require$$3$1.ipcMain.handle("updatePersonalStatus", (_event, newStatus, malId) => {
-  AnimeDb.updateAnimePersonalStatus(newStatus, malId);
+require$$3$1.ipcMain.handle("updateAnimeField", (_event, field, value, malId) => {
+  AnimeDb.updateAnimeField(field, value, malId);
 });
-require$$3$1.ipcMain.handle("updateSTierStatus", (_event, newFlag, malId) => {
-  AnimeDb.updateAnimeSTierFlag(newFlag, malId);
+require$$3$1.ipcMain.handle("deleteAnime", (_event, malId) => {
+  AnimeDb.deleteAnimeFromDatabase(malId);
 });
-require$$3$1.ipcMain.handle("deleteAnime", (_event, idNum) => {
-  AnimeDb.deleteAnimeFromDatabase(idNum);
-});
-require$$3$1.ipcMain.handle("getWatchedAnimeImages", () => {
-  return AnimeDb.returnAnimeImagesGroupedByWatched();
-});
-require$$3$1.ipcMain.handle("getSTierAnimeCount", () => {
-  return AnimeDb.returnAnimeCountAllSTiers();
-});
-require$$3$1.ipcMain.handle("getWatchedAnimeCount", () => {
-  return AnimeDb.returnAnimeCountGroupedByWatched();
-});
-require$$3$1.ipcMain.handle("getToBeWatchedAnimeCount", () => {
-  return AnimeDb.returnAnimeCountGroupedByToBeWatched();
-});
-require$$3$1.ipcMain.handle("getWatchingAnimeCount", () => {
-  return AnimeDb.returnAnimeCountGroupedByWatching();
-});
-require$$3$1.ipcMain.handle("getDroppedAnimeCount", () => {
-  return AnimeDb.returnAnimeCountGroupedByDropped();
+require$$3$1.ipcMain.handle("getTotalCountByStatus", (_event, status) => {
+  return AnimeDb.returnAnimeCountGroupedByStatus(status);
 });
 require$$3$1.ipcMain.handle("getTotalAverageRating", () => {
   return AnimeDb.returnTotalAverageRating();
@@ -587,11 +572,8 @@ require$$3$1.ipcMain.handle("getTotalAverageRating", () => {
 require$$3$1.ipcMain.handle("getTotalAnimeCount", () => {
   return AnimeDb.returnTotalAnimeCount();
 });
-require$$3$1.ipcMain.handle("addNewAnime", (anime) => {
-  AnimeDb.addNewAnime(anime);
-});
-require$$3$1.ipcMain.handle("returnAllAnimeTitles", () => {
-  return AnimeDb.returnAllAnimeTitles();
+require$$3$1.ipcMain.handle("getAnimeLeanData", (_event, malId) => {
+  return AnimeDb.returnAnimeLeanDataFromMalID(malId);
 });
 const createWindow = () => {
   const mainWindow = new require$$3$1.BrowserWindow({
