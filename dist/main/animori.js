@@ -505,7 +505,16 @@ function addNewAnime(anime) {
         INSERT INTO anime (mal_id, image_url, title, episodes, personal_status, personal_rating, personal_comments, is_s_tier)
         VALUES (@mal_id, @image_url, @title, @episodes, @personal_status, @personal_rating, @personal_comments, @is_s_tier)
         `);
-  addStatement.run({ ...anime });
+  addStatement.run({
+    mal_id: anime.mal_id,
+    image_url: anime.image_url,
+    title: anime.title,
+    episodes: anime.episodes,
+    personal_status: anime.personal_status,
+    personal_rating: anime.personal_rating ?? 0,
+    personal_comments: anime.personal_comments ?? null,
+    is_s_tier: anime.is_s_tier ?? 0
+  });
 }
 function updateAnimeField(field, value, malId) {
   const allowedFields = ["personal_rating", "personal_status", "is_s_tier", "personal_comments"];
@@ -554,7 +563,7 @@ const AnimeDb = {
 if (started) {
   require$$3$1.app.quit();
 }
-require$$3$1.ipcMain.handle("addNewAnime", (anime) => {
+require$$3$1.ipcMain.handle("addNewAnime", (_event, anime) => {
   AnimeDb.addNewAnime(anime);
 });
 require$$3$1.ipcMain.handle("updateAnimeField", (_event, field, value, malId) => {

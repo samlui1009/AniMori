@@ -26,7 +26,10 @@ function CurrentlyWatching() {
             <div className="btn-container">
                 <RTHButton className="home-btn"></RTHButton>
             </div>
-            {anime && <AnimeSearchCard passedAnimeData={anime}></AnimeSearchCard>}
+            {anime && <AnimeSearchCard 
+                passedAnimeData={anime}
+                watchStatus={status}
+                ></AnimeSearchCard>}
         </div>
     )
 }

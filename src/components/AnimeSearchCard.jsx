@@ -5,7 +5,7 @@ import { faSquareXmark } from '@fortawesome/free-solid-svg-icons'; // Import the
 
 // THIS is the Anime "Search Results" card generated after searching
 // for an anime with the API
-function AnimeSearchCard( { passedAnimeData }) {
+function AnimeSearchCard( { passedAnimeData, watchStatus }) {
 
     const [displayAnime, setDisplayAnime] = useState(false);
     
@@ -13,6 +13,24 @@ function AnimeSearchCard( { passedAnimeData }) {
         return null;
     }
     // A guard here
+
+    const handleClick = async () => {
+        try {
+            await window.dbFunctions.addNewAnime({
+                mal_id: passedAnimeData.mal_id,
+                title: passedAnimeData.title,
+                image_url: passedAnimeData.images.jpg.image_url,
+                episodes: passedAnimeData.episodes,
+                personal_status: watchStatus,
+                personal_rating: null,
+                personal_comments: null,
+                is_s_tier: 0
+            })
+            console.log("Anime has been added to the library:", passedAnimeData.title);
+        } catch {
+            console.log("Anime could not be added to your library!");
+        }
+    }
 
     useEffect(() => {
         setDisplayAnime(true);
@@ -37,10 +55,8 @@ function AnimeSearchCard( { passedAnimeData }) {
                 </div>
                 <img className="anime-img" src={passedAnimeData.images.jpg.image_url} alt={passedAnimeData.title}></img>
                 <div className="btn-ctn">
-                    <button className="btn">Add To Shelf</button>
-                    {/* <button className="btn">Move</button> */}
-                    {/* TODO: Move button should only be a part of the library/shelf, alongside Edit */}
-                    {/* <button className="btn">Remove</button> */}
+                    <button className="btn" onClick={() => handleClick(passedAnimeData, watchStatus)}>Add To Shelf</button>
+                    {/* The above syntax ensures that the function only runs UPON clicking */}
                 </div>
             </div>
             )}

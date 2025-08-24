@@ -46,7 +46,7 @@ function AnimeShelf({ personalStatus }) {
                         <p className="title">{anime.title}</p>
                         <div className="btn-nav">
                             <button className="btn">Edit</button>
-                            <button className="btn" onClick={handleDelete(anime.mal_id)}>Delete</button>
+                            <button className="btn" onClick={() => handleDelete(anime.mal_id)}>Delete</button>
                         </div>
                     </div>
                 ))}

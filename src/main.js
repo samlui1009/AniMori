@@ -20,7 +20,7 @@ if (started) {
 }
 
 // Adds the anime to the database - Do NOT return anything
-ipcMain.handle("addNewAnime", (anime) => {
+ipcMain.handle("addNewAnime", (_event, anime) => {
     AnimeDb.addNewAnime(anime);
 });
 

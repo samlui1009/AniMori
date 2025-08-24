@@ -31,9 +31,16 @@ function addNewAnime(anime) {
         INSERT INTO anime (mal_id, image_url, title, episodes, personal_status, personal_rating, personal_comments, is_s_tier)
         VALUES (@mal_id, @image_url, @title, @episodes, @personal_status, @personal_rating, @personal_comments, @is_s_tier)
         `)
-    // addStatement.run(anime);
-    addStatement.run({ ...anime });
-    // This is for troubleshooting - better-sqlite3 error: TypeError
+    addStatement.run({
+        mal_id: anime.mal_id,
+        image_url: anime.image_url,
+        title: anime.title,
+        episodes: anime.episodes,
+        personal_status: anime.personal_status,
+        personal_rating: anime.personal_rating ?? 0,
+        personal_comments: anime.personal_comments ?? null,
+        is_s_tier: anime.is_s_tier ?? 0
+    })
 }
 
 // Below: Update queries
