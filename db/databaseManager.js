@@ -110,7 +110,7 @@ function returnAnimeLeanDataByStatus(personalStatus) {
 // EFFECTS: Returns "lean" anime data to be displayed in STier Shelf component, only those flagged as S-Tiers 
 function returnAnimeLeanDataBySTier() {
     const row = anidb.prepare(`
-        SELECT mal_id, title, image_url, personal_comments, personal_rating, is_s_tier FROM anime WHERE s_tier = 1`).all();
+        SELECT mal_id, title, image_url, personal_comments, personal_rating, is_s_tier FROM anime WHERE is_s_tier = 1`).all();
         // Return back as an array
     return row;
 }

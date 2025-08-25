@@ -58,9 +58,9 @@ ipcMain.handle("getAnimeLeanDataByStatus", (_event, personalStatus) => {
     return AnimeDb.returnAnimeLeanDataByStatus(personalStatus);
 })
 
-ipcMain.handle("getAnimeLeanDataBySTier"), () => {
+ipcMain.handle("getAnimeLeanDataBySTier", () => {
     return AnimeDb.returnAnimeLeanDataBySTier();
-}
+})
 
 const createWindow = () => {
   // Create the browser window.

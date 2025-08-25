@@ -1,5 +1,7 @@
 import './STierShelf.css';
 
+import Slider from 'react-slick';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleArrowRight, faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
 

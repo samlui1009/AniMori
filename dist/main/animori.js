@@ -550,6 +550,11 @@ function returnAnimeLeanDataByStatus(personalStatus) {
         SELECT mal_id, title, image_url, personal_comments, personal_rating, is_s_tier FROM anime WHERE personal_status = ?`).all(personalStatus);
   return row;
 }
+function returnAnimeLeanDataBySTier() {
+  const row = anidb.prepare(`
+        SELECT mal_id, title, image_url, personal_comments, personal_rating, is_s_tier FROM anime WHERE is_s_tier = 1`).all();
+  return row;
+}
 const AnimeDb = {
   anidb,
   addNewAnime,
@@ -558,7 +563,8 @@ const AnimeDb = {
   returnAnimeCountGroupedByStatus,
   returnAnimeLeanDataByStatus,
   returnTotalAnimeCount,
-  returnTotalAverageRating
+  returnTotalAverageRating,
+  returnAnimeLeanDataBySTier
 };
 if (started) {
   require$$3$1.app.quit();
@@ -583,6 +589,9 @@ require$$3$1.ipcMain.handle("getTotalAnimeCount", () => {
 });
 require$$3$1.ipcMain.handle("getAnimeLeanDataByStatus", (_event, personalStatus) => {
   return AnimeDb.returnAnimeLeanDataByStatus(personalStatus);
+});
+require$$3$1.ipcMain.handle("getAnimeLeanDataBySTier", () => {
+  return AnimeDb.returnAnimeLeanDataBySTier();
 });
 const createWindow = () => {
   const mainWindow = new require$$3$1.BrowserWindow({
