@@ -34,7 +34,9 @@ contextBridge.exposeInMainWorld('dbFunctions', {
     getTotalCountByStatus: (status) =>
         ipcRenderer.invoke("getTotalCountByStatus", status),
     getAnimeLeanDataByStatus: (status) => 
-        ipcRenderer.invoke("getAnimeLeanDataByStatus", status)
+        ipcRenderer.invoke("getAnimeLeanDataByStatus", status),
+    getAnimeLeanDataBySTier: () => 
+        ipcRenderer.invoke("getAnimeLeanDataBySTier")
 });
 
 // https://dev.to/arindam1997007/a-step-by-step-guide-to-integrating-better-sqlite3-with-electron-js-app-using-create-react-app-3k16

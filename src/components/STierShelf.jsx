@@ -1,37 +1,27 @@
-import { useEffect, useState } from 'react';
+import './STierShelf.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleArrowRight, faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import './AnimeShelf.css';
 
-// This component displays ALL of the animes that the user has watched so far
-// TODO: Need to incorporate the AliceCarousel
-function AnimeShelf({ personalStatus }) {
-    // Requires the {} to be "destructured"
+
+// Technically, just a display shelf - Shouldn't allow modifications in it 
+// Only permit them within the Watched, cause if you delete it here 
+// Then it deletes it from the database!
+function STierShelf() {
 
     const [shelfItems, setShelfItems] = useState([]);
-    // Currently, there should be an empty array - It must be an array in order for the "mapping" 
-    // to work
-
-    const handleDelete = async (animeMalId) => {
-        try {
-            await window.dbFunctions.deleteAnime(animeMalId);
-        } catch {
-            console.log("Anime could not be deleted");
-        }
-    }
 
     useEffect(() => {
         const run = async () => {
-            const allAnimeData = await window.dbFunctions.getAnimeLeanDataByStatus(personalStatus);
-            // Should just return back all registered anime data
-            setShelfItems(allAnimeData);
+            const sTierAnimeData = await window.dbFunctions.getAnimeLeanDataBySTier();
+            setShelfItems(sTierAnimeData);
         };
         run();
-    }, [personalStatus]);
+    }, []);
+    // Don't forget the dependency array
 
     return (
-        <div className="nav-btns-ctn">
+        <div className="s-tier-ctn">
             <button className="nav-btn"><FontAwesomeIcon icon={faCircleArrowLeft}></FontAwesomeIcon></button>
             <div className="shelf-ctn">
                 {shelfItems.map(anime => (
@@ -43,13 +33,12 @@ function AnimeShelf({ personalStatus }) {
                         <p className="title">{anime.title}</p>
                         <div className="btn-nav">
                             <button className="btn">Edit</button>
-                            <button className="btn" onClick={() => handleDelete(anime.mal_id)}>Delete</button>
                         </div>
                     </div>
                 ))}
                 {shelfItems.length === 0 && (
                     <div className="single-anime-display">
-                        <p className="content">No content yet! Try adding something! :)</p>
+                        <p className="content">No S-Tiers yet! Aren't you the picky one?</p>
                     </div>
                 )}
             </div>
@@ -58,4 +47,7 @@ function AnimeShelf({ personalStatus }) {
     )
 }
 
-export default AnimeShelf
+// TODO: Add some more CSS modifications to this, such as:
+// A star element/button/badge of honour
+
+export default STierShelf

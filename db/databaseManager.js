@@ -105,6 +105,16 @@ function returnAnimeLeanDataByStatus(personalStatus) {
     return row;
 }
 
+// REQUIRES: The anime must exist within the database
+// MODIFIES: None
+// EFFECTS: Returns "lean" anime data to be displayed in STier Shelf component, only those flagged as S-Tiers 
+function returnAnimeLeanDataBySTier() {
+    const row = anidb.prepare(`
+        SELECT mal_id, title, image_url, personal_comments, personal_rating, is_s_tier FROM anime WHERE s_tier = 1`).all();
+        // Return back as an array
+    return row;
+}
+
 export default {
     anidb,
     addNewAnime,
@@ -113,7 +123,8 @@ export default {
     returnAnimeCountGroupedByStatus,
     returnAnimeLeanDataByStatus,
     returnTotalAnimeCount,
-    returnTotalAverageRating
+    returnTotalAverageRating,
+    returnAnimeLeanDataBySTier
 };
 // Required to export these so that it can be imported in preload.js
 
