@@ -3,8 +3,6 @@ import { searchAnimeByTitle } from '../JikanRequests.js';
 // Imported the API call through JikanRequests HERE
 import './MALSearchBar.css';
 
-// TODO
-
 function MALSearchBar( {animeResult} ) {
     const [query, setQuery] = useState("");
     // Query - Initial state: What are we typing?

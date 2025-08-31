@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import AnimeShelf from '../components/AnimeShelf.jsx';
+import STiers from '../components/STierShelf.jsx';
 
 import RTHButton from '../components/ReturnToHomeButton.jsx';
 import DLMode from '../components/DayNightModeOptionBar.jsx';
@@ -24,6 +24,7 @@ function STierFavourites() {
             <div className="header-ctn">
                 <h3 className="title">S-Tier Favourites 💕 ( ദ്ദി ˙ᗜ˙ ) </h3>
             </div>
+            <STiers></STiers>
             <div className="btn-container">
                 <RTHButton className="home-btn"></RTHButton>
             </div>
