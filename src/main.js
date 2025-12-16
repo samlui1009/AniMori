@@ -81,7 +81,6 @@ const createWindow = () => {
     webPreferences: {
       preload: path.join(__dirname, '../preload/preload.js'),
 
-
     //   Also sets a preload script => Joining our window with a file called
     //   preload.js
     //   It serves as a "bridge" b/t Main process and Renderer process

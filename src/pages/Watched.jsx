@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import RTHButton from '../components/ReturnToHomeButton.jsx';
 import DLMode from '../components/DayNightModeOptionBar.jsx';
 import NavSB from '../components/NavSideBar.jsx';
@@ -12,7 +12,17 @@ import './Pages.css'
 function Watched() {
 
     const status = "Watched";
+    const [shelfItems, setShelfItems] = useState([]);
     const [anime, setAnime] = useState(null);
+
+    useEffect(() => {
+        const run = async () => {
+            const allAnimeData = await window.dbFunctions.getAnimeLeanDataByStatus(status);
+            setShelfItems(allAnimeData);
+            console.log(allAnimeData)
+        };
+        run();
+    }, [status]);
 
     return(
         <div className="ctn">
@@ -26,7 +36,7 @@ function Watched() {
                 <h3 className="title">Watched ˙✧˖°📺 ⋆｡˚</h3>
                 <p className="tagline">The Completed Bunch.</p>
             </div>
-            <AnimeShelf personalStatus={status}></AnimeShelf>
+            <AnimeShelf personalStatus={status} setShelfItems={setShelfItems}></AnimeShelf>
             <div className="btn-container">
                 <RTHButton className="home-btn"></RTHButton>
             </div>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import AnimeShelf from '../components/AnimeShelf.jsx';
 import RTHButton from '../components/ReturnToHomeButton.jsx';
 import DLMode from '../components/DayNightModeOptionBar.jsx';
@@ -9,7 +9,18 @@ import './Pages.css'
 function CurrentlyWatching() {
 
     const status = "Currently Watching";
+    const [shelfItems, setShelfItems] = useState([]);
+    // This is for the search
     const [anime, setAnime] = useState(null);
+
+    useEffect(() => {
+        const run = async () => {
+            const allAnimeData = await window.dbFunctions.getAnimeLeanDataByStatus(status);
+            setShelfItems(allAnimeData);
+            console.log(allAnimeData)
+        };
+        run();
+    }, [status]);
 
     return(
         <div className="ctn">
@@ -22,7 +33,7 @@ function CurrentlyWatching() {
             <div className="header-ctn">
                 <h3 className="title">↻ ◁ Current Fixations ▷ ↺</h3>
             </div>
-            <AnimeShelf personalStatus={status}></AnimeShelf>
+            <AnimeShelf personalStatus={status} setShelfItems={setShelfItems}></AnimeShelf>
             <div className="btn-container">
                 <RTHButton className="home-btn"></RTHButton>
             </div>
@@ -30,7 +41,16 @@ function CurrentlyWatching() {
             {anime && <AnimeSearchCard 
                 passedAnimeData={anime}
                 watchStatus={status}
+                setShelfItems={setShelfItems}
                 ></AnimeSearchCard>}
+
+            {
+                <AnimeShelf
+                    personalStatus={status}
+                    shelfItems={shelfItems}
+                    setShelfItems={setShelfItems}
+                />                    
+            }
         </div>
     )
 }

@@ -7,9 +7,9 @@ body {
     background-image: var(--background-image, url('../assets/daymode-bg.png'));
     /* This is called a "custom-property" */
     /* We end up passing the variable name as an argument */
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
+    background-repeat: no-repeat;
+    background-position: right top;
+
     background-size: cover;
     background-attachment: fixed;
 }

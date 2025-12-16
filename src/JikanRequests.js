@@ -12,7 +12,6 @@ export const searchAnimeByTitle = async (title) => {
     // the first search
 }
 
-
 // https://medium.com/@tarimbilal4/build-a-stunning-anime-dashboard-with-reactjs-using-jikan-api-tailwindcss-firebase-and-chart-js-a2750437f903
 // This is a centralized area to keep all API endpoints in place
 // https://dev.to/hr21don/build-your-own-anime-search-app-using-jikan-api-4n79

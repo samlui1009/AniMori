@@ -1,16 +1,26 @@
 import {React, useEffect, useState } from 'react';
 import './EditPanel.css';
 
-function EditPanel({ animeToEdit }) {
+function EditPanel({ animeToEdit, onClose }) {
 
+    // Function logic to handle a "Cancellation" for the edit
     const handleCancel = (e) => {
         e.preventDefault();
+        onClose();
+    }
+
+    const handleEditSubmission = async () => {
+        try {
+
+        } catch {
+            console.log("Anime could not be edited!");
+        }
     }
 
     return (
         <div className="edit-panel-ctn">
-            <h5>Currently Editing: {animeToEdit.title}</h5>
-            <form className="edit-form">
+                <h5>Currently Editing: {animeToEdit.title}</h5>
+                <form className="edit-form">
                 <label for="comments">Comments:</label>
                 <textarea className="comments-section"></textarea>
                 <label for="watch-status">Change Watch Status To: </label>
@@ -24,11 +34,12 @@ function EditPanel({ animeToEdit }) {
                 <input className="s-tier-check" type="checkbox"></input>
                 <div className="btn-ctn">
                     <input className="btn" type="Submit"></input>
-                    <button className="btn">Cancel</button>
+                    <button className="btn" onClick={handleCancel}>Cancel</button>
                 </div>
-            </form>
+                </form>
         </div>
     )
 }
 
 export default EditPanel
+

@@ -5,7 +5,7 @@ import { faSquareXmark } from '@fortawesome/free-solid-svg-icons'; // Import the
 
 // THIS is the Anime "Search Results" card generated after searching
 // for an anime with the API
-function AnimeSearchCard( { passedAnimeData, watchStatus }) {
+function AnimeSearchCard( { passedAnimeData, watchStatus, setShelfItems }) {
 
     const [displayAnime, setDisplayAnime] = useState(false);
     
@@ -16,7 +16,7 @@ function AnimeSearchCard( { passedAnimeData, watchStatus }) {
 
     const handleClick = async () => {
         try {
-            await window.dbFunctions.addNewAnime({
+            const newAnime = {
                 mal_id: passedAnimeData.mal_id,
                 title: passedAnimeData.title,
                 image_url: passedAnimeData.images.jpg.image_url,
@@ -25,8 +25,10 @@ function AnimeSearchCard( { passedAnimeData, watchStatus }) {
                 personal_rating: null,
                 personal_comments: null,
                 is_s_tier: 0
-            })
-            console.log("Anime has been added to the library:", passedAnimeData.title);
+            }
+            await window.dbFunctions.addNewAnime(newAnime);
+            setShelfItems(prev => [...prev, newAnime]);
+            console.log("Anime has been added to the library:", newAnime.title);
         } catch {
             console.log("Anime could not be added to your library!");
         }
@@ -35,8 +37,7 @@ function AnimeSearchCard( { passedAnimeData, watchStatus }) {
     useEffect(() => {
         setDisplayAnime(true);
     }, [passedAnimeData])
-    // Basically, useEffect is used to run a side effect elsewhere 
-    // when something changes
+    // Basically, useEffect is used to run a side effect elsewhere when something changes
     // It will re-run whenever any value within dependency array changes
     // Dependency arrays are integral - determines if React should re-run effect
     // [] = Runs only ONCE, but adding a parameter into it means that we run it
@@ -65,3 +66,7 @@ function AnimeSearchCard( { passedAnimeData, watchStatus }) {
 }
 
 export default AnimeSearchCard
+
+// In order for multiple components to see the same 
+// "live" data and update consistently, we MUST implement the state 
+// At the common ancestor, which should be the "top" parent
