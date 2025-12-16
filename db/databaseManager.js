@@ -128,29 +128,7 @@ export default {
 };
 // Required to export these so that it can be imported in preload.js
 
-// Below are test queries to be used!
-// addNewAnime({
-//     mal_id: 2,
-//     image_url: "https://cdn.myanimelist.net/images/anime/5/17407l.jpg",
-//     title: "Naruto Shippuden",
-//     episodes: 150,
-//     personal_status: "Currently Watching",
-//     personal_rating: "3",
-//     personal_comments: "Very bleh. Not a fan of shinobis.",
-//     is_s_tier: 0
-// })
-
-// addNewAnime({
-//     mal_id: 3,
-//     image_url: "https://www.hotmail.com",
-//     title: "Pokemon", 
-//     episodes: 1025,
-//     personal_status: "Dropped",
-//     personal_rating: 2,
-//     personal_comments: "Too repetitive!",
-//     is_s_tier: 0
-// })
-
+// Test Query
 // addNewAnime({
 //     mal_id: 4,
 //     image_url: "https://www.google.com",

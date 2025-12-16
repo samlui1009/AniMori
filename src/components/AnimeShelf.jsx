@@ -1,18 +1,13 @@
 import { React, useEffect, useState } from 'react';
 import EditPanel from '../components/EditPanel.jsx';
 
-import "slick-carousel/slick/slick.css"; 
-import "slick-carousel/slick/slick-theme.css";
-
 import './AnimeShelf.css';
 
 // This component displays ALL of the animes that the user has watched so far
 // TODO: Need to incorporate the AliceCarousel
-function AnimeShelf ({ shelfItems }) {
+function AnimeShelf ( {shelfItems = [], setShelfItems} ) {
     // Requires the {} to be "destructured"
 
-    // const [shelfItems, setShelfItems] = useState([]);
-    // Currently, there should be an empty array - It must be an array in order for the "mapping" to work
     const [editPanel, setEditPanel] = useState(false);
     // We should NOT be seeing the edit panel from this anime shelf
 
@@ -38,16 +33,17 @@ function AnimeShelf ({ shelfItems }) {
         }
     }
 
-    if (!shelfItems) {
-        return null;
-    }
-    // A guard
-
     return (
         <div className="nav-btns-ctn">
             <div className="shelf-ctn">
                 {shelfItems.map((anime) => (
-                    <div key={anime.mal_id}>{anime.title}</div>
+                    <div className="anime-item" key={anime.mal_id}>
+                        <img className="anime-cover"
+                             src={anime.image_url}
+                             alt={anime.title}>                            
+                        </img>
+                        <h4 className="anime-title">{anime.title}</h4>
+                    </div>
                 ))}
 
                 {shelfItems.length === 0 && (

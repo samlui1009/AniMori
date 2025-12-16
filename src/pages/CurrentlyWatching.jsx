@@ -33,7 +33,7 @@ function CurrentlyWatching() {
             <div className="header-ctn">
                 <h3 className="title">↻ ◁ Current Fixations ▷ ↺</h3>
             </div>
-            <AnimeShelf personalStatus={status} setShelfItems={setShelfItems}></AnimeShelf>
+            <AnimeShelf personalStatus={status} shelfItems={shelfItems} setShelfItems={setShelfItems}></AnimeShelf>
             <div className="btn-container">
                 <RTHButton className="home-btn"></RTHButton>
             </div>
@@ -43,14 +43,6 @@ function CurrentlyWatching() {
                 watchStatus={status}
                 setShelfItems={setShelfItems}
                 ></AnimeSearchCard>}
-
-            {
-                <AnimeShelf
-                    personalStatus={status}
-                    shelfItems={shelfItems}
-                    setShelfItems={setShelfItems}
-                />                    
-            }
         </div>
     )
 }

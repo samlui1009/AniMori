@@ -33,7 +33,7 @@ function Dropped() {
                 <h3 className="title">🗑️ Dropped 🗑️</h3>
                 <p className="tagline">( ˵ •̀ □ •́ ˵ ): Enough said!</p>
             </div>
-            <AnimeShelf personalStatus={status} setShelfItems={setShelfItems}></AnimeShelf>
+            <AnimeShelf personalStatus={status} shelfItems={shelfItems} setShelfItems={setShelfItems}></AnimeShelf>
             <div className="btn-container">
                 <RTHButton className="home-btn"></RTHButton>
             </div>

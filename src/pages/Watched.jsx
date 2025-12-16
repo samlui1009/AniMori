@@ -36,7 +36,7 @@ function Watched() {
                 <h3 className="title">Watched ˙✧˖°📺 ⋆｡˚</h3>
                 <p className="tagline">The Completed Bunch.</p>
             </div>
-            <AnimeShelf personalStatus={status} setShelfItems={setShelfItems}></AnimeShelf>
+            <AnimeShelf personalStatus={status} shelfItems={shelfItems} setShelfItems={setShelfItems}></AnimeShelf>
             <div className="btn-container">
                 <RTHButton className="home-btn"></RTHButton>
             </div>

@@ -32,7 +32,7 @@ function Stats() {
 
     return (
         <div className="stats-container">
-            <h3 className="stats-title">Your Stats</h3>
+            <h2 className="stats-title">Your Stats</h2>
             <ul className="stats-list">
                 <li>Total Watched</li>
                 <li>Currently Watching</li>

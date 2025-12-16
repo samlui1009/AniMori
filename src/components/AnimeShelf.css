@@ -10,7 +10,42 @@
     /* This gives the "frosted" effect */
     border: var(--border, 2.5px solid rgba(75, 203, 215, 0.74)); /* subtle teal border */    
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Responsive grid */
+    gap: 20px; /* Spacing between items */
+    padding: 20px;
+    background-color: var(--shelf-bg, #f9f9f9);
 }
+
+.anime-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: var(--item-bg, #fff);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Anime cover art */
+.anime-cover {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+/* Anime title */
+.anime-title {
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--title-color, #333);
+}
+
 
 .single-anime-display {
     align-items: center;

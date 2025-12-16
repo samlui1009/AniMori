@@ -27,7 +27,7 @@ function AnimeSearchCard( { passedAnimeData, watchStatus, setShelfItems }) {
                 is_s_tier: 0
             }
             await window.dbFunctions.addNewAnime(newAnime);
-            setShelfItems(prev => [...prev, newAnime]);
+            setShelfItems((prev) => [...prev, newAnime]);
             console.log("Anime has been added to the library:", newAnime.title);
         } catch {
             console.log("Anime could not be added to your library!");
@@ -37,12 +37,6 @@ function AnimeSearchCard( { passedAnimeData, watchStatus, setShelfItems }) {
     useEffect(() => {
         setDisplayAnime(true);
     }, [passedAnimeData])
-    // Basically, useEffect is used to run a side effect elsewhere when something changes
-    // It will re-run whenever any value within dependency array changes
-    // Dependency arrays are integral - determines if React should re-run effect
-    // [] = Runs only ONCE, but adding a parameter into it means that we run it
-    // Whenever passedAnimeData changes
-    // Without the dependency array, it renders every time - NOT GOOD!
 
     return (
         <div>
