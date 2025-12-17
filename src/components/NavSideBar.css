@@ -12,6 +12,7 @@
     border: var(--border, 2.5px solid rgba(75, 203, 215, 0.74)); /* subtle teal border */
     border-radius: 12px;
     padding: 0.25rem;
+
     /* Apply animation? TODO - Not important though */
 }
 

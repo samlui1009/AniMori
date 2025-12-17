@@ -1,32 +1,16 @@
-.shelf-ctn {
-    margin-top: 50px;
-    width: 220px;
-    border-radius: 12px;
-
-    border-radius: 25px;
-    padding: 1rem;
-
-    background: rgba(255, 255, 255, 0.65); /* semi-transparent peach */
-    backdrop-filter: blur(6px);            /* frosted glass effect */
-    /* This gives the "frosted" effect */
-    border: var(--border, 2.5px solid rgba(75, 203, 215, 0.74)); /* subtle teal border */
-    border-radius: 25px;
-    padding: 1rem;
-    
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
 .nav-btns-ctn {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.single-anime-display {
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+.s-tier-ctn {
     display: flex;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 2rem 0;
 }
 
 .img {

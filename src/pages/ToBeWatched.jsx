@@ -36,12 +36,17 @@ function ToBeWatched() {
                 <h3 className="title">📺 To Watch 📺</h3>
                 <p className="tagline">+1 to the never-ending pile.</p>
             </div>
-            <AnimeShelf personalStatus={status} shelfItems={shelfItems} setShelfItems={setShelfItems}></AnimeShelf>
+
+            {!anime &&
+                <AnimeShelf personalStatus={status} shelfItems={shelfItems} setShelfItems={setShelfItems}></AnimeShelf>            
+            }
+            
+            {anime && <AnimeSearchCard passedAnimeData={anime} watchStatus={status} onClose={() => setAnime(null)}></AnimeSearchCard>}
+
             <div className="btn-container">
                 <RTHButton className="home-btn"></RTHButton>
             </div>
-            
-            {anime && <AnimeSearchCard passedAnimeData={anime} watchStatus={status}></AnimeSearchCard>}
+
         </div>
     )
 }

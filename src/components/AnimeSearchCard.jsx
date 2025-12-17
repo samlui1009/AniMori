@@ -5,7 +5,7 @@ import { faSquareXmark } from '@fortawesome/free-solid-svg-icons'; // Import the
 
 // THIS is the Anime "Search Results" card generated after searching
 // for an anime with the API
-function AnimeSearchCard( { passedAnimeData, watchStatus, setShelfItems }) {
+function AnimeSearchCard( { passedAnimeData, watchStatus, setShelfItems, }) {
 
     const [displayAnime, setDisplayAnime] = useState(false);
     

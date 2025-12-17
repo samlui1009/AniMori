@@ -4,7 +4,6 @@ import EditPanel from '../components/EditPanel.jsx';
 import './AnimeShelf.css';
 
 // This component displays ALL of the animes that the user has watched so far
-// TODO: Need to incorporate the AliceCarousel
 function AnimeShelf ( {shelfItems = [], setShelfItems} ) {
     // Requires the {} to be "destructured"
 
@@ -39,6 +38,7 @@ function AnimeShelf ( {shelfItems = [], setShelfItems} ) {
                 {shelfItems.map((anime) => (
                     <div className="anime-item" key={anime.mal_id}>
                         <img className="anime-cover"
+                             onClick={() => handleEdit(anime.mal_id)}
                              src={anime.image_url}
                              alt={anime.title}>                            
                         </img>
@@ -47,7 +47,7 @@ function AnimeShelf ( {shelfItems = [], setShelfItems} ) {
                 ))}
 
                 {shelfItems.length === 0 && (
-                    <div className="single-anime-display">
+                    <div className="single-display">
                         <p className="content">No content yet! Add something!</p>
                     </div>
                 )}
