@@ -4,7 +4,7 @@ import EditPanel from '../components/EditPanel.jsx';
 import './AnimeShelf.css';
 
 // This component displays ALL of the animes that the user has watched so far
-function AnimeShelf ( {shelfItems = [], setShelfItems} ) {
+function AnimeShelf ( {shelfItems = [], setShelfItems, onEdit} ) {
     // Requires the {} to be "destructured"
 
     const [editPanel, setEditPanel] = useState(false);
@@ -13,15 +13,15 @@ function AnimeShelf ( {shelfItems = [], setShelfItems} ) {
     // This state will be for editing the anime of selection thereafter
     const [editingAnime, setEditingAnime] = useState(null);
 
-    const handleEdit = async (animeMalId) => {
-        const animeToEdit = shelfItems.find(anime => anime.mal_id === animeMalId);
-        // Create a constant, called animeToEdit, where it will loop through array of shelf items to find the 
-        // appropriate anime with the mal_id that matches the parameter we are passing into
-        setEditingAnime(animeToEdit);
-        console.log(animeToEdit);
-        // For troubleshooting
-        setEditPanel(true);
-    }
+    // const handleEdit = async (animeMalId) => {
+    //     const animeToEdit = shelfItems.find(anime => anime.mal_id === animeMalId);
+    //     // Create a constant, called animeToEdit, where it will loop through array of shelf items to find the 
+    //     // appropriate anime with the mal_id that matches the parameter we are passing into
+    //     setEditingAnime(animeToEdit);
+    //     console.log(animeToEdit);
+    //     // For troubleshooting
+    //     setEditPanel(true);
+    // }
 
     const handleDelete = async (animeMalId) => {
         try {
@@ -38,7 +38,7 @@ function AnimeShelf ( {shelfItems = [], setShelfItems} ) {
                 {shelfItems.map((anime) => (
                     <div className="anime-item" key={anime.mal_id}>
                         <img className="anime-cover"
-                             onClick={() => handleEdit(anime.mal_id)}
+                             onClick={() => onEdit(anime.mal_id)}
                              src={anime.image_url}
                              alt={anime.title}>                            
                         </img>

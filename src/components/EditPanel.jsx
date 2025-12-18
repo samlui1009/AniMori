@@ -11,7 +11,7 @@ function EditPanel({ animeToEdit, onClose }) {
 
     const handleEditSubmission = async () => {
         try {
-
+            
         } catch {
             console.log("Anime could not be edited!");
         }
@@ -19,8 +19,9 @@ function EditPanel({ animeToEdit, onClose }) {
 
     return (
         <div className="edit-panel-ctn">
-                <h5>Currently Editing: {animeToEdit.title}</h5>
                 <form className="edit-form">
+                <h2>Currently Editing: {animeToEdit.title}</h2>
+                <img className="show-img" src={animeToEdit.image_url}></img>
                 <label for="comments">Comments:</label>
                 <textarea className="comments-section"></textarea>
                 <label for="watch-status">Change Watch Status To: </label>

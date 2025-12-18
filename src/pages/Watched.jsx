@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
+
+import EditPanel from '../components/EditPanel.jsx';
 import RTHButton from '../components/ReturnToHomeButton.jsx';
 import DLMode from '../components/DayNightModeOptionBar.jsx';
 import NavSB from '../components/NavSideBar.jsx';
-
 import AnimeShelf from '../components/AnimeShelf.jsx';
-
 import AnimeSearchCard from '../components/AnimeSearchCard.jsx';
 
 import './Pages.css'
@@ -14,6 +14,16 @@ function Watched() {
     const status = "Watched";
     const [shelfItems, setShelfItems] = useState([]);
     const [anime, setAnime] = useState(null);
+
+    const handleEdit = async (animeMalId) => {
+        const animeToEdit = shelfItems.find(anime => anime.mal_id === animeMalId);
+        // Create a constant, called animeToEdit, where it will loop through array of shelf items to find the 
+        // appropriate anime with the mal_id that matches the parameter we are passing into
+        setEditingAnime(animeToEdit);
+        console.log(animeToEdit);
+        // For troubleshooting
+        // setEditPanel(true);
+    }
 
     useEffect(() => {
         const run = async () => {
@@ -36,11 +46,30 @@ function Watched() {
                 <h3 className="title">Watched ˙✧˖°📺 ⋆｡˚</h3>
                 <p className="tagline">The Completed Bunch.</p>
             </div>
-            <AnimeShelf personalStatus={status} shelfItems={shelfItems} setShelfItems={setShelfItems}></AnimeShelf>
+
+            {!editingAnime && (
+                <AnimeShelf 
+                    personalStatus={status} 
+                    shelfItems={shelfItems} 
+                    setShelfItems={setShelfItems}
+                    onEdit = {handleEdit}>                            
+                </AnimeShelf>)
+            }
+
+            {editingAnime && (
+                <EditPanel
+                    animeToEdit={editingAnime}
+                    onClose={() => setEditingAnime(null)}>
+                </EditPanel>
+            )}
+            
+            {anime && <AnimeSearchCard passedAnimeData={anime} watchStatus={status} onClose={() => setAnime(null)}></AnimeSearchCard>}
+
             <div className="btn-container">
                 <RTHButton className="home-btn"></RTHButton>
             </div>
-            {anime && <AnimeSearchCard passedAnimeData={anime} watchStatus={status}></AnimeSearchCard>}
+
+
         </div>
     )
 }
