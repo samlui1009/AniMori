@@ -1,5 +1,6 @@
 import {React, useEffect, useState } from 'react';
 import './EditPanel.css';
+import FiveStarRating from './FiveStarRatingBar.jsx';
 
 function EditPanel({ animeToEdit, onClose }) {
 
@@ -31,6 +32,8 @@ function EditPanel({ animeToEdit, onClose }) {
                     <option className="opt" value="Watching">Currently Watching</option>
                     <option className="opt" value="Dropped">Dropped</option>
                 </select>
+                <label for="rating">Change Your Rating:</label>
+                <FiveStarRating></FiveStarRating>
                 <label for="checkbox">S-Tier?</label>
                 <input className="s-tier-check" type="checkbox"></input>
                 <div className="btn-ctn">

@@ -13,6 +13,7 @@ function Watched() {
 
     const status = "Watched";
     const [shelfItems, setShelfItems] = useState([]);
+    const [editingAnime, setEditingAnime] = useState(null);
     const [anime, setAnime] = useState(null);
 
     const handleEdit = async (animeMalId) => {
