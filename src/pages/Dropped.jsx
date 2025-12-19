@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import AnimeShelf from '../components/AnimeShelf.jsx';
+import MALSearchBar from '../components/MALSearchBar.jsx';
 import EditPanel from '../components/EditPanel.jsx';
 import RTHButton from '../components/ReturnToHomeButton.jsx';
 import DLMode from '../components/DayNightModeOptionBar.jsx';
@@ -47,6 +48,10 @@ function Dropped() {
                 <p className="tagline">( ˵ •̀ □ •́ ˵ ): Enough said!</p>
             </div>
 
+            <div>
+                <MALSearchBar variant="header" animeResult={setAnime}></MALSearchBar>
+            </div>
+
             {!editingAnime && (
                 <AnimeShelf 
                     personalStatus={status} 
@@ -63,7 +68,11 @@ function Dropped() {
                 </EditPanel>
             )}
             
-            {anime && <AnimeSearchCard passedAnimeData={anime} watchStatus={status}></AnimeSearchCard>}
+            {anime && <AnimeSearchCard 
+                      passedAnimeData={anime} 
+                      watchStatus={status}
+                      setShelfItems={setShelfItems}
+                      ></AnimeSearchCard>}
 
             <div className="btn-container">
                 <RTHButton className="home-btn"></RTHButton>

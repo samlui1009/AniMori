@@ -3,12 +3,14 @@ import { searchAnimeByTitle } from '../JikanRequests.js';
 // Imported the API call through JikanRequests HERE
 import './MALSearchBar.css';
 
-function MALSearchBar( {animeResult} ) {
+function MALSearchBar( {variant = "nav", animeResult} ) {
     const [query, setQuery] = useState("");
     // Query - Initial state: What are we typing?
     // We should not be typing ANYTHING
+    
     const [anime, setAnime] = useState(null);
     // No anime just yet - yes, should be NULL
+
     const [error, setError] = useState(null);
 
     const handleSearch = async (e) => {
@@ -26,13 +28,13 @@ function MALSearchBar( {animeResult} ) {
     };
 
     return (
-        <div className="search-bar-ctn">
+        <div className={`search-bar-ctn search-bar-ctn--${variant}`}>
             <form onSubmit={handleSearch}>
                 <input className="input-field" 
-                       placeholder="Type Anime Name Here" 
+                       placeholder="🔍 Find Anime Here" 
                        value={query} 
                        onChange={(e) => setQuery(e.target.value)}></input>
-                <div className="search-btn-ctn">
+                <div className={`search-btn-ctn search-btn-ctn--${variant}`}>
                     <button className="search-btn" type="submit">Search!</button>
                 </div>
             </form>

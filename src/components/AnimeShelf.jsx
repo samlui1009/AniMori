@@ -13,16 +13,6 @@ function AnimeShelf ( {shelfItems = [], setShelfItems, onEdit} ) {
     // This state will be for editing the anime of selection thereafter
     const [editingAnime, setEditingAnime] = useState(null);
 
-    // const handleEdit = async (animeMalId) => {
-    //     const animeToEdit = shelfItems.find(anime => anime.mal_id === animeMalId);
-    //     // Create a constant, called animeToEdit, where it will loop through array of shelf items to find the 
-    //     // appropriate anime with the mal_id that matches the parameter we are passing into
-    //     setEditingAnime(animeToEdit);
-    //     console.log(animeToEdit);
-    //     // For troubleshooting
-    //     setEditPanel(true);
-    // }
-
     const handleDelete = async (animeMalId) => {
         try {
             await window.dbFunctions.deleteAnime(animeMalId);

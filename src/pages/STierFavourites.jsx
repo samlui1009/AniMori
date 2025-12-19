@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import STiers from '../components/STierShelf.jsx';
-
+import MALSearchBar from '../components/MALSearchBar.jsx';
 import RTHButton from '../components/ReturnToHomeButton.jsx';
 import DLMode from '../components/DayNightModeOptionBar.jsx';
 import NavSB from '../components/NavSideBar.jsx';
@@ -24,10 +24,16 @@ function STierFavourites() {
             <div className="header-ctn">
                 <h3 className="title">S-Tier Favourites 💕 ( ദ്ദി ˙ᗜ˙ ) </h3>
             </div>
+
+            <div>
+                <MALSearchBar variant="header" animeResult={setAnime}></MALSearchBar>
+            </div>
+
             <STiers></STiers>
             <div className="btn-container">
                 <RTHButton className="home-btn"></RTHButton>
             </div>
+            
             {anime && <AnimeSearchCard passedAnimeData={anime}></AnimeSearchCard>}
         </div>
     )

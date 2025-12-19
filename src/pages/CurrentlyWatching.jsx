@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import AnimeShelf from '../components/AnimeShelf.jsx';
+import MALSearchBar from '../components/MALSearchBar.jsx';
 import RTHButton from '../components/ReturnToHomeButton.jsx';
 import DLMode from '../components/DayNightModeOptionBar.jsx';
 import NavSB from '../components/NavSideBar.jsx';
@@ -46,6 +47,10 @@ function CurrentlyWatching() {
             </div>
             <div className="header-ctn">
                 <h3 className="title">↻ ◁ Current Fixations ▷ ↺</h3>
+            </div>
+
+            <div>
+                <MALSearchBar variant="header" animeResult={setAnime}></MALSearchBar>
             </div>
 
             {!editingAnime && (

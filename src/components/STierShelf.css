@@ -33,7 +33,6 @@
 }
 
 .content {
-    text-align: center;
     font-weight: 100;
     color: var(--color, #7B6A68);
 }

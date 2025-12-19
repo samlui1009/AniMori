@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import EditPanel from '../components/EditPanel.jsx';
+import MALSearchBar from '../components/MALSearchBar.jsx';
 import RTHButton from '../components/ReturnToHomeButton.jsx';
 import DLMode from '../components/DayNightModeOptionBar.jsx';
 import NavSB from '../components/NavSideBar.jsx';
@@ -48,6 +49,10 @@ function Watched() {
                 <p className="tagline">The Completed Bunch.</p>
             </div>
 
+            <div>
+                <MALSearchBar variant="header" animeResult={setAnime}></MALSearchBar>
+            </div>
+
             {!editingAnime && (
                 <AnimeShelf 
                     personalStatus={status} 
@@ -64,7 +69,11 @@ function Watched() {
                 </EditPanel>
             )}
             
-            {anime && <AnimeSearchCard passedAnimeData={anime} watchStatus={status} onClose={() => setAnime(null)}></AnimeSearchCard>}
+            {anime && <AnimeSearchCard 
+                      passedAnimeData={anime} 
+                      watchStatus={status}
+                      setShelfItems={setShelfItems} 
+                      onClose={() => setAnime(null)}></AnimeSearchCard>}
 
             <div className="btn-container">
                 <RTHButton className="home-btn"></RTHButton>
