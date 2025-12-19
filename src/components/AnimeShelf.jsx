@@ -1,4 +1,5 @@
 import { React, useEffect, useState } from 'react';
+import * as Collapsible from "@radix-ui/react-collapsible";
 import EditPanel from '../components/EditPanel.jsx';
 
 import './AnimeShelf.css';
@@ -6,6 +7,9 @@ import './AnimeShelf.css';
 // This component displays ALL of the animes that the user has watched so far
 function AnimeShelf ( {shelfItems = [], setShelfItems, onEdit} ) {
     // Requires the {} to be "destructured"
+
+    // State to open up the collapsible anime shelf
+    const [openShelf, setOpenShelf] = useState(false);
 
     const [editPanel, setEditPanel] = useState(false);
     // We should NOT be seeing the edit panel from this anime shelf
@@ -18,7 +22,7 @@ function AnimeShelf ( {shelfItems = [], setShelfItems, onEdit} ) {
             await window.dbFunctions.deleteAnime(animeMalId);
             setShelfItems(prev => prev.filter(anime => anime.mal_id !== animeMalId));
         } catch {
-            console.log("Anime could not be deleted");
+            console.log("Anime could not be deleted!");
         }
     }
 

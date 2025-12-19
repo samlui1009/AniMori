@@ -28,6 +28,10 @@ function CurrentlyWatching() {
         // setEditPanel(true);
     }
 
+    const handleCloseSearchCard = async (e) => {
+        setAnime(null);
+    }
+
     useEffect(() => {
         const run = async () => {
             const allAnimeData = await window.dbFunctions.getAnimeLeanDataByStatus(status);
@@ -53,7 +57,7 @@ function CurrentlyWatching() {
                 <MALSearchBar variant="header" animeResult={setAnime}></MALSearchBar>
             </div>
 
-            {!editingAnime && (
+            {!editingAnime && !anime && (
                 <AnimeShelf 
                     personalStatus={status} 
                     shelfItems={shelfItems} 
@@ -73,6 +77,7 @@ function CurrentlyWatching() {
                 passedAnimeData={anime}
                 watchStatus={status}
                 setShelfItems={setShelfItems}
+                onClose={handleCloseSearchCard}
                 ></AnimeSearchCard>
             }
 

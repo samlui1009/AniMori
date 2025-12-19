@@ -13,6 +13,10 @@ function STierFavourites() {
 
     const [anime, setAnime] = useState(null);
 
+    const handleCloseSearchCard = async (e) => {
+        setAnime(null);
+    }
+
     return(
         <div className="ctn">
             <div className="nav-ctn">
@@ -34,7 +38,10 @@ function STierFavourites() {
                 <RTHButton className="home-btn"></RTHButton>
             </div>
             
-            {anime && <AnimeSearchCard passedAnimeData={anime}></AnimeSearchCard>}
+            {anime && 
+                <AnimeSearchCard 
+                passedAnimeData={anime}
+                onClose={handleCloseSearchCard}></AnimeSearchCard>}
         </div>
     )
 }

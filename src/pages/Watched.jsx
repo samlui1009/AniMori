@@ -27,6 +27,10 @@ function Watched() {
         // setEditPanel(true);
     }
 
+    const handleCloseSearchCard = async (e) => {
+        setAnime(null);
+    }
+
     useEffect(() => {
         const run = async () => {
             const allAnimeData = await window.dbFunctions.getAnimeLeanDataByStatus(status);
@@ -53,7 +57,7 @@ function Watched() {
                 <MALSearchBar variant="header" animeResult={setAnime}></MALSearchBar>
             </div>
 
-            {!editingAnime && (
+            {!editingAnime && !anime &&  (
                 <AnimeShelf 
                     personalStatus={status} 
                     shelfItems={shelfItems} 
@@ -73,7 +77,7 @@ function Watched() {
                       passedAnimeData={anime} 
                       watchStatus={status}
                       setShelfItems={setShelfItems} 
-                      onClose={() => setAnime(null)}></AnimeSearchCard>}
+                      onClose={handleCloseSearchCard}></AnimeSearchCard>}
 
             <div className="btn-container">
                 <RTHButton className="home-btn"></RTHButton>

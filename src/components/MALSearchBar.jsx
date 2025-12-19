@@ -31,7 +31,7 @@ function MALSearchBar( {variant = "nav", animeResult} ) {
         <div className={`search-bar-ctn search-bar-ctn--${variant}`}>
             <form onSubmit={handleSearch}>
                 <input className="input-field" 
-                       placeholder="🔍 Find Anime Here" 
+                       placeholder="🔍 Find New Anime Here" 
                        value={query} 
                        onChange={(e) => setQuery(e.target.value)}></input>
                 <div className={`search-btn-ctn search-btn-ctn--${variant}`}>

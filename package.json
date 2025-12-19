@@ -30,7 +30,7 @@
     "@electron-forge/plugin-fuses": "^7.8.3",
     "@electron-forge/plugin-vite": "^7.8.3",
     "@electron/fuses": "^1.8.0",
-    "electron": "37.3.0",
+    "electron": "^37.10.3",
     "electron-rebuild": "^3.2.9",
     "vite": "^6.3.5"
   },
@@ -40,6 +40,7 @@
     "@fortawesome/free-regular-svg-icons": "^7.0.0",
     "@fortawesome/free-solid-svg-icons": "^7.0.0",
     "@fortawesome/react-fontawesome": "^0.2.5",
+    "@radix-ui/react-collapsible": "^1.1.12",
     "@vitejs/plugin-react": "^4.7.0",
     "axios": "^1.11.0",
     "better-sqlite3": "^12.2.0",

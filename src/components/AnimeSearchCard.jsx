@@ -5,7 +5,7 @@ import { faSquareXmark } from '@fortawesome/free-solid-svg-icons'; // Import the
 
 // THIS is the Anime "Search Results" card generated after searching
 // for an anime with the API
-function AnimeSearchCard( { passedAnimeData, watchStatus, setShelfItems, }) {
+function AnimeSearchCard( { passedAnimeData, watchStatus, setShelfItems, onClose}) {
 
     const [displayAnime, setDisplayAnime] = useState(false);
     
@@ -29,6 +29,7 @@ function AnimeSearchCard( { passedAnimeData, watchStatus, setShelfItems, }) {
             await window.dbFunctions.addNewAnime(newAnime);
             setShelfItems((prev) => [...prev, newAnime]);
             console.log("Anime has been added to the library:", newAnime.title);
+            onClose();
         } catch {
             console.log("Anime could not be added to your library!");
         }
@@ -42,7 +43,7 @@ function AnimeSearchCard( { passedAnimeData, watchStatus, setShelfItems, }) {
         <div>
             {displayAnime && (
                 <div className="anime-info-ctn">
-                <button className="close-btn" onClick={() => setDisplayAnime(false)}><FontAwesomeIcon icon={faSquareXmark} size="lg"/></button>
+                <button className="close-btn" onClick={onClose}><FontAwesomeIcon icon={faSquareXmark} size="lg"/></button>
                 <div className="anime-gen-info">
                     <h3 className="name">Anime Name: {passedAnimeData.title}</h3>
                     <p className="info">Total Episodes: {passedAnimeData.episodes}</p>
