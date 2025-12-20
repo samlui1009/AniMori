@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from 'react';
-import * as Collapsible from "@radix-ui/react-collapsible";
 import EditPanel from '../components/EditPanel.jsx';
+import { IoMdArrowDropdownCircle, IoMdArrowDropupCircle  } from "react-icons/io";
 
 import './AnimeShelf.css';
 
@@ -10,12 +10,15 @@ function AnimeShelf ( {shelfItems = [], setShelfItems, onEdit} ) {
 
     // State to open up the collapsible anime shelf
     const [openShelf, setOpenShelf] = useState(false);
-
     const [editPanel, setEditPanel] = useState(false);
     // We should NOT be seeing the edit panel from this anime shelf
 
     // This state will be for editing the anime of selection thereafter
     const [editingAnime, setEditingAnime] = useState(null);
+
+    const toggleOpenShelf = (e) => {
+        setOpenShelf((prev) => !prev);
+    }
 
     const handleDelete = async (animeMalId) => {
         try {
@@ -28,6 +31,16 @@ function AnimeShelf ( {shelfItems = [], setShelfItems, onEdit} ) {
 
     return (
         <div className="nav-btns-ctn">
+            {!openShelf && (
+                <div className="shelf-btn-ctn">
+                    <button className="shelf-btn" onClick={toggleOpenShelf}>
+                    <IoMdArrowDropdownCircle className="open-logo"/>
+                    <p>Open Library</p>
+                    </button>
+                </div>
+            )}
+
+            {openShelf && (
             <div className="shelf-ctn">
                 {shelfItems.map((anime) => (
                     <div className="anime-item" key={anime.mal_id}>
@@ -52,8 +65,8 @@ function AnimeShelf ( {shelfItems = [], setShelfItems, onEdit} ) {
                         onClose={() => setEditPanel(false)}></EditPanel>
                     </div>
                 )}
-
             </div>
+            )}
         </div>
     )
 }
