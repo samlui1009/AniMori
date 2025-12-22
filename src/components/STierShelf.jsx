@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from 'react';
 import { IoMdArrowDropdownCircle, IoMdArrowDropupCircle  } from "react-icons/io";
-
+import STierBadge from '../assets/s-tier-badge.png';
 import './STierShelf.css';
 
 
@@ -47,6 +47,7 @@ function STierShelf( {shelfItems=[], setShelfItems, onEdit} ) {
                              alt={anime.title}>                            
                         </img>
                         <h4 className="anime-title">{anime.title}</h4>
+                        <img className="s-tier-badge" src={STierBadge} alt="S-Tier Badge"></img>
                     </div>
                 ))}
 
@@ -55,6 +56,13 @@ function STierShelf( {shelfItems=[], setShelfItems, onEdit} ) {
                         <p className="content">No S-Tiers yet! Aren't you the picky one?</p>
                     </div>
                 )}
+
+                <div className="close-shelf-btn-ctn">
+                    <button className="shelf-btn" onClick={toggleCloseShelf}>
+                    <IoMdArrowDropupCircle className="close-logo" />
+                    <p>Close Library</p>
+                    </button>
+                </div>            
 
             </div>
         </div>
