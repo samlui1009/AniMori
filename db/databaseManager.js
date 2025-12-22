@@ -22,7 +22,7 @@ anidb.exec(`
 // Aug 23: Revised the schema for the anime table so it's more lean and fitting of
 // requires for displaying anime data in the Shelf component
 
-// REQUIRES: The anime must exist within the database
+// REQUIRES: The anime must NOT exist within the database
 // MODIFIES: Anime
 // EFFECTS:  Inserts a new anime into the animori database
 // This is for INSERTING a new anime with all of these values into the SQLite database
@@ -40,6 +40,26 @@ function addNewAnime(anime) {
         personal_rating: anime.personal_rating ?? 0,
         personal_comments: anime.personal_comments ?? null,
         is_s_tier: anime.is_s_tier ?? 0
+    })
+}
+
+// REQUIRES: The anime must not exist within the database with a pre-existing S-Tier flag already
+// MODIFIES: Anime
+// EFFECTS:  Inserts a new anime into the animori database
+function addNewAnimeAsSTierFavourite(anime) {
+    const addStatement = anidb.prepare(`
+        INSERT INTO anime (mal_id, image_url, title, episodes, personal_status, personal_rating, personal_comments, is_s_tier)
+        VALUES (@mal_id, @image_url, @title, @episodes, @personal_status, @personal_rating, @personal_comments, @is_s_tier)
+        `)
+    addStatement.run({
+        mal_id: anime.mal_id,
+        image_url: anime.image_url,
+        title: anime.title,
+        episodes: anime.episodes,
+        personal_status: anime.personal_status,
+        personal_rating: anime.personal_rating ?? 0,
+        personal_comments: anime.personal_comments ?? null,
+        is_s_tier: 1
     })
 }
 

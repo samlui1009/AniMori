@@ -1,11 +1,11 @@
 import { React, useState, useEffect } from 'react';
-import EditPanel from '../components/EditPanel.jsx';
+import { IoMdArrowDropdownCircle, IoMdArrowDropupCircle  } from "react-icons/io";
+
 import './STierShelf.css';
 
 
 function STierShelf( {shelfItems=[], setShelfItems, onEdit} ) {
 
-    
     const [openShelf, setOpenShelf] = useState(false);
     const [editPanel, setEditPanel] = useState(false);
 
@@ -27,29 +27,26 @@ function STierShelf( {shelfItems=[], setShelfItems, onEdit} ) {
         }
     }
 
-    useEffect(() => {
-        const run = async () => {
-            const sTierAnimeData = await window.dbFunctions.getAnimeLeanDataBySTier();
-            setShelfItems(sTierAnimeData);
-            console.log(sTierAnimeData);
-        };
-        run();
-    }, []);
-    // Don't forget the dependency array
-
     return (
         <div className="s-tier-ctn">
-            <div className="shelf-ctn">
-                {shelfItems.map(anime => (
-                    <div>
-                        <img className="img"
-                            key={anime.mal_id} 
-                            src={anime.image_url} 
-                        />
-                        <p className="title">{anime.title}</p>
-                        <div className="btn-nav">
-                            <button className="btn">Edit</button>
-                        </div>
+            {!openShelf && (
+                <div className="shelf-btn-ctn">
+                    <button className="shelf-btn" onClick={toggleOpenShelf}>
+                    <IoMdArrowDropdownCircle className="open-logo"/>
+                    <p>Open Library</p>
+                    </button>
+                </div>
+            )}
+
+            <div className={`shelf-ctn ${openShelf ? 'open' : 'closed'}`}>
+                {shelfItems.map((anime) => (
+                    <div className="anime-item" key={anime.mal_id}>
+                        <img className="anime-cover"
+                             onClick={() => onEdit(anime.mal_id)}
+                             src={anime.image_url}
+                             alt={anime.title}>                            
+                        </img>
+                        <h4 className="anime-title">{anime.title}</h4>
                     </div>
                 ))}
 
