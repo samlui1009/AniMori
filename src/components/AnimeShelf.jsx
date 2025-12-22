@@ -20,6 +20,10 @@ function AnimeShelf ( {shelfItems = [], setShelfItems, onEdit} ) {
         setOpenShelf((prev) => !prev);
     }
 
+    const toggleCloseShelf = (e) => {
+        setOpenShelf(false)
+    }
+
     const handleDelete = async (animeMalId) => {
         try {
             await window.dbFunctions.deleteAnime(animeMalId);
@@ -40,8 +44,7 @@ function AnimeShelf ( {shelfItems = [], setShelfItems, onEdit} ) {
                 </div>
             )}
 
-            {openShelf && (
-            <div className="shelf-ctn">
+            <div className={`shelf-ctn ${openShelf ? 'open' : 'closed'}`}>
                 {shelfItems.map((anime) => (
                     <div className="anime-item" key={anime.mal_id}>
                         <img className="anime-cover"
@@ -59,6 +62,13 @@ function AnimeShelf ( {shelfItems = [], setShelfItems, onEdit} ) {
                     </div>
                 )}
 
+                <div className="close-shelf-btn-ctn">
+                    <button className="shelf-btn" onClick={toggleCloseShelf}>
+                    <IoMdArrowDropupCircle className="close-logo" />
+                    <p>Close Library</p>
+                    </button>
+                </div>
+
                 {editPanel && (
                     <div>
                         <EditPanel animeToEdit={editingAnime}
@@ -66,7 +76,6 @@ function AnimeShelf ( {shelfItems = [], setShelfItems, onEdit} ) {
                     </div>
                 )}
             </div>
-            )}
         </div>
     )
 }
