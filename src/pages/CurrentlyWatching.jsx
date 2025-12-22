@@ -10,6 +10,7 @@ import AnimeSearchCard from '../components/AnimeSearchCard.jsx';
 import EditPanel from '../components/EditPanel.jsx'
 
 import './Pages.css'
+import DisplayOneShowPanel from '../components/DisplayOneShowPanel.jsx';
 
 function CurrentlyWatching() {
 
@@ -22,10 +23,6 @@ function CurrentlyWatching() {
 
     const viewAnimeDetails = async (animeMalId) => {
         const animeDetails = shelfItems.find(anime => anime.mal_id === animeMalId);
-        // Create a constant, called animeDetails, where it will loop through array of shelf items to find the 
-        // appropriate anime with the mal_id that matches the parameter we are passing into
-        console.log(animeDetails);
-        // For troubleshooting
         setAnimeDetails(animeDetails);
     }
 
@@ -34,9 +31,6 @@ function CurrentlyWatching() {
         // Create a constant, called animeToEdit, where it will loop through array of shelf items to find the 
         // appropriate anime with the mal_id that matches the parameter we are passing into
         setEditingAnime(animeToEdit);
-        console.log(animeToEdit);
-        // For troubleshooting
-        // setEditPanel(true);
     }
 
     const handleCloseSearchCard = async (e) => {
@@ -68,18 +62,29 @@ function CurrentlyWatching() {
                 <MALSearchBar variant="header" animeResult={setAnime}></MALSearchBar>
             </div>
 
-            {!editingAnime && !anime && animeDetails && (
-                <OneShowPanel></OneShowPanel>)
-            }
-
-            {!editingAnime && !anime && (
+            {!editingAnime && !anime && !animeDetails && (
                 <AnimeShelf 
                     personalStatus={status} 
                     shelfItems={shelfItems} 
                     setShelfItems={setShelfItems}
-                    onEdit = {handleEdit}>                            
+                    onClick = {viewAnimeDetails}>                            
                 </AnimeShelf>)
             }
+
+            {!editingAnime && animeDetails && (
+                <DisplayOneShowPanel
+                    shelfItems={shelfItems}
+                    animeMalId={animeDetails.mal_id}
+                    onEdit={() => handleEdit(animeDetails.mal_id)}
+                    onDelete={async () => {
+                        await window.dbFunctions.deleteAnimeByMalId(animeMalId);
+                        const updatedShelfItems = shelfItems.filter(anime => anime.mal_id !== animeDetails.mal_id);
+                        setShelfItems(updatedShelfItems);
+                        setAnimeDetails(null);
+                    }}
+                    onClose={() => setAnimeDetails(null)}>
+                </DisplayOneShowPanel>
+            )}
 
             {editingAnime && (
                 <EditPanel

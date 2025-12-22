@@ -58,8 +58,13 @@ ipcMain.handle("getAnimeLeanDataByStatus", (_event, personalStatus) => {
     return AnimeDb.returnAnimeLeanDataByStatus(personalStatus);
 })
 
+// Returns Anime Database "lean" data for any shows that are flagged as S-Tier
 ipcMain.handle("getAnimeLeanDataBySTier", () => {
     return AnimeDb.returnAnimeLeanDataBySTier();
+})
+
+ipcMain.handle("getAnimeByMalId", (_event, malId) => {
+    return AnimeDb.returnAnimeByMalId(malId);
 })
 
 const createWindow = () => {

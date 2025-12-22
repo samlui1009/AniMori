@@ -5,7 +5,7 @@ import { IoMdArrowDropdownCircle, IoMdArrowDropupCircle  } from "react-icons/io"
 import './AnimeShelf.css';
 
 // This component displays ALL of the animes that the user has watched so far
-function AnimeShelf ( {shelfItems = [], setShelfItems, onEdit} ) {
+function AnimeShelf ( {shelfItems = [], setShelfItems, onClick} ) {
     // Requires the {} to be "destructured"
 
     // State to open up the collapsible anime shelf
@@ -48,7 +48,7 @@ function AnimeShelf ( {shelfItems = [], setShelfItems, onEdit} ) {
                 {shelfItems.map((anime) => (
                     <div className="anime-item" key={anime.mal_id}>
                         <img className="anime-cover"
-                             onClick={() => onEdit(anime.mal_id)}
+                             onClick={() => onClick(anime.mal_id)}
                              src={anime.image_url}
                              alt={anime.title}>                            
                         </img>

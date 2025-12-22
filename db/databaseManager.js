@@ -43,7 +43,8 @@ function addNewAnime(anime) {
     })
 }
 
-// REQUIRES: The anime must not exist within the database with a pre-existing S-Tier flag already
+// REQUIRES: The anime must not exist within the database with a pre-existing S-Tier flag already, OR, that it can exist but it 
+// must NOT bear a pre-existing S-Tier flag
 // MODIFIES: Anime
 // EFFECTS:  Inserts a new anime into the animori database
 function addNewAnimeAsSTierFavourite(anime) {
@@ -153,7 +154,8 @@ export default {
     returnAnimeLeanDataByStatus,
     returnTotalAnimeCount,
     returnTotalAverageRating,
-    returnAnimeLeanDataBySTier
+    returnAnimeLeanDataBySTier,
+    returnAnimeByMalId
 };
 // Required to export these so that it can be imported in preload.js
 
