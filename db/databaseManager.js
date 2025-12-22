@@ -58,6 +58,15 @@ function updateAnimeField(field, value, malId) {
     runStatement.run(value, malId);
 }
 
+// REQUIRES: Anime must be present within database
+// MODIFIES: AnimeDb
+// EFFECTS:  Returns the anime's data accordingly
+function returnAnimeByMalId(malId) {
+    const row = anidb.prepare(`
+        SELECT * FROM anime WHERE mal_id = ?`).get(malId);
+    return row;
+}
+
 // Below: Delete queries - Really only just this one needed though
 // Functional and working!
 function deleteAnimeFromDatabase(malId) {

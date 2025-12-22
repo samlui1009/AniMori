@@ -1,4 +1,6 @@
 import React from 'react';
+import EditPanel from '.components/EditPanel.jsx';
+
 
 const DisplayOneShowPanel = ({ show, onEdit, onDelete, onCancel }) => {
     const { comments, rating, isSTier } = show;

@@ -1,8 +1,23 @@
-import './STierShelf.css';
 import { React, useState, useEffect } from 'react';
+import EditPanel from '../components/EditPanel.jsx';
+import './STierShelf.css';
 
-function STierShelf() {
-    const [shelfItems, setShelfItems] = useState([]);
+
+function STierShelf( {shelfItems=[], setShelfItems, onEdit} ) {
+
+    
+    const [openShelf, setOpenShelf] = useState(false);
+    const [editPanel, setEditPanel] = useState(false);
+
+    const [editingAnime, setEditingAnime] = useState(null);
+
+    const toggleOpenShelf = (e) => {
+        setOpenShelf((prev) => !prev);
+    }
+
+    const toggleCloseShelf = (e) => {
+        setOpenShelf(false)
+    }
 
     const handleDelete = async (animeMalId) => {
         try {

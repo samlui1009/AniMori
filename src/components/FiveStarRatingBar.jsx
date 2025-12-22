@@ -2,24 +2,21 @@ import { useState } from 'react';
 import { FaStar } from 'react-icons/fa';
 import './FiveStarRatingBar.css';
 
-function FiveStarRatingBar() {
+function FiveStarRatingBar({ value = 0, onChange }) {
 
-    const [rating, setRating] = useState(null)
-    const [rateColor, setColor] = useState(null)
+    const [rating, setRating] = useState(0);
 
     return (
         <div>
-            {[...Array(5)].map((star, index) => {
-                const currentRate = index + 1
+            {[1, 2, 3, 4, 5].map((num) => {
                 return (
-                        <label className="rating-bar-ctn">
+                        <label key={num} className="rating-bar-ctn">
                             <input type="radio" name="rate" className="rating-bar"
-                            value={currentRate}
-                            onClick = {() => setRating(currentRate)}/>
+                            onClick = {() => onChange?.(num)}/>
 
                             <FaStar className="star"
                             size={15}
-                            color= { currentRate <= (rateColor || rating) ? "gold" : "grey"} />
+                            color= { num <= value ? "gold" : "grey"} />
                         </label>
                 )
             })}
