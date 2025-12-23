@@ -8,9 +8,7 @@ import DLMode from '../components/DayNightModeOptionBar.jsx';
 import NavSB from '../components/NavSideBar.jsx';
 import AnimeSearchCard from '../components/AnimeSearchCard.jsx';
 import EditPanel from '../components/EditPanel.jsx'
-
 import './Pages.css'
-import DisplayOneShowPanel from '../components/DisplayOneShowPanel.jsx';
 
 function CurrentlyWatching() {
 
@@ -28,9 +26,24 @@ function CurrentlyWatching() {
 
     const handleEdit = async (animeMalId) => {
         const animeToEdit = shelfItems.find(anime => anime.mal_id === animeMalId);
-        // Create a constant, called animeToEdit, where it will loop through array of shelf items to find the 
-        // appropriate anime with the mal_id that matches the parameter we are passing into
         setEditingAnime(animeToEdit);
+    }
+
+    const handleAnimeDeletion = async (animeMalId) => {
+        try {
+            await window.dbFunctions.deleteAnime(animeMalId);
+            const updatedShelfItems = shelfItems.filter(anime => anime.mal_id !== animeDetails.mal_id);
+            setShelfItems(updatedShelfItems);
+            setAnimeDetails(null);    
+        } catch {
+            console.log("Selected anime could not be deleted!");
+        }
+    }
+
+    const handleCloseDisplayPanel = async (e) => {
+        setAnimeDetails(null);
+        setAnime(null);
+        setEditingAnime(null);
     }
 
     const handleCloseSearchCard = async (e) => {
@@ -72,18 +85,13 @@ function CurrentlyWatching() {
             }
 
             {!editingAnime && animeDetails && (
-                <DisplayOneShowPanel
+                <OneShowPanel
                     shelfItems={shelfItems}
                     animeMalId={animeDetails.mal_id}
                     onEdit={() => handleEdit(animeDetails.mal_id)}
-                    onDelete={async () => {
-                        await window.dbFunctions.deleteAnimeByMalId(animeMalId);
-                        const updatedShelfItems = shelfItems.filter(anime => anime.mal_id !== animeDetails.mal_id);
-                        setShelfItems(updatedShelfItems);
-                        setAnimeDetails(null);
-                    }}
-                    onClose={() => setAnimeDetails(null)}>
-                </DisplayOneShowPanel>
+                    onDelete={() => handleAnimeDeletion(animeDetails.mal_id)}
+                    onCancel={handleCloseDisplayPanel}>
+                </OneShowPanel>
             )}
 
             {editingAnime && (

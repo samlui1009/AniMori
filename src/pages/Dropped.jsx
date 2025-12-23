@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import AnimeShelf from '../components/AnimeShelf.jsx';
+import OneShowPanel from '../components/DisplayOneShowPanel.jsx';
 import MALSearchBar from '../components/MALSearchBar.jsx';
 import EditPanel from '../components/EditPanel.jsx';
 import RTHButton from '../components/ReturnToHomeButton.jsx';
@@ -12,9 +13,15 @@ import './Pages.css'
 function Dropped() {
 
     const status = "Dropped";
+    const [animeDetails, setAnimeDetails] = useState(null);
     const [shelfItems, setShelfItems] = useState([]);
     const [editingAnime, setEditingAnime] = useState(null);
     const [anime, setAnime] = useState(null);
+
+    const viewAnimeDetails = async (animeMalId) => {
+        const animeDetails = shelfItems.find(anime => anime.mal_id === animeMalId);
+        setAnimeDetails(animeDetails);
+    }
 
     const handleEdit = async (animeMalId) => {
         const animeToEdit = shelfItems.find(anime => anime.mal_id === animeMalId);
@@ -56,14 +63,30 @@ function Dropped() {
                 <MALSearchBar variant="header" animeResult={setAnime}></MALSearchBar>
             </div>
 
-            {!editingAnime && !anime && (
+            {!editingAnime && !anime && !animeDetails && (
                 <AnimeShelf 
                     personalStatus={status} 
                     shelfItems={shelfItems} 
                     setShelfItems={setShelfItems}
-                    onEdit = {handleEdit}>                            
+                    onClick = {viewAnimeDetails}>                            
                 </AnimeShelf>)
             }
+
+            {!editingAnime && animeDetails && (
+                <OneShowPanel
+                    shelfItems={shelfItems}
+                    animeMalId={animeDetails.mal_id}
+                    onEdit={() => handleEdit(animeDetails.mal_id)}
+                    onDelete={async () => {
+                        await window.dbFunctions.deleteAnimeByMalId(animeMalId);
+                        const updatedShelfItems = shelfItems.filter(anime => anime.mal_id !== animeDetails.mal_id);
+                        setShelfItems(updatedShelfItems);
+                        setAnimeDetails(null);
+                    }}
+                    onClose={() => setAnimeDetails(null)}>
+                </OneShowPanel>
+            )}
+
 
             {editingAnime && (
                 <EditPanel
