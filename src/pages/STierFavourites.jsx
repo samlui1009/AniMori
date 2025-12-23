@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 
+import { handleAnimeDeletion, viewAnimeDetails, handleEditAnime, handleCloseDisplayPanel, handleCloseSearchCard } from '../anime-db-handlers/handlers.js';
+
 import STiers from '../components/STierShelf.jsx';
+import OneShowPanel from '../components/DisplayOneShowPanel.jsx'
 import MALSearchBar from '../components/MALSearchBar.jsx';
 import RTHButton from '../components/ReturnToHomeButton.jsx';
 import DLMode from '../components/DayNightModeOptionBar.jsx';
@@ -12,21 +15,12 @@ import './Pages.css'
 
 function STierFavourites() {
 
+    // Search card state
     const [anime, setAnime] = useState(null);
+
+    const [animeDetails, setAnimeDetails] = useState(null);
     const [shelfItems, setShelfItems] = useState([]);
     const [editingAnime, setEditingAnime] = useState(null);
-
-    const handleEdit = async (animeMalId) => {
-        const animeToEdit = shelfItems.find(anime => anime.mal_id === animeMalId);
-        // Create a constant, called animeToEdit, where it will loop through array of shelf items to find the 
-        // appropriate anime with the mal_id that matches the parameter we are passing into
-        setEditingAnime(animeToEdit);
-        console.log(animeToEdit);
-    }
-
-    const handleCloseSearchCard = async (e) => {
-        setAnime(null);
-    }
 
     useEffect(() => {
         const run = async () => {
@@ -36,7 +30,6 @@ function STierFavourites() {
         };
         run();
     }, []);
-    // Don't forget the dependency array
 
     return(
         <div className="ctn">
@@ -54,12 +47,22 @@ function STierFavourites() {
                 <MALSearchBar variant="header" animeResult={setAnime}></MALSearchBar>
             </div>
 
-            {!editingAnime && !anime && (
+            {!editingAnime && !anime && !animeDetails && (
                 <STiers
-                    shelfItems={shelfItems}
+                    shelfItems={shelfItems} 
                     setShelfItems={setShelfItems}
-                    onEdit = {handleEdit}>
-                </STiers>
+                    onClick = {(animeMalId) => viewAnimeDetails(animeMalId, shelfItems, setAnimeDetails)}>                            
+                </STiers>)
+            }
+
+            {!editingAnime && animeDetails && (
+                <OneShowPanel
+                    shelfItems={shelfItems}
+                    animeMalId={animeDetails.mal_id}
+                    onEdit={() => handleEditAnime(animeDetails.mal_id, shelfItems, setEditingAnime)}
+                    onDelete={() => handleAnimeDeletion(animeDetails.mal_id, shelfItems, setShelfItems, setAnimeDetails)}
+                    onCancel={() => handleCloseDisplayPanel(setAnimeDetails, setAnime, setEditingAnime)}>
+                </OneShowPanel>
             )}
 
             {editingAnime && (
@@ -69,12 +72,12 @@ function STierFavourites() {
                 </EditPanel>
             )}
 
-            {anime && 
-                <AnimeSearchCard 
+            {anime && <AnimeSearchCard 
                 passedAnimeData={anime}
+                watchStatus={status}
                 setShelfItems={setShelfItems}
-                onClose={handleCloseSearchCard}>
-                </AnimeSearchCard>
+                onClose={() => handleCloseSearchCard(setAnime)}
+                ></AnimeSearchCard>
             }
 
             <div className="btn-container">

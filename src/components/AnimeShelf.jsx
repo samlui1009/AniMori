@@ -24,15 +24,6 @@ function AnimeShelf ( {shelfItems = [], setShelfItems, onClick} ) {
         setOpenShelf(false)
     }
 
-    const handleDelete = async (animeMalId) => {
-        try {
-            await window.dbFunctions.deleteAnime(animeMalId);
-            setShelfItems(prev => prev.filter(anime => anime.mal_id !== animeMalId));
-        } catch {
-            console.log("Anime could not be deleted!");
-        }
-    }
-
     return (
         <div className="nav-btns-ctn">
             {!openShelf && (

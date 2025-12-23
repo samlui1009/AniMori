@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 
+import { handleAnimeDeletion, viewAnimeDetails, handleEditAnime, handleCloseDisplayPanel, handleCloseSearchCard } from '../anime-db-handlers/handlers.js';
+
 import AnimeShelf from '../components/AnimeShelf.jsx';
 import OneShowPanel from '../components/DisplayOneShowPanel.jsx';
 import MALSearchBar from '../components/MALSearchBar.jsx';
@@ -16,26 +18,9 @@ function Dropped() {
     const [animeDetails, setAnimeDetails] = useState(null);
     const [shelfItems, setShelfItems] = useState([]);
     const [editingAnime, setEditingAnime] = useState(null);
+
+    // Search card state
     const [anime, setAnime] = useState(null);
-
-    const viewAnimeDetails = async (animeMalId) => {
-        const animeDetails = shelfItems.find(anime => anime.mal_id === animeMalId);
-        setAnimeDetails(animeDetails);
-    }
-
-    const handleEdit = async (animeMalId) => {
-        const animeToEdit = shelfItems.find(anime => anime.mal_id === animeMalId);
-        // Create a constant, called animeToEdit, where it will loop through array of shelf items to find the 
-        // appropriate anime with the mal_id that matches the parameter we are passing into
-        setEditingAnime(animeToEdit);
-        console.log(animeToEdit);
-        // For troubleshooting
-        // setEditPanel(true);
-    }
-
-    const handleCloseSearchCard = async (e) => {
-        setAnime(null);
-    }
 
     useEffect(() => {
         const run = async () => {
@@ -68,7 +53,7 @@ function Dropped() {
                     personalStatus={status} 
                     shelfItems={shelfItems} 
                     setShelfItems={setShelfItems}
-                    onClick = {viewAnimeDetails}>                            
+                    onClick = {(animeMalId) => viewAnimeDetails(animeMalId, shelfItems, setAnimeDetails)}>                            
                 </AnimeShelf>)
             }
 
@@ -76,14 +61,9 @@ function Dropped() {
                 <OneShowPanel
                     shelfItems={shelfItems}
                     animeMalId={animeDetails.mal_id}
-                    onEdit={() => handleEdit(animeDetails.mal_id)}
-                    onDelete={async () => {
-                        await window.dbFunctions.deleteAnimeByMalId(animeMalId);
-                        const updatedShelfItems = shelfItems.filter(anime => anime.mal_id !== animeDetails.mal_id);
-                        setShelfItems(updatedShelfItems);
-                        setAnimeDetails(null);
-                    }}
-                    onClose={() => setAnimeDetails(null)}>
+                    onEdit={() => handleEditAnime(animeDetails.mal_id, shelfItems, setEditingAnime)}
+                    onDelete={() => handleAnimeDeletion(animeDetails.mal_id, shelfItems, setShelfItems, setAnimeDetails)}
+                    onCancel={() => handleCloseDisplayPanel(setAnimeDetails, setAnime, setEditingAnime)}>
                 </OneShowPanel>
             )}
 
@@ -96,11 +76,12 @@ function Dropped() {
             )}
             
             {anime && <AnimeSearchCard 
-                      passedAnimeData={anime} 
-                      watchStatus={status}
-                      setShelfItems={setShelfItems}
-                      onClose={handleCloseSearchCard}
-                      ></AnimeSearchCard>}
+                passedAnimeData={anime}
+                watchStatus={status}
+                setShelfItems={setShelfItems}
+                onClose={() => handleCloseSearchCard(setAnime)}
+                ></AnimeSearchCard>
+            }
 
             <div className="btn-container">
                 <RTHButton className="home-btn"></RTHButton>

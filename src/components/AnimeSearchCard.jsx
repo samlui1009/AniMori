@@ -14,7 +14,7 @@ function AnimeSearchCard( { passedAnimeData, watchStatus, setShelfItems, onClose
     }
     // A guard here
 
-    const handleClick = async () => {
+    const handleClick = async (passedAnimeData, watchStatus) => {
         try {
             const newAnime = {
                 mal_id: passedAnimeData.mal_id,
@@ -28,7 +28,7 @@ function AnimeSearchCard( { passedAnimeData, watchStatus, setShelfItems, onClose
             }
             await window.dbFunctions.addNewAnime(newAnime);
             setShelfItems((prev) => [...prev, newAnime]);
-            console.log("Anime has been added to the library:", newAnime.title);
+            // console.log("Anime has been added to the library:", newAnime.title);
             onClose();
         } catch {
             console.log("Anime could not be added to your library!");
