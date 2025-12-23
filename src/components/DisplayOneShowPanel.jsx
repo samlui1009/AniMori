@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import './DisplayOneShowPanel.css';
+
 const DisplayOneShowPanel = ({ shelfItems, animeMalId, onEdit, onDelete, onCancel }) => {
 
     const animeToView = shelfItems.find(show => show.mal_id === animeMalId);

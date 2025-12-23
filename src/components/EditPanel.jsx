@@ -1,6 +1,8 @@
 import {React, useEffect, useState } from 'react';
-import './EditPanel.css';
 import FiveStarRating from './FiveStarRatingBar.jsx';
+import { showEditSuccessAlert } from '../swal-alerts/alerts.jsx';
+
+import './EditPanel.css';
 
 function EditPanel({ animeToEdit, onClose }) {
 
@@ -14,8 +16,6 @@ function EditPanel({ animeToEdit, onClose }) {
 
     const handleEditSubmission = async (e) => {
         e.preventDefault();
-        // console.log("Handler fired!");
-        // console.log("Attempting to edit: ", animeToEdit.title);
 
         try {
             const newComments = document.querySelector(".comments-section").value;
@@ -41,6 +41,8 @@ function EditPanel({ animeToEdit, onClose }) {
                 await window.dbFunctions.updateAnimeField("is_s_tier", isSTier, animeToEdit.mal_id);
                 console.log("Updated S-Tier status!");
             }
+            showEditSuccessAlert();
+            onClose();
             console.log("Anime has been successfully edited!");
         } catch (error) {
             console.log("Anime could not be edited!");

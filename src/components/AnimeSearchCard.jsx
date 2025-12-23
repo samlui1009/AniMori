@@ -1,5 +1,6 @@
 import './AnimeSearchCard.css';
 import { useState, useEffect } from 'react';
+import { showAddSuccessAlert } from '../swal-alerts/alerts';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSquareXmark } from '@fortawesome/free-solid-svg-icons'; // Import the toggle icons
 
@@ -28,7 +29,7 @@ function AnimeSearchCard( { passedAnimeData, watchStatus, setShelfItems, onClose
             }
             await window.dbFunctions.addNewAnime(newAnime);
             setShelfItems((prev) => [...prev, newAnime]);
-            // console.log("Anime has been added to the library:", newAnime.title);
+            showAddSuccessAlert();
             onClose();
         } catch {
             console.log("Anime could not be added to your library!");
