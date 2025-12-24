@@ -33,13 +33,13 @@ function STierShelf( {shelfItems=[], setShelfItems, onClick} ) {
             <div className={`shelf-ctn ${openShelf ? 'open' : 'closed'}`}>
                 {shelfItems.map((anime) => (
                     <div className="anime-item" key={anime.mal_id}>
+                        <img className="s-tier-badge" src={STierBadge} alt="S-Tier Badge"></img>
                         <img className="anime-cover"
                              onClick={() => onClick(anime.mal_id)}
                              src={anime.image_url}
                              alt={anime.title}>                            
                         </img>
                         <h4 className="anime-title">{anime.title}</h4>
-                        <img className="s-tier-badge" src={STierBadge} alt="S-Tier Badge"></img>
                     </div>
                 ))}
 

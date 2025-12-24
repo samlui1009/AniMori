@@ -525,11 +525,6 @@ function updateAnimeField(field, value, malId) {
         UPDATE anime SET ${field} = ? WHERE mal_id = ?`);
   runStatement.run(value, malId);
 }
-function returnAnimeByMalId(malId) {
-  const row = anidb.prepare(`
-        SELECT * FROM anime WHERE mal_id = ?`).get(malId);
-  return row;
-}
 function deleteAnimeFromDatabase(malId) {
   const deleteStatement = anidb.prepare(`
         DELETE from anime WHERE mal_id = ?`);
@@ -569,8 +564,7 @@ const AnimeDb = {
   returnAnimeLeanDataByStatus,
   returnTotalAnimeCount,
   returnTotalAverageRating,
-  returnAnimeLeanDataBySTier,
-  returnAnimeByMalId
+  returnAnimeLeanDataBySTier
 };
 if (started) {
   require$$3$1.app.quit();

@@ -29,6 +29,10 @@ export const handleEditAnime = async (animeMalId, shelfItems, setEditingAnime) =
     setEditingAnime(animeToEdit);
 }
 
+export const handleCloseEditAnimePanel = async () => {
+    // Placeholder code for now
+}
+
 export const handleAnimeAlreadyExists = async (animeMalId) => {
     console.log("Hello World");
     // Placeholder code for now

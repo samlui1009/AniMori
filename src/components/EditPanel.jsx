@@ -8,12 +8,6 @@ function EditPanel({ animeToEdit, onClose }) {
 
     const [newRating, setNewRating] = useState(0);
 
-    // Function logic to handle a "Cancellation" for the edit
-    const handleCancel = (e) => {
-        e.preventDefault();
-        onClose();
-    }
-
     const handleEditSubmission = async (e) => {
         e.preventDefault();
 
@@ -69,7 +63,7 @@ function EditPanel({ animeToEdit, onClose }) {
                 <input className="s-tier-check" type="checkbox"></input>
                 <div className="btn-ctn">
                     <input className="btn" type="submit"></input>
-                    <button className="btn" onClick={handleCancel}>Cancel</button>
+                    <button className="btn" onClick={onClose}>Cancel</button>
                 </div>
                 </form>
         </div>

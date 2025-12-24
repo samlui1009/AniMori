@@ -64,6 +64,15 @@ function addNewAnimeAsSTierFavourite(anime) {
     })
 }
 
+// REQUIRES: The anime can either exist OR NOT exist within the database
+// MODIFIES: N/A
+// EFFECTS:  Detects whether an anime is already present within the database
+function detectDuplicateAnime(malId) {
+    const row = anidb.prepare(`
+        SELECT COUNT(*) AS count FROM anime WHERE mal_id = ?`).get(malId);
+    return row.count > 0;
+}
+
 // Below: Update queries
 // REQUIRES: Anime must be present within database
 // MODIFIES: AnimeDb
@@ -154,8 +163,7 @@ export default {
     returnAnimeLeanDataByStatus,
     returnTotalAnimeCount,
     returnTotalAverageRating,
-    returnAnimeLeanDataBySTier,
-    returnAnimeByMalId
+    returnAnimeLeanDataBySTier
 };
 // Required to export these so that it can be imported in preload.js
 
