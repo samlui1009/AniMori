@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import './DayNightModeOptionBar.css';
+import RTHButton from '../components/ReturnToHomeButton.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faToggleOn, faToggleOff } from '@fortawesome/free-solid-svg-icons'; // Import the toggle icons
 // Imports to use the icons from this library
@@ -18,8 +19,11 @@ function DayNightModeOptionBar() {
     // With the dependency array, to make sure it stops from re-loading constantly
 
     return (
-        <div className="light-dark-container" onClick={() => setIsDarkMode(!isDarkMode)}>
-            <FontAwesomeIcon className="toggle-icon" icon={isDarkMode ? faToggleOn : faToggleOff} />
+        <div className="top-right-ctn">
+            <RTHButton></RTHButton>
+            <div className="light-dark-container" onClick={() => setIsDarkMode(!isDarkMode)}>
+                <FontAwesomeIcon className="toggle-icon" icon={isDarkMode ? faToggleOn : faToggleOff} />
+            </div>
         </div>
     )
 }

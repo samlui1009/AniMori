@@ -82,11 +82,6 @@ function Dropped() {
                 onClose={() => handleCloseSearchCard(setAnime)}
                 ></AnimeSearchCard>
             }
-
-            <div className="btn-container">
-                <RTHButton className="home-btn"></RTHButton>
-            </div>
-
         </div>
     )
 }

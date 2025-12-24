@@ -1,5 +1,6 @@
 import './ReturnToHomeButton.css';
 import { useNavigate } from 'react-router-dom';
+import { FaHome } from "react-icons/fa";
 
 function ReturnToHomeButton() {
 
@@ -11,7 +12,7 @@ function ReturnToHomeButton() {
 
     return (
         <div>
-            <button className="home-btn" onClick={handleClick}>Go Back To Home</button>
+            <button className="home-btn" onClick={handleClick}><FaHome className="home-logo"></FaHome> Home</button>
         </div>
     )
 }
