@@ -43,37 +43,6 @@ function addNewAnime(anime) {
     })
 }
 
-// REQUIRES: The anime must not exist within the database with a pre-existing S-Tier flag already, OR, that it can exist but it 
-// must NOT bear a pre-existing S-Tier flag
-// MODIFIES: Anime
-// EFFECTS:  Inserts a new anime into the animori database
-function addNewAnimeAsSTierFavourite(anime, watchStatus) {
-    const addStatement = anidb.prepare(`
-        INSERT INTO anime (mal_id, image_url, title, episodes, personal_status, personal_rating, personal_comments, is_s_tier)
-        VALUES (@mal_id, @image_url, @title, @episodes, @personal_status, @personal_rating, @personal_comments, @is_s_tier)
-        `)
-    addStatement.run({
-        mal_id: anime.mal_id,
-        image_url: anime.image_url,
-        title: anime.title,
-        episodes: anime.episodes,
-        personal_status: watchStatus,
-        personal_rating: anime.personal_rating ?? 0,
-        personal_comments: anime.personal_comments ?? null,
-        is_s_tier: 1
-    })
-}
-
-// REQUIRES: The anime can either exist OR NOT exist within the database
-// MODIFIES: N/A
-// EFFECTS:  Detects whether an anime is already present within the database
-function detectDuplicateAnime(malId) {
-    const row = anidb.prepare(`
-        SELECT COUNT(*) AS count FROM anime WHERE mal_id = ?`).get(malId);
-    return row.count > 0;
-}
-// TODO: This is placeholder code only!
-
 // Below: Update queries
 // REQUIRES: Anime must be present within database
 // MODIFIES: AnimeDb

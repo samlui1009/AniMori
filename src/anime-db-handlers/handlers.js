@@ -1,4 +1,4 @@
-import { showDeleteConfirmAlert, showDeleteSuccessAlert } from "../swal-alerts/alerts"; 
+import { showDeleteConfirmAlert, showDeleteSuccessAlert, showAnimeAlreadyExistsAlert } from "../swal-alerts/alerts"; 
 
 export const handleAnimeDeletion = async (animeMalId, shelfItems, setShelfItems, setAnimeDetails) => {
     try {
@@ -6,7 +6,6 @@ export const handleAnimeDeletion = async (animeMalId, shelfItems, setShelfItems,
         
         if (!confirmDeletion) {
             return; 
-            // Placeholder code, we need to ensure that it'll show a "Deletion Not Completed" alert in the future
         } else {
             await window.dbFunctions.deleteAnime(animeMalId);
             const updatedShelfItems = shelfItems.filter(anime => anime.mal_id !== animeMalId);
@@ -42,8 +41,22 @@ export const handleCloseEditAnimePanel = async (setEditingAnime, setAnimeDetails
 }
 
 export const handleAnimeAlreadyExists = async (animeMalId) => {
-    console.log("Hello World");
-    // Placeholder code for now
+    try {
+        const confirmDeletion = await showDeleteConfirmAlert();
+        
+        if (!confirmDeletion) {
+            return; 
+        } else {
+            await window.dbFunctions.deleteAnime(animeMalId);
+            const updatedShelfItems = shelfItems.filter(anime => anime.mal_id !== animeMalId);
+            await window.dbFunctions.deleteAllNullEntries();
+            setShelfItems(updatedShelfItems);
+            setAnimeDetails(null); 
+            showDeleteSuccessAlert();       
+        }
+    } catch {
+        console.log("Selected anime could not be deleted!");
+    }
 }
 
 export const handleCloseDisplayPanel = async (setAnimeDetails, setAnime, setEditingAnime) => {

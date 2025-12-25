@@ -60,7 +60,7 @@ export const showDeleteSuccessAlert = () => {
     })
 }
 
-export const showAnimeAlreadyExistsAlert = () => {
+export const showAnimeAlreadyExistsAlert = (status) => {
 
     const showAlertExists = "This show already exists in your library!";
 

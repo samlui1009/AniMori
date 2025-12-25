@@ -2,10 +2,11 @@ import { React, useState, useEffect } from 'react';
 import { IoMdArrowDropdownCircle, IoMdArrowDropupCircle  } from "react-icons/io";
 import STierBadge from '../assets/s-tier-badge.png';
 import './STierShelf.css';
-import { viewAnimeDetails } from '../anime-db-handlers/handlers';
-
 
 function STierShelf( {shelfItems=[], setShelfItems, onClick} ) {
+
+    // ASSUME: Users should only be adding things to S-Tiers once they have finished the entire show
+    const status = "Watched"
 
     const [openShelf, setOpenShelf] = useState(false);
     const [editPanel, setEditPanel] = useState(false);
