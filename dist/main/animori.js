@@ -560,10 +560,16 @@ function returnAnimeLeanDataBySTier() {
         SELECT mal_id, title, image_url, personal_comments, personal_rating, is_s_tier FROM anime WHERE is_s_tier = 1`).all();
   return row;
 }
+function deleteAllNullEntries() {
+  const deleteStatement = anidb.prepare(`
+        DELETE FROM anime WHERE mal_id IS NULL`);
+  deleteStatement.run();
+}
 const AnimeDb = {
   anidb,
   addNewAnime,
   deleteAnimeFromDatabase,
+  deleteAllNullEntries,
   updateAnimeField,
   returnAnimeCountGroupedByStatus,
   returnAnimeLeanDataByStatus,
@@ -586,6 +592,9 @@ require$$3$1.ipcMain.handle("updateAnimeField", (_event, field, value, malId) =>
 });
 require$$3$1.ipcMain.handle("deleteAnime", (_event, malId) => {
   AnimeDb.deleteAnimeFromDatabase(malId);
+});
+require$$3$1.ipcMain.handle("deleteAllNullEntries", () => {
+  AnimeDb.deleteAllNullEntries();
 });
 require$$3$1.ipcMain.handle("getTotalCountByStatus", (_event, status) => {
   return AnimeDb.returnAnimeCountGroupedByStatus(status);

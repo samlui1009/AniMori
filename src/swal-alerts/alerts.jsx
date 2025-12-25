@@ -1,4 +1,5 @@
 import Swal from 'sweetalert2'
+import './alerts.css';
 
 export const showAddSuccessAlert = () => {
 
@@ -34,7 +35,14 @@ export const showDeleteConfirmAlert = () => {
         showCancelButton: true,
         text: deleteConfirmationQuestionAlertMessage,
         confirmButtonText: 'Yes, delete it!',
-        cancelButtonText: 'Cancel'
+        confirmButtonColor: '#d33',
+        cancelButtonText: 'No, keep it!',
+        cancelButtonColor: '#3085d6',
+        customClass: {
+            confirmButton: 'swal-confirm-btn',
+            cancelButton: 'swal-cancel-btn'
+        },
+        buttonsStyling: false
     }).then((result) => {
         return result.isConfirmed;
     });

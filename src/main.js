@@ -42,6 +42,10 @@ ipcMain.handle("deleteAnime", (_event, malId) => {
     AnimeDb.deleteAnimeFromDatabase(malId);
 })
 
+ipcMain.handle("deleteAllNullEntries", () => {
+    AnimeDb.deleteAllNullEntries();
+})
+
 ipcMain.handle("getTotalCountByStatus", (_event, status) => {
     return AnimeDb.returnAnimeCountGroupedByStatus(status);
     // Forgot the return, lol

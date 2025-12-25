@@ -10,6 +10,7 @@ export const handleAnimeDeletion = async (animeMalId, shelfItems, setShelfItems,
         } else {
             await window.dbFunctions.deleteAnime(animeMalId);
             const updatedShelfItems = shelfItems.filter(anime => anime.mal_id !== animeMalId);
+            await window.dbFunctions.deleteAllNullEntries();
             setShelfItems(updatedShelfItems);
             setAnimeDetails(null); 
             showDeleteSuccessAlert();       

@@ -47,7 +47,7 @@ function addNewAnime(anime) {
 // must NOT bear a pre-existing S-Tier flag
 // MODIFIES: Anime
 // EFFECTS:  Inserts a new anime into the animori database
-function addNewAnimeAsSTierFavourite(anime) {
+function addNewAnimeAsSTierFavourite(anime, watchStatus) {
     const addStatement = anidb.prepare(`
         INSERT INTO anime (mal_id, image_url, title, episodes, personal_status, personal_rating, personal_comments, is_s_tier)
         VALUES (@mal_id, @image_url, @title, @episodes, @personal_status, @personal_rating, @personal_comments, @is_s_tier)
@@ -57,7 +57,7 @@ function addNewAnimeAsSTierFavourite(anime) {
         image_url: anime.image_url,
         title: anime.title,
         episodes: anime.episodes,
-        personal_status: anime.personal_status,
+        personal_status: watchStatus,
         personal_rating: anime.personal_rating ?? 0,
         personal_comments: anime.personal_comments ?? null,
         is_s_tier: 1
@@ -72,6 +72,7 @@ function detectDuplicateAnime(malId) {
         SELECT COUNT(*) AS count FROM anime WHERE mal_id = ?`).get(malId);
     return row.count > 0;
 }
+// TODO: This is placeholder code only!
 
 // Below: Update queries
 // REQUIRES: Anime must be present within database
@@ -154,10 +155,20 @@ function returnAnimeLeanDataBySTier() {
     return row;
 }
 
+// REQUIRES: N/A
+// MODIFIES: animeDb
+// EFFECTS: Clears out any null entries that are found within the database - Primarily for maintenance to clear out anything after deletions
+function deleteAllNullEntries() {
+    const deleteStatement = anidb.prepare(`
+        DELETE FROM anime WHERE mal_id IS NULL`)
+    deleteStatement.run();
+}
+
 export default {
     anidb,
     addNewAnime,
     deleteAnimeFromDatabase,
+    deleteAllNullEntries,
     updateAnimeField,
     returnAnimeCountGroupedByStatus,
     returnAnimeLeanDataByStatus,
@@ -167,18 +178,6 @@ export default {
     returnAnimeByMalId
 };
 // Required to export these so that it can be imported in preload.js
-
-// Test Query
-// addNewAnime({
-//     mal_id: 4,
-//     image_url: "https://www.google.com",
-//     title: "Test Anime",
-//     episodes: 5,
-//     personal_status: "To Be Watched",
-//     personal_rating: 5,
-//     personal_comments: "5 for now, we'll see how it goes",
-//     is_s_tier: 0
-// })
 
 // References: https://www.youtube.com/watch?v=IooIXYf0PIo
 // References: https://www.youtube.com/watch?v=nMvjcBTFlPA&t=378s

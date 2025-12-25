@@ -29,6 +29,8 @@ contextBridge.exposeInMainWorld('dbFunctions', {
         ipcRenderer.invoke("updateAnimeField", field, value, malId),
     deleteAnime: (malId) => 
         ipcRenderer.invoke("deleteAnime", malId),
+    deleteAllNullEntries: () =>
+        ipcRenderer.invoke("deleteAllNullEntries"),
     getTotalAverageRating: () =>
         ipcRenderer.invoke("getTotalAverageRating"),
     getTotalAnimeCount: () =>

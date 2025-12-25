@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap');
+
+.swal-confirm-btn, .swal-cancel-btn {
+    font-family: "Silkscreen", sans-serif;
+    border: none;
+    margin: 10px;
+    max-width: 100px;
+    max-height: 100px;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 6px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.swal-confirm-btn {
+    background-color: green;
+    color: white;
+}
+
+.swal-cancel-btn {
+    background-color: #f63434dc;
+    color: white;
+}

@@ -6,6 +6,7 @@ contextBridge.exposeInMainWorld("dbFunctions", {
   getAnimeByMalId: (malId) => ipcRenderer.invoke("returnAnimeByMalId", malId),
   updateAnimeField: (field, value, malId) => ipcRenderer.invoke("updateAnimeField", field, value, malId),
   deleteAnime: (malId) => ipcRenderer.invoke("deleteAnime", malId),
+  deleteAllNullEntries: () => ipcRenderer.invoke("deleteAllNullEntries"),
   getTotalAverageRating: () => ipcRenderer.invoke("getTotalAverageRating"),
   getTotalAnimeCount: () => ipcRenderer.invoke("getTotalAnimeCount"),
   getTotalCountByStatus: (status) => ipcRenderer.invoke("getTotalCountByStatus", status),
