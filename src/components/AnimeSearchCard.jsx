@@ -29,19 +29,13 @@ function AnimeSearchCard( { passedAnimeData, watchStatus, setShelfItems, onClose
                 is_s_tier: 0
             };
 
-            const showExists = window.dbFunctions.doesAnimeExist(newAnime.mal_id);
-
-            if (showExists) {
-                showAnimeAlreadyExistsAlert();
-                return;
-            } else {
-                await window.dbFunctions.addNewAnime(newAnime);
-                setShelfItems((prev) => [...prev, newAnime]);
-                showAddSuccessAlert();
-                onClose();    
-            }
+            await window.dbFunctions.addNewAnime(newAnime);
+            setShelfItems((prev) => [...prev, newAnime]);
+            showAddSuccessAlert();
+            onClose();    
         } catch {
-            console.log("Anime could not be added to shelf!");
+            showAnimeAlreadyExistsAlert();
+            return;
         }
     }
 

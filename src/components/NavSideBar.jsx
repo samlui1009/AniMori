@@ -1,7 +1,6 @@
 import './NavSideBar.css';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import MalSB from '../components/MALSearchBar.jsx';
 import Hamburger from 'hamburger-react';
 
 function NavSideBar( {onAnimeResult} ) {
@@ -39,10 +38,6 @@ function NavSideBar( {onAnimeResult} ) {
                         <li className="qnav-item">
                             <Link to="/s-tiers">⭐ S-Tiers</Link>
                         </li>
-                        <li className="qnav-item">
-                            <p>⌕ Find Anime</p>
-                            <MalSB animeResult={onAnimeResult}></MalSB>
-                        </li>
                     </ul>
                 </div>}
         </div>
@@ -51,5 +46,4 @@ function NavSideBar( {onAnimeResult} ) {
 
 export default NavSideBar
 
-// TODO: USE THE HAMBURGER HERE!
 // https://hamburger-react.netlify.app/

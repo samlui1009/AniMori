@@ -1,5 +1,7 @@
 import { React, useEffect, useState } from 'react';
 import EditPanel from '../components/EditPanel.jsx';
+import CollectionSearchBar from '../components/CollectionSearchBar.jsx';
+// TODO: WOrk on this tomorrow
 import { IoMdArrowDropdownCircle, IoMdArrowDropupCircle  } from "react-icons/io";
 
 import './AnimeShelf.css';
