@@ -31,7 +31,11 @@ ipcMain.handle("addNewAnime", (_event, anime) => {
 // ipc Code to handle backend interactions with SQLite database
 ipcMain.handle("updateAnimeField", (_event, field, value, malId) => {
     AnimeDb.updateAnimeField(field, value, malId);
-})
+});
+
+ipcMain.handle("doesAnimeExist", (_event, malId) => {
+    AnimeDb.doesAnimeExist(malId);
+});
 
 // Event is an IpcMainInvokeEvent object
 // This is an unused parameter

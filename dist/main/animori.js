@@ -535,6 +535,13 @@ function deleteAnimeFromDatabase(malId) {
         DELETE from anime WHERE mal_id = ?`);
   deleteStatement.run(malId);
 }
+function doesAnimeExist(malId) {
+  const query = anidb.prepare(`
+        SELECT EXISTS(SELECT 1 FROM anime WHERE mal_id = ?)
+    `);
+  const result = query.get(malId);
+  return Boolean(Object.values(result)[0]);
+}
 function returnAnimeCountGroupedByStatus(personalStatus) {
   const row = anidb.prepare(`
         SELECT COUNT(*) AS count FROM anime WHERE personal_status = ?`).get(personalStatus);
@@ -568,6 +575,7 @@ function deleteAllNullEntries() {
 const AnimeDb = {
   anidb,
   addNewAnime,
+  doesAnimeExist,
   deleteAnimeFromDatabase,
   deleteAllNullEntries,
   updateAnimeField,
@@ -589,6 +597,9 @@ require$$3$1.ipcMain.handle("addNewAnime", (_event, anime) => {
 });
 require$$3$1.ipcMain.handle("updateAnimeField", (_event, field, value, malId) => {
   AnimeDb.updateAnimeField(field, value, malId);
+});
+require$$3$1.ipcMain.handle("doesAnimeExist", (_event, malId) => {
+  AnimeDb.doesAnimeExist(malId);
 });
 require$$3$1.ipcMain.handle("deleteAnime", (_event, malId) => {
   AnimeDb.deleteAnimeFromDatabase(malId);

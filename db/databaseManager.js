@@ -75,6 +75,17 @@ function deleteAnimeFromDatabase(malId) {
     deleteStatement.run(malId);
 }
 
+// REQUIRES: malId must be a valid number
+// MODIFIES: None
+// EFFECTS: Returns true if an anime with the given malId exists in the database, false otherwise
+function doesAnimeExist(malId) {
+    const query = anidb.prepare(`
+        SELECT EXISTS(SELECT 1 FROM anime WHERE mal_id = ?)
+    `);
+    const result = query.get(malId); // Execute the query with the provided malId
+    return Boolean(Object.values(result)[0]); // Convert the result to a boolean
+}
+
 // Below: Return queries
 // REQUIRES: The anime must exist within the database
 // MODIFIES: N/A - Refactored from independent queries
@@ -136,6 +147,7 @@ function deleteAllNullEntries() {
 export default {
     anidb,
     addNewAnime,
+    doesAnimeExist,
     deleteAnimeFromDatabase,
     deleteAllNullEntries,
     updateAnimeField,

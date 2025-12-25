@@ -25,6 +25,8 @@ contextBridge.exposeInMainWorld('dbFunctions', {
         ipcRenderer.invoke("addNewAnime", anime),
     getAnimeByMalId: (malId) => 
         ipcRenderer.invoke("returnAnimeByMalId", malId),
+    doesAnimeExist: (malId) =>
+        ipcRenderer.invoke("doesAnimeExist", malId),
     updateAnimeField: (field, value, malId) =>
         ipcRenderer.invoke("updateAnimeField", field, value, malId),
     deleteAnime: (malId) => 

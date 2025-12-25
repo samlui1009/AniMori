@@ -2,7 +2,6 @@ import {React, useEffect, useState } from 'react';
 import FiveStarRating from './FiveStarRatingBar.jsx';
 
 import { completeAnimeEdit, handleCloseEditAnimePanel } from '../anime-db-handlers/handlers.js';
-
 import { showEditSuccessAlert } from '../swal-alerts/alerts.jsx';
 
 import './EditPanel.css';
@@ -38,7 +37,6 @@ function EditPanel({ animeToEdit, setEditingAnime, setAnimeDetails, setShelfItem
 
             const updatedAnime = await window.dbFunctions.getAnimeByMalId(animeToEdit.mal_id);
             setAnimeDetails(updatedAnime);
-
             const refreshed = await window.dbFunctions.getAnimeLeanDataByStatus(status);
             setShelfItems(refreshed);
             setEditingAnime(null);

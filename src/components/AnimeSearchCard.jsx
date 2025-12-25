@@ -1,11 +1,12 @@
 import './AnimeSearchCard.css';
+
 import { useState, useEffect } from 'react';
 import { showAddSuccessAlert } from '../swal-alerts/alerts';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSquareXmark } from '@fortawesome/free-solid-svg-icons'; // Import the toggle icons
+import { showAnimeAlreadyExistsAlert } from '../swal-alerts/alerts';
 
-// THIS is the Anime "Search Results" card generated after searching
-// for an anime with the API
+// THIS is the Anime "Search Results" card generated after searching for an anime with the API
 function AnimeSearchCard( { passedAnimeData, watchStatus, setShelfItems, onClose}) {
 
     const [displayAnime, setDisplayAnime] = useState(false);
@@ -26,13 +27,21 @@ function AnimeSearchCard( { passedAnimeData, watchStatus, setShelfItems, onClose
                 personal_rating: null,
                 personal_comments: null,
                 is_s_tier: 0
+            };
+
+            const showExists = window.dbFunctions.doesAnimeExist(newAnime.mal_id);
+
+            if (showExists) {
+                showAnimeAlreadyExistsAlert();
+                return;
+            } else {
+                await window.dbFunctions.addNewAnime(newAnime);
+                setShelfItems((prev) => [...prev, newAnime]);
+                showAddSuccessAlert();
+                onClose();    
             }
-            await window.dbFunctions.addNewAnime(newAnime);
-            setShelfItems((prev) => [...prev, newAnime]);
-            showAddSuccessAlert();
-            onClose();
         } catch {
-            console.log("Anime could not be added to your library!");
+            console.log("Anime could not be added to shelf!");
         }
     }
 

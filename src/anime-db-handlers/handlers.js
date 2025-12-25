@@ -40,25 +40,6 @@ export const handleCloseEditAnimePanel = async (setEditingAnime, setAnimeDetails
     setAnime(null);
 }
 
-export const handleAnimeAlreadyExists = async (animeMalId) => {
-    try {
-        const confirmDeletion = await showDeleteConfirmAlert();
-        
-        if (!confirmDeletion) {
-            return; 
-        } else {
-            await window.dbFunctions.deleteAnime(animeMalId);
-            const updatedShelfItems = shelfItems.filter(anime => anime.mal_id !== animeMalId);
-            await window.dbFunctions.deleteAllNullEntries();
-            setShelfItems(updatedShelfItems);
-            setAnimeDetails(null); 
-            showDeleteSuccessAlert();       
-        }
-    } catch {
-        console.log("Selected anime could not be deleted!");
-    }
-}
-
 export const handleCloseDisplayPanel = async (setAnimeDetails, setAnime, setEditingAnime) => {
     setAnimeDetails(null);
     setAnime(null);

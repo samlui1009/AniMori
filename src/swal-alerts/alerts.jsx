@@ -54,19 +54,19 @@ export const showDeleteSuccessAlert = () => {
 
     Swal.fire({
         icon: 'success',
-        title: 'Deleted',
+        title: 'Deleted!',
         icon: 'success',
         text: deleteConfirmMessage    
     })
 }
 
-export const showAnimeAlreadyExistsAlert = (status) => {
+export const showAnimeAlreadyExistsAlert = () => {
 
     const showAlertExists = "This show already exists in your library!";
 
     Swal.fire({
-        icon: 'info',
-        title: 'Info',
+        icon: 'warning',
+        title: 'Alert!',
         text: showAlertExists
     })
 }
