@@ -10,7 +10,7 @@ import EditPanel from '../components/EditPanel.jsx'
 
 import './Pages.css'
 
-// ASSUME: S-Tiers should have been Watched/Completed already
+// ASSUME: S-Tiers should have been Watched/Completed already - CANNOT add/make modifications to this, it's a "display/achievement shelf" only
 function STierFavourites() {
 
     // Search card state

@@ -28,7 +28,6 @@ function Stats() {
         }
         run();
     }, []);
-    // Questions here: Why the "run()"?
 
     return (
         <div className="stats-container">

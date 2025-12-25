@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './DisplayOneShowPanel.css';
 
 const DisplayOneShowPanel = ({ shelfItems, animeMalId, onEdit, onDelete, onCancel }) => {
@@ -8,7 +8,9 @@ const DisplayOneShowPanel = ({ shelfItems, animeMalId, onEdit, onDelete, onCance
 
     return (
         <div className="display-one-show-panel">
-            <h2 className="show-name">Showing Details For: {animeToView.title}</h2>
+            <div className="show-name-ctn">
+                <h2 className="show-name">Showing Details For: {animeToView.title}</h2>
+            </div>
             <img src={animeToView.image_url} alt={`${animeToView.title} Cover`} className="show-img" />
             <div className="show-details">
                 <h4>✏️ Comments:</h4> <p className="show-info">{animeToView.personal_comments || "No comments available. Add something!"}</p>

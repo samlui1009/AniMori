@@ -1,7 +1,7 @@
-import {React, useEffect, useState } from 'react';
+import {React, useState } from 'react';
 import FiveStarRating from './FiveStarRatingBar.jsx';
 
-import { completeAnimeEdit, handleCloseEditAnimePanel } from '../anime-db-handlers/handlers.js';
+import { handleCloseEditAnimePanel } from '../anime-db-handlers/handlers.js';
 import { showEditSuccessAlert } from '../swal-alerts/alerts.jsx';
 
 import './EditPanel.css';

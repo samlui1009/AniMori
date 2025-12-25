@@ -17,6 +17,10 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
+.show-name-ctn {
+    max-width: 80%;
+}
+
 .action-buttons {
     padding: 10px;
     gap: 10px;

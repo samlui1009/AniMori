@@ -5,7 +5,6 @@ import { handleAnimeDeletion, viewAnimeDetails, handleEditAnime, handleCloseDisp
 import AnimeShelf from '../components/AnimeShelf.jsx';
 import OneShowPanel from '../components/DisplayOneShowPanel.jsx';
 import MALSearchBar from '../components/MALSearchBar.jsx';
-import RTHButton from '../components/ReturnToHomeButton.jsx';
 import DLMode from '../components/DayNightModeOptionBar.jsx';
 import NavSB from '../components/NavSideBar.jsx';
 import AnimeSearchCard from '../components/AnimeSearchCard.jsx';
