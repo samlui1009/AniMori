@@ -1,10 +1,13 @@
 import {React, useEffect, useState } from 'react';
 import FiveStarRating from './FiveStarRatingBar.jsx';
+
+import { completeAnimeEdit, handleCloseEditAnimePanel } from '../anime-db-handlers/handlers.js';
+
 import { showEditSuccessAlert } from '../swal-alerts/alerts.jsx';
 
 import './EditPanel.css';
 
-function EditPanel({ animeToEdit, onClose }) {
+function EditPanel({ animeToEdit, setEditingAnime, setAnimeDetails, setShelfItems, status, setAnime }) {
 
     const [newRating, setNewRating] = useState(0);
 
@@ -15,9 +18,6 @@ function EditPanel({ animeToEdit, onClose }) {
             const newComments = document.querySelector(".comments-section").value;
             const newStatus = document.querySelector(".watch-status-select").value;
             const isSTier = document.querySelector(".s-tier-check").checked ? 1 : 0;
-
-            console.log(newComments);
-            console.log(newStatus);
 
             if (newComments) {
                 await window.dbFunctions.updateAnimeField("personal_comments", newComments, animeToEdit.mal_id);
@@ -35,8 +35,14 @@ function EditPanel({ animeToEdit, onClose }) {
                 await window.dbFunctions.updateAnimeField("is_s_tier", isSTier, animeToEdit.mal_id);
                 console.log("Updated S-Tier status!");
             }
+
+            const updatedAnime = await window.dbFunctions.getAnimeByMalId(animeToEdit.mal_id);
+            setAnimeDetails(updatedAnime);
+
+            const refreshed = await window.dbFunctions.getAnimeLeanDataByStatus(status);
+            setShelfItems(refreshed);
+            setEditingAnime(null);
             showEditSuccessAlert();
-            onClose();
             console.log("Anime has been successfully edited!");
         } catch (error) {
             console.log("Anime could not be edited!");
@@ -63,7 +69,7 @@ function EditPanel({ animeToEdit, onClose }) {
                 <input className="s-tier-check" type="checkbox"></input>
                 <div className="btn-ctn">
                     <input className="btn" type="submit"></input>
-                    <button className="btn" onClick={onClose}>Cancel</button>
+                    <button className="btn" onClick={() => handleCloseEditAnimePanel(setEditingAnime, setAnimeDetails, setAnime)}>Cancel</button>
                 </div>
                 </form>
         </div>

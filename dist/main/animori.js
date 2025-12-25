@@ -525,6 +525,11 @@ function updateAnimeField(field, value, malId) {
         UPDATE anime SET ${field} = ? WHERE mal_id = ?`);
   runStatement.run(value, malId);
 }
+function returnAnimeByMalId(malId) {
+  const row = anidb.prepare(`
+        SELECT * FROM anime WHERE mal_id = ?`).get(malId);
+  return row;
+}
 function deleteAnimeFromDatabase(malId) {
   const deleteStatement = anidb.prepare(`
         DELETE from anime WHERE mal_id = ?`);
@@ -564,11 +569,15 @@ const AnimeDb = {
   returnAnimeLeanDataByStatus,
   returnTotalAnimeCount,
   returnTotalAverageRating,
-  returnAnimeLeanDataBySTier
+  returnAnimeLeanDataBySTier,
+  returnAnimeByMalId
 };
 if (started) {
   require$$3$1.app.quit();
 }
+require$$3$1.ipcMain.handle("returnAnimeByMalId", (_event, malId) => {
+  AnimeDb.returnAnimeByMalId(malId);
+});
 require$$3$1.ipcMain.handle("addNewAnime", (_event, anime) => {
   AnimeDb.addNewAnime(anime);
 });

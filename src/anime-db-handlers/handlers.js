@@ -29,8 +29,15 @@ export const handleEditAnime = async (animeMalId, shelfItems, setEditingAnime) =
     setEditingAnime(animeToEdit);
 }
 
-export const handleCloseEditAnimePanel = async () => {
-    // Placeholder code for now
+export const completeAnimeEdit = (updatedAnime, setAnimeDetails, setEditingAnime) => {
+    setAnimeDetails(updatedAnime);
+    setEditingAnime(null);
+}
+
+export const handleCloseEditAnimePanel = async (setEditingAnime, setAnimeDetails, setAnime) => {
+    setEditingAnime(null);
+    setAnimeDetails(null);
+    setAnime(null);
 }
 
 export const handleAnimeAlreadyExists = async (animeMalId) => {

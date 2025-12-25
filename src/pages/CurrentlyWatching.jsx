@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { handleAnimeDeletion, viewAnimeDetails, handleEditAnime, handleCloseDisplayPanel, handleCloseSearchCard } from '../anime-db-handlers/handlers.js';
+import { handleAnimeDeletion, viewAnimeDetails, handleEditAnime, handleCloseDisplayPanel, handleCloseSearchCard, completeAnimeEdit } from '../anime-db-handlers/handlers.js';
 
 import AnimeShelf from '../components/AnimeShelf.jsx';
 import OneShowPanel from '../components/DisplayOneShowPanel.jsx';
@@ -69,7 +69,11 @@ function CurrentlyWatching() {
             {editingAnime && (
                 <EditPanel
                     animeToEdit={editingAnime}
-                    onClose={() => setEditingAnime(null)}>
+                    setEditingAnime={setEditingAnime}
+                    setAnimeDetails={setAnimeDetails}
+                    shelfItems={shelfItems}
+                    setShelfItems={setShelfItems}
+                    status={status}>
                 </EditPanel>
             )}
 

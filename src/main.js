@@ -19,6 +19,10 @@ if (started) {
   app.quit();
 }
 
+ipcMain.handle("returnAnimeByMalId", (_event, malId) => {
+    AnimeDb.returnAnimeByMalId(malId);
+})
+
 // Adds the anime to the database - Do NOT return anything
 ipcMain.handle("addNewAnime", (_event, anime) => {
     AnimeDb.addNewAnime(anime);

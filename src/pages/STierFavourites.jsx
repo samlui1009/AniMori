@@ -5,7 +5,6 @@ import { handleAnimeDeletion, viewAnimeDetails, handleEditAnime, handleCloseDisp
 import STiers from '../components/STierShelf.jsx';
 import OneShowPanel from '../components/DisplayOneShowPanel.jsx'
 import MALSearchBar from '../components/MALSearchBar.jsx';
-import RTHButton from '../components/ReturnToHomeButton.jsx';
 import DLMode from '../components/DayNightModeOptionBar.jsx';
 import NavSB from '../components/NavSideBar.jsx';
 import AnimeSearchCard from '../components/AnimeSearchCard.jsx';
@@ -13,6 +12,7 @@ import EditPanel from '../components/EditPanel.jsx'
 
 import './Pages.css'
 
+// ASSUME: S-Tiers should have been Watched/Completed already
 function STierFavourites() {
 
     // Search card state
@@ -68,7 +68,11 @@ function STierFavourites() {
             {editingAnime && (
                 <EditPanel
                     animeToEdit={editingAnime}
-                    onClose={() => setEditingAnime(null)}>
+                    setEditingAnime={setEditingAnime}
+                    setAnimeDetails={setAnimeDetails}
+                    shelfItems={shelfItems}
+                    setShelfItems={setShelfItems}
+                    status={"Watched"}>
                 </EditPanel>
             )}
 

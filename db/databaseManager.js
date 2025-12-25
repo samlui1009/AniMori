@@ -163,7 +163,8 @@ export default {
     returnAnimeLeanDataByStatus,
     returnTotalAnimeCount,
     returnTotalAverageRating,
-    returnAnimeLeanDataBySTier
+    returnAnimeLeanDataBySTier,
+    returnAnimeByMalId
 };
 // Required to export these so that it can be imported in preload.js
 

@@ -69,7 +69,11 @@ function ToBeWatched() {
             {editingAnime && (
                 <EditPanel
                     animeToEdit={editingAnime}
-                    onClose={() => setEditingAnime(null)}>
+                    setEditingAnime={setEditingAnime}
+                    setAnimeDetails={setAnimeDetails}
+                    shelfItems={shelfItems}
+                    setShelfItems={setShelfItems}
+                    status={status}>
                 </EditPanel>
             )}
             
