@@ -5,8 +5,7 @@ import './MALSearchBar.css';
 
 function MALSearchBar( {variant = "nav", animeResult} ) {
     const [query, setQuery] = useState("");
-    // Query - Initial state: What are we typing?
-    // We should not be typing ANYTHING
+    // Query - Initial state: What are we typingg - We should not be typing ANYTHING
     
     const [anime, setAnime] = useState(null);
     // No anime just yet - yes, should be NULL

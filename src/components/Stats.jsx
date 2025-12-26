@@ -15,7 +15,6 @@ function Stats() {
                 const watchedStats = await window.dbFunctions.getTotalCountByStatus('Watched');
                 const droppedStats = await window.dbFunctions.getTotalCountByStatus('Dropped');
                 const currentWatchStats = await window.dbFunctions.getTotalCountByStatus('Currently Watching');
-                // To Be Watched status should be 'To Be Watched'
                 const rate = await window.dbFunctions.getTotalAverageRating();
                 const roundedRate = Math.round(rate*100)/100; 
                 setWatched(watchedStats)

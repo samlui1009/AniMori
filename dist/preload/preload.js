@@ -1,9 +1,9 @@
 "use strict";
 const { contextBridge, ipcRenderer } = require("electron");
 contextBridge.exposeInMainWorld("dbFunctions", {
-  // ping: () => "pong",
   addNewAnime: (anime) => ipcRenderer.invoke("addNewAnime", anime),
   getAnimeByMalId: (malId) => ipcRenderer.invoke("returnAnimeByMalId", malId),
+  getAnimeByName: (animeName) => ipcRenderer.invoke("getAnimeByName", animeName),
   doesAnimeExist: (malId) => ipcRenderer.invoke("doesAnimeExist", malId),
   updateAnimeField: (field, value, malId) => ipcRenderer.invoke("updateAnimeField", field, value, malId),
   deleteAnime: (malId) => ipcRenderer.invoke("deleteAnime", malId),

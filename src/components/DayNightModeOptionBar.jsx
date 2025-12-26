@@ -3,7 +3,6 @@ import './DayNightModeOptionBar.css';
 import RTHButton from '../components/ReturnToHomeButton.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faToggleOn, faToggleOff } from '@fortawesome/free-solid-svg-icons'; // Import the toggle icons
-// Imports to use the icons from this library
 
 function DayNightModeOptionBar() {
 
@@ -13,7 +12,6 @@ function DayNightModeOptionBar() {
     useEffect(() => {
         const currTheme = isDarkMode ? "dark" : "light";
         document.documentElement.setAttribute("data-theme", currTheme);
-        // Still working up until here - Also, question: What does this do?
         localStorage.setItem("theme", currTheme);
     }, [isDarkMode]);
     // With the dependency array, to make sure it stops from re-loading constantly
@@ -29,6 +27,3 @@ function DayNightModeOptionBar() {
 }
 
 export default DayNightModeOptionBar
-
-// https://www.youtube.com/watch?v=sy-rRtT84CQ
-// Follow this tutorial HERE

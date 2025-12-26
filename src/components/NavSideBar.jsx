@@ -45,5 +45,3 @@ function NavSideBar( {onAnimeResult} ) {
 }
 
 export default NavSideBar
-
-// https://hamburger-react.netlify.app/

@@ -86,6 +86,15 @@ function doesAnimeExist(malId) {
     return Boolean(Object.values(result)[0]); // Convert the result to a boolean
 }
 
+// REQUIRES: The anime must exist within the database
+// MODIFIES: N/A
+// EFFECTS: Returns the anime data based on its name/title
+function returnAnimeByName(animeName) {
+    const row = anidb.prepare(`
+        SELECT * FROM anime WHERE title = ?`).get(animeName);
+    return row;
+}
+
 // Below: Return queries
 // REQUIRES: The anime must exist within the database
 // MODIFIES: N/A - Refactored from independent queries

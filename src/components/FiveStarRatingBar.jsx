@@ -25,5 +25,3 @@ function FiveStarRatingBar({ value = 0, onChange }) {
 }
 
 export default FiveStarRatingBar
-
-// https://www.youtube.com/watch?v=BmhU_MoxNqQ

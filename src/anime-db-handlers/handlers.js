@@ -1,4 +1,4 @@
-import { showDeleteConfirmAlert, showDeleteSuccessAlert, showAnimeAlreadyExistsAlert } from "../swal-alerts/alerts"; 
+import { showDeleteConfirmAlert, showDeleteSuccessAlert } from "../swal-alerts/alerts"; 
 
 export const handleAnimeDeletion = async (animeMalId, shelfItems, setShelfItems, setAnimeDetails) => {
     try {

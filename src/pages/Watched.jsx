@@ -18,6 +18,7 @@ function Watched() {
     const [animeDetails, setAnimeDetails] = useState(null);
     const [shelfItems, setShelfItems] = useState([]);
     const [editingAnime, setEditingAnime] = useState(null);
+    
     // Search card state
     const [anime, setAnime] = useState(null);
 

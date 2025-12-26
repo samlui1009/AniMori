@@ -5,8 +5,6 @@
 // The Main process is ALSO isolated, so to communicate with each other - Use IPC!
 // Runs ipcMain
 
-// Inter Process Communication => https://www.youtube.com/watch?v=J60XrXk0J1o
-
 // Contains logic for creating the window and handling the lifecycle
 
 import { app, BrowserWindow, ipcMain } from 'electron';
@@ -35,6 +33,10 @@ ipcMain.handle("updateAnimeField", (_event, field, value, malId) => {
 
 ipcMain.handle("doesAnimeExist", (_event, malId) => {
     AnimeDb.doesAnimeExist(malId);
+});
+
+ipcMain.handle("getAnimeByName", (_event, name) => {
+    return AnimeDb.returnAnimeByName(name);
 });
 
 // Event is an IpcMainInvokeEvent object
@@ -144,6 +146,3 @@ app.on('window-all-closed', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
-
-// SQLite - Best for small desktop applications, lightweight 
-// https://www.youtube.com/watch?v=nMvjcBTFlPA

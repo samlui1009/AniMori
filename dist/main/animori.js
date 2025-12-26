@@ -601,6 +601,9 @@ require$$3$1.ipcMain.handle("updateAnimeField", (_event, field, value, malId) =>
 require$$3$1.ipcMain.handle("doesAnimeExist", (_event, malId) => {
   AnimeDb.doesAnimeExist(malId);
 });
+require$$3$1.ipcMain.handle("getAnimeByName", (_event, name) => {
+  return AnimeDb.returnAnimeByName(name);
+});
 require$$3$1.ipcMain.handle("deleteAnime", (_event, malId) => {
   AnimeDb.deleteAnimeFromDatabase(malId);
 });
