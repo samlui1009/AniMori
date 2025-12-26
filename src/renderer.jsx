@@ -1,10 +1,5 @@
-// More than 1 renderer is possible - Renderers are responsible for
-// displaying the graphical content
-// Renderer is ISOLATED
-
 import { createRoot } from 'react-dom/client';
 import { HashRouter, Routes, Route } from 'react-router-dom';
-// https://stackoverflow.com/questions/36505404/how-to-use-react-router-with-electron
 // Why don't we need BrowserRouter like in SipLy/portfolio?
 // Because HashRouter is meant for FILE-BASED ENVIRONMENTS like this!
 import OpeningPage from './pages/Opening.jsx';

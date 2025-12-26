@@ -144,12 +144,15 @@ The tech stack utilized was as follows:
     <li>https://hamburger-react.netlify.app/</li>
     <li>https://v5.reactrouter.com/web/guides/quick-start</li>
     <li>https://www.npmjs.com/package/typewriter-effect</li>
+    <li>https://stackoverflow.com/questions/36505404/how-to-use-react-router-with-electron</li>
 </ol>
 
 #### SQLite3
 <ol>
   <li>https://www.npmjs.com/package/better-sqlite3</li>
   <li>https://github.com/WiseLibs/better-sqlite3</li>
+  <li>https://www.youtube.com/watch?v=nMvjcBTFlPA</li>
+  <li>https://www.youtube.com/watch?v=IooIXYf0PIo</li>
   <li>https://www.youtube.com/watch?v=nMvjcBTFlPA</li>
   <li>https://dev.to/arindam1997007/a-step-by-step-guide-to-integrating-better-sqlite3-with-electron-js-app-using-create-react-app-3k16</li>
 </ol>

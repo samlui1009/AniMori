@@ -19,9 +19,6 @@ anidb.exec(`
 // The database executes this in case the table doesn't exist
 // All of the query logic will be handled here
 
-// Aug 23: Revised the schema for the anime table so it's more lean and fitting of
-// requires for displaying anime data in the Shelf component
-
 // REQUIRES: The anime must NOT exist within the database
 // MODIFIES: Anime
 // EFFECTS:  Inserts a new anime into the animori database
@@ -168,9 +165,6 @@ export default {
     returnAnimeByMalId
 };
 // Required to export these so that it can be imported in preload.js
-
-// References: https://www.youtube.com/watch?v=IooIXYf0PIo
-// References: https://www.youtube.com/watch?v=nMvjcBTFlPA&t=378s
 
 // Learning Notes
 // Prepare creates a statement object to be executed with different options 
