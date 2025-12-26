@@ -1,6 +1,10 @@
 # AniMori - Your One-Stop Desktop Anime Tracker
 AniMori (アニ森) is a cross-platform desktop application that serves as a Japanese animation tracker. Once officially complete and deployed, I hope that this can serve as an aesthetic and cozy app for global anime watchers to use.
 
+<p align="center">
+<img src="https://github.com/samlui1009/AniMori/blob/main/Project%20Images%20for%20README.md/StartPage_DarkMode.png" width="400" height="400">
+</p>
+
 ## Inspiration behind Project
 As an avid Japanese animation fan, I have relied on external websites (I.e., MyAnimeList) to keep track of shows that I've been following. However, I often found that many of these platforms lacked the personal functionalities that I would've liked to have included, such as writing personal comments, giving a show ratings (Out of 5 stars) or flagging shows as S-Tier for the most top-rated and beloved.
 
@@ -34,32 +38,94 @@ The tech stack utilized was as follows:
 
 ## Features
 
-<ol>
-    <li>
+<ul>
+    <li><b>User Statistics</b>
+        <p>The home page showcases the current users' watch statistics. It pulls information from the database, including the total number of watched shows, currently watching shows and dropped shows, respectively. It also gives the user information on the users' overall average rating for all shows that have been registered into the database.</p>
+        <p align="center">
+<img src="https://github.com/samlui1009/AniMori/blob/main/Project%20Images%20for%20README.md/StatsPage.png" width="400" height="400">
+        </p>
     </li>
-</ol>
+
+  <li><b>Watch Status Libraries</b>
+    <p>Clicking into either watch categories from the User Statistics home page will navigate to a library shelf of anime with their respective watch status. As an example, the image below displays the shows that are categorized as To Be Watched. The shelf starts off with an initial state of being closed, but can be opened by clicking the Open Library button. As noted, you can see the anime show cover picture, followed by their titles.</p>
+    <p align="center">
+      <img src="https://github.com/samlui1009/AniMori/blob/main/Project%20Images%20for%20README.md/ExampleWatchStatus_ClosedLibrary.png" width="400" height="400">
+      <img src="https://github.com/samlui1009/AniMori/blob/main/Project%20Images%20for%20README.md/ExampleWatchStatus_OpenLibrary.png" width="400" height="400">
+    </p>
+  </li>
+
+  <li><b>MyAnimeList Search Bar</b>
+    <p>To the left of each watch status library page, you will also find a search bar. Through the Jikan API, it can then search MyAnimeList for the relevant show. For simplicity sake, the request currently returns the FIRST result, rather than an entire array of TV shows with similar names/keywords. I hope to improve on this functionality in the future with plans of returning back an entire array of possible results. In the example below, I had typed Frieren into the search bar, which subsequently returned Frieren: Beyond Journey's End Season 1. The search result prompts the user to either add the show into their library with that designated watch status, or exit by clicking the X at the top-right corner.</p>
+    <p align="center">
+        <img src="https://github.com/samlui1009/AniMori/blob/main/Project%20Images%20for%20README.md/SearchResult.png" width="400" height="400">
+    </p>
+  </li>
+
+  <li><b>Show Addition Alerts</b>
+    <p>If a show is detected to NOT be a part of the users' database, the user can successfully add the show to their shelf. Through Sweet-Alert2, I was able to create a visible, aesthetic alert that notifies the user of a successful addition. Similarly, if a show HAS been added to the database (Either under the same watch status, or with a different watch status), the user will be met with another visible alert, which informs them that they cannot add the designated show into their database once again. In code, this is programmed using a try-catch block.</p>
+    <p align="center">
+        <img src="https://github.com/samlui1009/AniMori/blob/main/Project%20Images%20for%20README.md/Add_Success.png" width="400" height="400">
+        <img src="https://github.com/samlui1009/AniMori/blob/main/Project%20Images%20for%20README.md/Add_DuplicateAlert.png" width="400" height="400">
+    </p>
+  </li>
+
+  <li><b>Displaying and Editing A Show</b>
+    <p>One of the features of this application allows the user to view and edit an added show in their library with personal comments, update the watch status, change the rating (Out of 5) and check if it meets the S-Tier criteria. Displayed below is what clicking into an anime looks like. It brings the user to a panel that showcases any additional details. By default, when a show is added into ones' library, they will NOT have any comments, ratings or be flagged as S-Tier.</p>
+    <p align="center">
+      <img src="https://github.com/samlui1009/AniMori/blob/main/Project%20Images%20for%20README.md/ShowDetails.png" width="400" height="400">
+    </p>
+  <p>Scrolling below, you can then access the possible options for an added show, including: Edit, Delete or Cancel.</p>
+    <p align="center">
+      <img src="https://github.com/samlui1009/AniMori/blob/main/Project%20Images%20for%20README.md/ShowDetails_Options.png" width="400" height="400">
+    </p>
+  <p>By clicking Edit, it will lead the user to an edit form. This prompts the user to add new comments, change the watch status if required, and tick if the show meets S-Tier requirements. By clicking Submit, all the edits will be saved, and re-rendered in the shelf.</p>
+  <p align="center">
+    <img src="https://github.com/samlui1009/AniMori/blob/main/Project%20Images%20for%20README.md/EditShowPanel.png" width="400" height="400">
+  </p>
+  <p>For any shows that a user would like to delete, an alert will also be provided to the user to confirm their decision to permanently delete something from their library.</p>
+    <p align="center">
+      <img src="https://github.com/samlui1009/AniMori/blob/main/Project%20Images%20for%20README.md/EditShowPanel_DeleteAlert.png" width="400" height="400">
+    </p>
+  </li>
+
+  <li><b>S-Tier Achievement Shelf</b>
+    <p>Finally, no anime tracking application would be complete without an S-Tier shelf. S-Tiers are noted in gaming and media ranks as "Superior, "Super" or "Special", which represents the absolute best. It originates from Japanese grading systems where an S had surpassed A's. Of course, this is subjective for every user. In this application, the S-Tier shelf cannot be edited; its general usage is for display only. Any shows that were added to the library under their designated watch statuses can be updated with a checkmark in the S-Tier checkbox. Once that is checked, the show will then be displayed in the S-Tier shelf. As an aside, the S-Tier shows will all be presented with a badge of honour overlaying the anime cover art.</p>
+  <p align="center">
+    <img src="https://github.com/samlui1009/AniMori/blob/main/Project%20Images%20for%20README.md/STiers.png" width="400" height="400">
+  </p>
+  </li>
+</ul>
 
 ## Relevant Dependencies, Libraries and Modules Used
 
 <ul>
-    <li>Font-Awesome: </li>
-    <li>Hamburger-React: </li>
-    <li>Typewriter-Effect: </li>
-    <p>Other React libraries, such as React-Icons, Sweet-Alert2 and React-Router-Dom were previously employed for prior projects.</p>
+    <li><b>Font-Awesome</b>: An icon library and toolkit that provides vector icons for a multitude of things, including social media, UI elements. It permits easy customization in combination with CSS stylings.</li>
+    <li><b>Hamburger-React</b>: A React component library that provides a variety of hamburger menu icons. This was utilized in my application as a Quick Navigation bar (Located on the top-left corner), allowing users to jump between different watch status shelves.</li>
+    <li><b>Typewriter-Effect</b>: Allows text to appear character-by-character, simulating the action of a person typing in real-life.</li>
+  <br>
+    <p>Other React libraries, such as <b>React-Icons</b>, <b>Sweet-Alert2</b> and <b>React-Router-Dom</b> were previously employed for prior projects. All relevant links and references can be found below in the Resources section.</p>
 </ul>
 
+## Future Improvements
+<ul>
+  <li>Anime Library Search Bar: Feature planned and coming soon!</li>
+</ul>
 
 ## Self-Reflections & Learnings 
 
-## General Troubleshooting Learnings
+#### Electron.js, ContextBridge, IPC
+
+#### React (useEffect, useState, "Lifting States" into Parent Components, Props)
+
+#### React-Router-Dom (HashRouter vs. BrowserRouter)
+
+#### Styling (Dark vs. Light Mode with data-theme; Keyframes)
+
+### General Troubleshooting Learnings
+#### better-sqlite3 and Electron.js Node ABI Incompatibility
 
 ## Installation Instructions
-
-## Development 
-
-## Build
-
-## Try It Out Yourself By Following the Instructions HERE:
+<p>Coming soon!</p>
 
 ## Resources/References
 
