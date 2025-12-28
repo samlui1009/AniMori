@@ -1,12 +1,4 @@
-// From YT Tutorial
-// This is the Main process - ONLY ONE 
-// Serves as application entry point, responsible for controlling the life-cycle
-// A Node.js environment, with full OS access => A major security concern though
-// The Main process is ALSO isolated, so to communicate with each other - Use IPC!
-// Runs ipcMain
-
 // Contains logic for creating the window and handling the lifecycle
-
 import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'node:path';
 import started from 'electron-squirrel-startup';
@@ -17,6 +9,8 @@ if (started) {
   app.quit();
 }
 
+// ipc Code to handle backend interactions with SQLite database
+// Returns the anime by their MAL ID
 ipcMain.handle("returnAnimeByMalId", (_event, malId) => {
     AnimeDb.returnAnimeByMalId(malId);
 })
@@ -26,13 +20,13 @@ ipcMain.handle("addNewAnime", (_event, anime) => {
     AnimeDb.addNewAnime(anime);
 });
 
-// ipc Code to handle backend interactions with SQLite database
+// Updates an added anime within our library based on the field
 ipcMain.handle("updateAnimeField", (_event, field, value, malId) => {
     AnimeDb.updateAnimeField(field, value, malId);
 });
 
 ipcMain.handle("doesAnimeExist", (_event, malId) => {
-    AnimeDb.doesAnimeExist(malId);
+    return AnimeDb.doesAnimeExist(malId);
 });
 
 ipcMain.handle("getAnimeByName", (_event, name) => {
@@ -48,13 +42,12 @@ ipcMain.handle("deleteAnime", (_event, malId) => {
     AnimeDb.deleteAnimeFromDatabase(malId);
 })
 
-ipcMain.handle("deleteAllNullEntries", () => {
+ipcMain.handle("deleteAllNullEntries", (_event) => {
     AnimeDb.deleteAllNullEntries();
 })
 
 ipcMain.handle("getTotalCountByStatus", (_event, status) => {
     return AnimeDb.returnAnimeCountGroupedByStatus(status);
-    // Forgot the return, lol
 })
 
 // Returns total average rating for ALL anime = Required for Stats component
@@ -77,6 +70,7 @@ ipcMain.handle("getAnimeLeanDataBySTier", () => {
     return AnimeDb.returnAnimeLeanDataBySTier();
 })
 
+// Returns the anime by their MAL ID
 ipcMain.handle("getAnimeByMalId", (_event, malId) => {
     return AnimeDb.returnAnimeByMalId(malId);
 })
@@ -84,14 +78,13 @@ ipcMain.handle("getAnimeByMalId", (_event, malId) => {
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 750,
-    height: 750,
+    width: 800,
+    height: 800,
     frame: true,
     alwaysOnTop: true,
     // Sets dimensions
     contextIsolation: true,
     // This is set to true by default through documentation
-    // 
 
     // As per Google, this creates a "frameless" window that we'll need to 
     // style accordingly in the renderer.jsx & css

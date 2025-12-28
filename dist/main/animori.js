@@ -599,7 +599,7 @@ require$$3$1.ipcMain.handle("updateAnimeField", (_event, field, value, malId) =>
   AnimeDb.updateAnimeField(field, value, malId);
 });
 require$$3$1.ipcMain.handle("doesAnimeExist", (_event, malId) => {
-  AnimeDb.doesAnimeExist(malId);
+  return AnimeDb.doesAnimeExist(malId);
 });
 require$$3$1.ipcMain.handle("getAnimeByName", (_event, name) => {
   return AnimeDb.returnAnimeByName(name);
@@ -607,7 +607,7 @@ require$$3$1.ipcMain.handle("getAnimeByName", (_event, name) => {
 require$$3$1.ipcMain.handle("deleteAnime", (_event, malId) => {
   AnimeDb.deleteAnimeFromDatabase(malId);
 });
-require$$3$1.ipcMain.handle("deleteAllNullEntries", () => {
+require$$3$1.ipcMain.handle("deleteAllNullEntries", (_event) => {
   AnimeDb.deleteAllNullEntries();
 });
 require$$3$1.ipcMain.handle("getTotalCountByStatus", (_event, status) => {
@@ -630,14 +630,13 @@ require$$3$1.ipcMain.handle("getAnimeByMalId", (_event, malId) => {
 });
 const createWindow = () => {
   const mainWindow = new require$$3$1.BrowserWindow({
-    width: 750,
-    height: 750,
+    width: 800,
+    height: 800,
     frame: true,
     alwaysOnTop: true,
     // Sets dimensions
     contextIsolation: true,
     // This is set to true by default through documentation
-    // 
     // As per Google, this creates a "frameless" window that we'll need to 
     // style accordingly in the renderer.jsx & css
     // When "false", it creates an automatic "rounded" border

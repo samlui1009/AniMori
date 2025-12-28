@@ -3,6 +3,7 @@ import Database from 'better-sqlite3';
 const anidb = new Database("./animori.db", { verbose: console.log });
 // Following documentation
 
+// Query logic is defined below, starting with table creation if it doesn't exist
 anidb.exec(`
     CREATE TABLE IF NOT EXISTS anime (
       mal_id INTEGER PRIMARY KEY,
@@ -15,14 +16,10 @@ anidb.exec(`
       is_s_tier INTEGER
     )
 `);
-// This is basic SQL syntax
-// The database executes this in case the table doesn't exist
-// All of the query logic will be handled here
 
 // REQUIRES: The anime must NOT exist within the database
 // MODIFIES: Anime
 // EFFECTS:  Inserts a new anime into the animori database
-// This is for INSERTING a new anime with all of these values into the SQLite database
 function addNewAnime(anime) {
     const addStatement = anidb.prepare(`
         INSERT INTO anime (mal_id, image_url, title, episodes, personal_status, personal_rating, personal_comments, is_s_tier)
@@ -164,10 +161,4 @@ export default {
     returnAnimeLeanDataBySTier,
     returnAnimeByMalId
 };
-// Required to export these so that it can be imported in preload.js
-
-// Learning Notes
-// Prepare creates a statement object to be executed with different options 
-// .all = Array 
-// .get = First row only 
-// .run = For mutations (INSERT, UPDATE, DELETE)
+// Required to export these so that it can be imported into preload.js

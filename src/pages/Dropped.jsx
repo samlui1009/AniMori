@@ -25,7 +25,6 @@ function Dropped() {
         const run = async () => {
             const allAnimeData = await window.dbFunctions.getAnimeLeanDataByStatus(status);
             setShelfItems(allAnimeData);
-            console.log(allAnimeData)
         };
         run();
     }, [status]);

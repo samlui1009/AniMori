@@ -1,7 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import { HashRouter, Routes, Route } from 'react-router-dom';
-// Why don't we need BrowserRouter like in SipLy/portfolio?
-// Because HashRouter is meant for FILE-BASED ENVIRONMENTS like this!
+
 import OpeningPage from './pages/Opening.jsx';
 import HomePage from './pages/Home.jsx';
 import CurrentWatching from './pages/CurrentlyWatching.jsx';
