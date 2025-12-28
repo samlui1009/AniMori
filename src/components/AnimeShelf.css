@@ -81,6 +81,14 @@
     justify-content: center;
 }
 
+.shelf-search-bar-ctn {
+    grid-column: 1/-1;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3rem;
+    margin-top: -2rem;
+}
+
 .open-logo, .close-logo {
     font-size: 1.2rem;
     margin-right: 10px;
@@ -119,13 +127,6 @@
     font-weight: bold;
 }
 
-.single-display {
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    display: flex;
-}
-
 .img {
     width: 150px;
     height: 150px;
@@ -146,7 +147,6 @@
 }
 
 .content {
-    font-weight: 200;
     color: var(--color, #7B6A68);
 }
 

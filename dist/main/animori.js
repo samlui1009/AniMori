@@ -630,24 +630,15 @@ require$$3$1.ipcMain.handle("getAnimeByMalId", (_event, malId) => {
 });
 const createWindow = () => {
   const mainWindow = new require$$3$1.BrowserWindow({
-    width: 800,
-    height: 800,
+    width: 750,
+    height: 750,
     frame: true,
     alwaysOnTop: true,
     // Sets dimensions
     contextIsolation: true,
     // This is set to true by default through documentation
-    // As per Google, this creates a "frameless" window that we'll need to 
-    // style accordingly in the renderer.jsx & css
-    // When "false", it creates an automatic "rounded" border
-    // But then this also eliminates the overall bar 
     webPreferences: {
       preload: path.join(__dirname, "../preload/preload.js"),
-      //   Also sets a preload script => Joining our window with a file called
-      //   preload.js
-      //   It serves as a "bridge" b/t Main process and Renderer process
-      //   Called preload because it "pre-loads" before any other scripts 
-      //   in the Renderer process
       nodeIntegration: true
     }
   });

@@ -1,7 +1,6 @@
 import { React, useEffect, useState } from 'react';
 import EditPanel from '../components/EditPanel.jsx';
 import CollectionSearchBar from '../components/CollectionSearchBar.jsx';
-// TODO: WOrk on this tomorrow
 import { IoMdArrowDropdownCircle, IoMdArrowDropupCircle  } from "react-icons/io";
 
 import './AnimeShelf.css';
@@ -38,6 +37,7 @@ function AnimeShelf ( {shelfItems = [], setShelfItems, onClick} ) {
             )}
 
             <div className={`shelf-ctn ${openShelf ? 'open' : 'closed'}`}>
+                <div className="shelf-search-bar-ctn"><CollectionSearchBar></CollectionSearchBar></div>
                 {shelfItems.map((anime) => (
                     <div className="anime-item" key={anime.mal_id}>
                         <img className="anime-cover"
