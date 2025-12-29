@@ -24,7 +24,6 @@ function STierFavourites() {
         const run = async () => {
             const sTierAnimeData = await window.dbFunctions.getAnimeLeanDataBySTier();
             setShelfItems(sTierAnimeData);
-            console.log(sTierAnimeData);
         };
         run();
     }, []);
@@ -32,7 +31,7 @@ function STierFavourites() {
     return(
         <div className="ctn">
             <div className="nav-ctn">
-                <NavSB className="nav-sb" onAnimeResult={setAnime}></NavSB>
+                <NavSB className="nav-sb"></NavSB>
             </div>
             <div className="dl-ctn">
                 <DLMode></DLMode>

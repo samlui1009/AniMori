@@ -3,21 +3,21 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Hamburger from 'hamburger-react';
 
-function NavSideBar( {onAnimeResult} ) {
+function NavSideBar() {
 
     const [open, setOpen] = useState(false);
     // Initial state: Hamburger menu should NOT be open yet
 
     return (
         <div className="hamburger-ctn">
-            <Hamburger 
+            <Hamburger className="hamburger-icon"
                 toggled={open} 
                 toggle={setOpen}
                 size={24}
                 direction="right"
                 distance="md"
                 easing="ease-in"
-                color="#7B6A68"/>
+                color="#7393B3"/>
                 
             {open &&
                 <div className="open-menu">

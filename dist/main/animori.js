@@ -542,6 +542,11 @@ function doesAnimeExist(malId) {
   const result = query.get(malId);
   return Boolean(Object.values(result)[0]);
 }
+function returnAnimeByNameAndWatchStatus(animeName, watchStatus) {
+  const rows = anidb.prepare(`
+        SELECT * FROM anime WHERE title LIKE ? COLLATE NOCASE AND personal_status = ?`).all(`${animeName}%`, watchStatus);
+  return rows || null;
+}
 function returnAnimeCountGroupedByStatus(personalStatus) {
   const row = anidb.prepare(`
         SELECT COUNT(*) AS count FROM anime WHERE personal_status = ?`).get(personalStatus);
@@ -584,7 +589,8 @@ const AnimeDb = {
   returnTotalAnimeCount,
   returnTotalAverageRating,
   returnAnimeLeanDataBySTier,
-  returnAnimeByMalId
+  returnAnimeByMalId,
+  returnAnimeByNameAndWatchStatus
 };
 if (started) {
   require$$3$1.app.quit();
@@ -601,8 +607,8 @@ require$$3$1.ipcMain.handle("updateAnimeField", (_event, field, value, malId) =>
 require$$3$1.ipcMain.handle("doesAnimeExist", (_event, malId) => {
   return AnimeDb.doesAnimeExist(malId);
 });
-require$$3$1.ipcMain.handle("getAnimeByName", (_event, name) => {
-  return AnimeDb.returnAnimeByName(name);
+require$$3$1.ipcMain.handle("getAnimeByNameAndWatchStatus", (_event, name, watchStatus) => {
+  return AnimeDb.returnAnimeByNameAndWatchStatus(name, watchStatus);
 });
 require$$3$1.ipcMain.handle("deleteAnime", (_event, malId) => {
   AnimeDb.deleteAnimeFromDatabase(malId);

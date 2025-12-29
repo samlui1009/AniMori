@@ -233,6 +233,7 @@ The tech stack utilized was as follows:
     <li>https://www.w3schools.com/cssref/css3_pr_animation.php</li>
     <li>https://www.youtube.com/watch?v=HKlbVheOx4k (Understanding state-lifting)</li>
     <li>https://www.youtube.com/watch?v=L-1sP3Ljhsg</li>
+    <li>https://www.youtube.com/watch?v=MY6ZZIn93V8 (Creating a search bar for filtering purposes)</li>
 </ol>
 
 #### Jikan Troubleshooting

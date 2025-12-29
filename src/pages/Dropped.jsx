@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { handleAnimeDeletion, viewAnimeDetails, handleEditAnime, handleCloseDisplayPanel, handleCloseSearchCard } from '../anime-db-handlers/handlers.js';
+import { handleAnimeDeletion, viewAnimeDetails, handleEditAnime, handleCloseDisplayPanel, handleCloseSearchCard, searchForAnimeInCollection } from '../anime-db-handlers/handlers.js';
 
 import AnimeShelf from '../components/AnimeShelf.jsx';
 import OneShowPanel from '../components/DisplayOneShowPanel.jsx';
@@ -21,6 +21,15 @@ function Dropped() {
     // Search card state
     const [anime, setAnime] = useState(null);
 
+    // State-handling for the COLLECTION search bar only
+    const [searchTerm, setSearchTerm] = useState("");
+    // Empty search state for now
+    const [searchResults, setSearchResults] = useState([]);
+
+    useEffect(() => {
+        searchForAnimeInCollection(setSearchResults, searchTerm, status);
+    }, [searchTerm, shelfItems]);
+
     useEffect(() => {
         const run = async () => {
             const allAnimeData = await window.dbFunctions.getAnimeLeanDataByStatus(status);
@@ -32,7 +41,7 @@ function Dropped() {
     return(
         <div className="ctn">
             <div className="nav-ctn">
-                <NavSB className="nav-sb" onAnimeResult={setAnime}></NavSB>
+                <NavSB className="nav-sb"></NavSB>
             </div>
             <div className="dl-ctn">
                 <DLMode></DLMode>

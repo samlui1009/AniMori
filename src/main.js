@@ -29,13 +29,12 @@ ipcMain.handle("doesAnimeExist", (_event, malId) => {
     return AnimeDb.doesAnimeExist(malId);
 });
 
-ipcMain.handle("getAnimeByName", (_event, name) => {
-    return AnimeDb.returnAnimeByName(name);
+ipcMain.handle("getAnimeByNameAndWatchStatus", (_event, name, watchStatus) => {
+    return AnimeDb.returnAnimeByNameAndWatchStatus(name, watchStatus);
 });
 
-// Event is an IpcMainInvokeEvent object
-// This is an unused parameter
-// But if we have parameters after it, then we DO need to add _event
+// Event is an IpcMainInvokeEvent object, which is unused here
+// If there are parameters (I.e., malId, name), the _event is required 
 
 // Deletes the anime from database based off the malId
 ipcMain.handle("deleteAnime", (_event, malId) => {

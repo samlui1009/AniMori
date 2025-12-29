@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { handleAnimeDeletion, viewAnimeDetails, handleEditAnime, handleCloseDisplayPanel, handleCloseSearchCard, completeAnimeEdit } from '../anime-db-handlers/handlers.js';
+import { handleAnimeDeletion, viewAnimeDetails, handleEditAnime, handleCloseDisplayPanel, handleCloseSearchCard, searchForAnimeInCollection } from '../anime-db-handlers/handlers.js';
 
 import AnimeShelf from '../components/AnimeShelf.jsx';
 import OneShowPanel from '../components/DisplayOneShowPanel.jsx';
@@ -22,6 +22,16 @@ function CurrentlyWatching() {
     // Search card state
     const [anime, setAnime] = useState(null);
 
+    // State-handling for the COLLECTION search bar only
+    const [searchTerm, setSearchTerm] = useState("");
+    // Empty search state for now
+    const [searchResults, setSearchResults] = useState([]);
+
+    useEffect(() => {
+        searchForAnimeInCollection(setSearchResults, searchTerm, status);
+    }, [searchTerm, shelfItems]);
+
+    // This useEffect is for rendering ALL the shelf items that exists within this
     useEffect(() => {
         const run = async () => {
             const allAnimeData = await window.dbFunctions.getAnimeLeanDataByStatus(status);
@@ -33,7 +43,7 @@ function CurrentlyWatching() {
     return(
         <div className="ctn">
             <div className="nav-ctn">
-                <NavSB className="nav-sb" onAnimeResult={setAnime}></NavSB>
+                <NavSB className="nav-sb"></NavSB>
             </div>
             <div className="dl-ctn">
                 <DLMode></DLMode>
@@ -51,6 +61,8 @@ function CurrentlyWatching() {
                     personalStatus={status} 
                     shelfItems={shelfItems} 
                     setShelfItems={setShelfItems}
+                    searchTerm={searchTerm}
+                    setSearchTerm={setSearchTerm}
                     onClick = {(animeMalId) => viewAnimeDetails(animeMalId, shelfItems, setAnimeDetails)}>                            
                 </AnimeShelf>)
             }

@@ -6,7 +6,7 @@ import { IoMdArrowDropdownCircle, IoMdArrowDropupCircle  } from "react-icons/io"
 import './AnimeShelf.css';
 
 // This component displays ALL of the animes that the user has watched so far
-function AnimeShelf ( {shelfItems = [], setShelfItems, onClick} ) {
+function AnimeShelf ( {shelfItems = [], setShelfItems, searchTerm, setSearchTerm, onClick} ) {
     // Requires the {} to be "destructured"
 
     // State to open up the collapsible anime shelf
@@ -37,7 +37,7 @@ function AnimeShelf ( {shelfItems = [], setShelfItems, onClick} ) {
             )}
 
             <div className={`shelf-ctn ${openShelf ? 'open' : 'closed'}`}>
-                <div className="shelf-search-bar-ctn"><CollectionSearchBar></CollectionSearchBar></div>
+                <div className="shelf-search-bar-ctn"><CollectionSearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm}></CollectionSearchBar></div>
                 {shelfItems.map((anime) => (
                     <div className="anime-item" key={anime.mal_id}>
                         <img className="anime-cover"

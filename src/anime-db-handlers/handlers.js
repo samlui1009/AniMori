@@ -29,16 +29,21 @@ export const handleEditAnime = async (animeMalId, shelfItems, setEditingAnime) =
     setEditingAnime(animeToEdit);
 }
 
-export const completeAnimeEdit = (updatedAnime, setAnimeDetails, setEditingAnime) => {
-    setAnimeDetails(updatedAnime);
-    setEditingAnime(null);
-}
-
 export const handleCloseEditAnimePanel = async (setEditingAnime, setAnimeDetails, setAnime) => {
     setEditingAnime(null);
     setAnimeDetails(null);
     setAnime(null);
 }
+
+export const searchForAnimeInCollection = async (setSearchResults, searchTerm, status) => {
+    // For troubleshooting
+    console.log("Current search term: ", searchTerm);
+    const filteredAnimeData = await window.dbFunctions.getAnimeByNameAndWatchStatus(searchTerm, status);
+    // For troubleshooting
+    console.log("Filtered Anime Data:", filteredAnimeData);
+    setSearchResults(filteredAnimeData);
+};
+
 
 export const handleCloseDisplayPanel = async (setAnimeDetails, setAnime, setEditingAnime) => {
     setAnimeDetails(null);

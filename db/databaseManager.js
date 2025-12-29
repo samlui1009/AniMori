@@ -76,17 +76,19 @@ function doesAnimeExist(malId) {
     const query = anidb.prepare(`
         SELECT EXISTS(SELECT 1 FROM anime WHERE mal_id = ?)
     `);
-    const result = query.get(malId); // Execute the query with the provided malId
-    return Boolean(Object.values(result)[0]); // Convert the result to a boolean
+    // First, execute the query
+    const result = query.get(malId);
+    // Then, convert the result we received into a Boolean value
+    return Boolean(Object.values(result)[0]);
 }
 
 // REQUIRES: The anime must exist within the database
 // MODIFIES: N/A
-// EFFECTS: Returns the anime data based on its name/title
-function returnAnimeByName(animeName) {
-    const row = anidb.prepare(`
-        SELECT * FROM anime WHERE title = ?`).get(animeName);
-    return row;
+// EFFECTS: Returns multiple rows of data based on the users' inputted name/title when searching
+function returnAnimeByNameAndWatchStatus(animeName, watchStatus) {
+    const rows = anidb.prepare(`
+        SELECT * FROM anime WHERE title LIKE ? COLLATE NOCASE AND personal_status = ?`).all(`${animeName}%`, watchStatus);
+    return rows || null;
 }
 
 // Below: Return queries
@@ -159,6 +161,7 @@ export default {
     returnTotalAnimeCount,
     returnTotalAverageRating,
     returnAnimeLeanDataBySTier,
-    returnAnimeByMalId
+    returnAnimeByMalId,
+    returnAnimeByNameAndWatchStatus
 };
 // Required to export these so that it can be imported into preload.js
