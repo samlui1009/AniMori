@@ -108,7 +108,7 @@ The tech stack utilized was as follows:
 
 ## Future Improvements
 <ul>
-  <li>Anime Library Search Bar: I hope to include a search bar for each watch status library, allowing users to quickly sift through and find their target anime without having to scroll through the entire library. This feature is coming soon!</li>
+  <li>Anime Library Search Bar: As of <b>December 28th, 2025</b>, this feature has been added and is fully functional!</li>
 </ul>
 
 ## Self-Reflections & Learnings 
@@ -185,8 +185,34 @@ The tech stack utilized was as follows:
 
 <p>Electron applications bundle their own Node.js version. Therefore, any native modules compiled against the system Node.js version will not load unless they're rebuilt specifically for Electron. The solution to this was to simply use electron-rebuild, which recompiles native Node modules with Electron's ABI, ensuring that they match with Electron's instead of our OS systems' node.</p>
 
-## Installation Instructions
+#### Compiling Electron Applications into a Single, Standalone Executable
 <p>Coming soon!</p>
+
+## Installation Instructions (Local Machines)
+<p>Install the latest version of Node.js (JavaScript runtime server) and check for the version type with the following command:</p>
+
+```node --version```
+
+<br>
+<p>Install the latest version of npm (JavaScript package manager) and check for the version type with the following command:</p>
+
+```npm --version```
+
+<br>
+<p>Clone the repository by typing in the command line, either through HTTPS or SSH (Both of which you can locate from this specific repository above)</p>
+<p>Install any dependencies by using the following command:</p>
+
+```npm install```
+
+<p>Now, in the CLI, make sure that you are in the correct directory and then type either one of the following commands:</p>
+
+```npm run dev```
+
+<br>
+
+```npm run start```
+
+<br>
 
 ## Resources/References
 
