@@ -54,15 +54,18 @@ function ToBeWatched() {
             <div>
                 <MALSearchBar variant="header" animeResult={setAnime}></MALSearchBar>
             </div>
-
+            
             {!editingAnime && !anime && !animeDetails && (
                 <AnimeShelf 
                     personalStatus={status} 
-                    shelfItems={shelfItems} 
+                    shelfItems={searchTerm.trim() ? searchResults : shelfItems} 
                     setShelfItems={setShelfItems}
+                    searchTerm={searchTerm}
+                    setSearchTerm={setSearchTerm}
                     onClick = {(animeMalId) => viewAnimeDetails(animeMalId, shelfItems, setAnimeDetails)}>                            
                 </AnimeShelf>)
             }
+
 
             {!editingAnime && animeDetails && (
                 <OneShowPanel

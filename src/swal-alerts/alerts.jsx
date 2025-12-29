@@ -55,7 +55,6 @@ export const showDeleteSuccessAlert = () => {
     Swal.fire({
         icon: 'success',
         title: 'Deleted!',
-        icon: 'success',
         text: deleteConfirmMessage    
     })
 }

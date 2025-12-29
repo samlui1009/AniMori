@@ -59,7 +59,7 @@ function CurrentlyWatching() {
             {!editingAnime && !anime && !animeDetails && (
                 <AnimeShelf 
                     personalStatus={status} 
-                    shelfItems={shelfItems} 
+                    shelfItems={searchTerm.trim() ? searchResults : shelfItems} 
                     setShelfItems={setShelfItems}
                     searchTerm={searchTerm}
                     setSearchTerm={setSearchTerm}
